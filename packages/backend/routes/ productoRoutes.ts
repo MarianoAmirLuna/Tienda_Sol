@@ -23,16 +23,19 @@ export default function productoRoutes(getController: (controllerClass: any) => 
         getController(ProductoController).eliminarProducto(req, res);
     });
 
-    //TODO: flto este para completar el crud de productos
-    // router.put(pathProducto + "/:id", (req, res) => {
-    //     getController(ProductoController).actualizarProducto(req, res);
-    // });
+    //TODO: falto este para completar el crud de productos
     
-    //TODO: implementar estas
-    // router.get(pathProducto + "/categoria/:categoria", (req, res) => {
-    //     getController(ProductoController).buscarPorCategoria(req, res);
-    // });
+     router.put(pathProducto + "/:id", (req, res) => {
+         getController(ProductoController).actualizarProducto(req, res);
+     });
+    
+    
+    
+    router.get(pathProducto + "/categoria/:categoria", (req, res) => {
+        getController(ProductoController).buscarPorCategoria(req, res);
+    });
 
+    //TODO: implementar estas
     // router.get(pathProducto + "/vendedor/:vendedorId", (req, res) => {
     //     getController(ProductoController).buscarPorVendedor(req, res);
     // });

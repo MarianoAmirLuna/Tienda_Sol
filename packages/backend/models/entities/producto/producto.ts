@@ -1,10 +1,11 @@
 import {Categoria} from "../producto/categoria"
+import { Usuario } from "../usuario/usuario";
 import {Getter, Setter} from 'tslombok'
 
 export class Producto {
 
   private id: number;
-  private vendedor: string;
+  private vendedor: Usuario;
   private titulo: string;
   private descripcion: string;
   private categorias: Categoria[];
@@ -15,8 +16,7 @@ export class Producto {
   private activo: boolean;
 
   constructor(
-    id: number,
-    vendedor: string,
+    vendedor: Usuario,
     titulo: string,
     descripcion: string,
     categorias: Categoria[],
@@ -26,7 +26,7 @@ export class Producto {
     fotos: string[],
     activo: boolean
   ) {
-    this.id = id;
+    this.id = 1;
     this.vendedor = vendedor;
     this.titulo = titulo;
     this.descripcion = descripcion;
@@ -42,12 +42,20 @@ export class Producto {
     return this.id;
   }
 
+  setID(new_id: number): void{
+      this.id = new_id;
+  }
+
   getStock(): number {
     return this.stock;
   }
 
   getTitulo(): String{
     return this.titulo;
+  }
+
+  getCategorias() : Categoria[] {
+    return this.categorias;
   }
 
   estaDisponible(cantidad: number): boolean{

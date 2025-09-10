@@ -27,7 +27,6 @@ const PORT = Number(process.env.SERVER_PORT) || 8000;
 // Se envía al server el puerto
 const server = new Server(app, PORT)
 
-
 const productoRepo = new ProductoRepository()
 const productoService = new ProductoService(productoRepo)
 const productoController = new ProductoController(productoService);

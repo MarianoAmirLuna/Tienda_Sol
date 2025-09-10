@@ -4,4 +4,8 @@ export class Categoria{
     constructor( nombre:string){
         this.nombre = nombre;
     }
+
+    getCategoria() : String {
+        return this.nombre;
+    }
 }
