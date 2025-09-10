@@ -6,7 +6,7 @@ export class ProductoService {
 
 
     crearProducto(producto: Producto): Producto {
-        
+
         return this.productoRepo.create(producto);
     }
     eliminarProducto(id: number): boolean {
@@ -28,27 +28,27 @@ export class ProductoService {
         return this.productoRepo.findAll();
     }
 
-    validarStock(id: number, cantidad: number): boolean {
+    // validarStock(id: number, cantidad: number): boolean {
 
-        const producto = this.productoRepo.findById(id);
+    //     const producto = this.productoRepo.findById(id);
 
-        if (!producto) {
-            throw new Error("Producto no encontrado");
-        }
-            return producto.getStock() >= cantidad;
-    }
+    //     if (!producto) {
+    //         throw new Error("Producto no encontrado");
+    //     }
+    //         return producto.getStock() >= cantidad;
+    // }
 
-    reducirStock(id: number, cantidad: number): Producto {
+    // reducirStock(id: number, cantidad: number): Producto {
 
-        const producto = this.obtenerProducto(id);
-        producto.reducirStock(cantidad);
-        return this.productoRepo.update(producto);
-    }
+    //     const producto = this.obtenerProducto(id);
+    //     producto.reducirStock(cantidad);
+    //     return this.productoRepo.update(producto);
+    // }
 
-    aumentarStock(id: number, cantidad: number): Producto {
+    // aumentarStock(id: number, cantidad: number): Producto {
 
-        const producto = this.obtenerProducto(id);
-        producto.aumentarStock(cantidad);
-        return this.productoRepo.update(producto);
-    }
+    //     const producto = this.obtenerProducto(id);
+    //     producto.aumentarStock(cantidad);
+    //     return this.productoRepo.update(producto);
+    // }
 }
