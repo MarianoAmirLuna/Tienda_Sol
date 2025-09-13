@@ -1,11 +1,10 @@
-import { ProductoService } from "../services/productoService.js";
+//import { ProductoService } from "../services/productoService.js";
 import { z } from "zod";
 import { Producto } from "../models/entities/producto/producto.js";
 import { Categoria } from "../models/entities/producto/categoria.js";
-import { TipoUsuario } from "../models/entities/usuario/tipoUsuario.js";
-import { Usuario } from "../models/entities/usuario/usuario.js";
-import express from "express";
-
+//import { TipoUsuario } from "../models/entities/usuario/tipoUsuario.js";
+//import { Usuario } from "../models/entities/usuario/usuario.js";
+//import express from "express";
 
 // const productoSchema = z.object({
 //   id: z.number(),
@@ -15,7 +14,6 @@ import express from "express";
 //   categorias: z.array(z.object({ nombre: z.string() })),
 //   vendedor: z.object({ id: z.string(), nombre: z.string() }),
 // });
-
 
 const productoSchema = z.object({
   // id: z.number(),
@@ -28,26 +26,7 @@ const productoSchema = z.object({
   activo: z.boolean().default(true),
   categorias: z.array(z.object({ nombre: z.string() }))
     .transform(cats => cats.map(cat => new Categoria(cat.nombre))),
-  vendedor: z
-    .object({
-      nombre: z.string(),
-      email: z.string().email(),
-      telefono: z.string(),
-      tipo: z.nativeEnum(TipoUsuario),
-      fechaAlta: z.preprocess(arg => {
-        if (typeof arg === "string" || arg instanceof Date) return new Date(arg);
-      }, z.date())
-    })
-    .transform(
-      seller =>
-        new Usuario(
-          seller.nombre,
-          seller.email,
-          seller.telefono,
-          seller.tipo,
-          seller.fechaAlta
-        )
-    ),
+  vendedor: z.number().int().nonnegative(),
   createdAt: z.preprocess(arg => {
     if (typeof arg === "string" || arg instanceof Date) return new Date(arg);
   }, z.date()).default(() => new Date()),
@@ -127,16 +106,16 @@ export class ProductoController {
 
   //Joaco
   actualizarProducto(req, res) {
-    const productoUpdateSchema = productoSchema.partial();
+
     const resultId = idTransform.safeParse(req.params.id)
+    
     if (resultId.error) {
       res.status(400).json(resultId.error.issues)
       return
     }
-    const id = resultId.data
-    const body = req.body
-    const resultBody = productoUpdateSchema.safeParse(body)
-    const productoActualizado = this.productoService.actualizar(id, resultBody)
+
+    const resultBody = productoSchema.safeParse(req.body)
+    const productoActualizado = this.productoService.actualizar(resultId.data, resultBody.data)
     if (!productoActualizado) {
       res.status(404).json({
         error: "No existe el producto que se quiere modificar."
@@ -150,5 +129,6 @@ export class ProductoController {
     const unaCategoria = productoSchema.safeParse(req.params.categoria);
     if (unaCategoria.error) return res.status(400).json(unaCategoria.error.issues);
     const productos = this.productoService.buscarPorCategoria(unaCategoria.data.categorias);
+    res.status(200).json(productos);
   }
 }

@@ -2,6 +2,7 @@
   "name": "2025-2c-backend-grupo-09",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "workspaces": [
     "packages/*"
   ],
@@ -20,10 +21,8 @@
   "description": "[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/ewd7QYGY)",
   "devDependencies": {
     "concurrently": "^9.2.0",
-    "eslint": "^9.31.0",
-    "@eslint/js": "^9.31.0",
-    "eslint-plugin-react": "^7.37.5",
-    "globals": "^16.3.0",
+    "eslint": "^8.57.1",
+    "globals": "^16.4.0",
     "prettier": "3.6.2"
   },
   "dependencies": {

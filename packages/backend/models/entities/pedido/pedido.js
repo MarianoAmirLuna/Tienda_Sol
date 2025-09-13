@@ -7,15 +7,24 @@ import { CambioEstadoPedido } from "./cambioEstadoPedido.js";
 
 
 export class Pedido {
-    constructor(id, comprador, items, total, moneda, direccionEntrega, estado, fechaCreacion, historialEstados) {
-        this.id = id;
+    constructor(comprador, items, total, moneda, direccionEntrega) {
+        this.id = 1;
         this.comprador = comprador;
         this.items = items;
         this.total = total;
         this.moneda = moneda;
         this.direccionEntrega = direccionEntrega;
-        this.estado = estado;
-        this.fechaCreacion = fechaCreacion;
-        this.historialEstados = [];
+        this.estado = EstadoPedido.PENDIENTE;
+        this.fechaCreacion = new Date();
+        this.historialEstados = [EstadoPedido.PENDIENTE]
+    }
+
+    cambiarEstado(estado) {
+        this.historialEstados.push(this.estado);
+        this.setEstado(estado);
+    }
+
+    setEstado(unEstado) {
+        this.estado = unEstado;
     }
 }

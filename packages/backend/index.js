@@ -4,6 +4,9 @@ import cors from "cors";
 import { ProductoRepository } from "./models/repository/productoRepository.js";
 import { ProductoService } from "./services/productoService.js";
 import { ProductoController } from "./controllers/productoController.js";
+import { PedidoRepository } from "./models/repository/pedidoRepository.js";
+import { PedidoService } from "./services/pedidoService.js";
+import { PedidoController } from "./controllers/pedidoController.js";
 
 import { Server } from "./server.js";
 import routes from "./routes/routes.js";
@@ -32,6 +35,13 @@ const productoService = new ProductoService(productoRepo);
 const productoController = new ProductoController(productoService);
 
 server.setController(ProductoController, productoController);
+
+// Pedidos
+const pedidoRepo = new PedidoRepository();
+const pedidoService = new PedidoService(pedidoRepo);
+const pedidoController = new PedidoController(pedidoService); 
+
+server.setController(PedidoController, pedidoController);
 
 routes.forEach((route) => server.addRoute(route));
 server.configureRoutes();

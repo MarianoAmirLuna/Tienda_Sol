@@ -16,7 +16,7 @@ export class ProductoRepository {
 
   findById(id) {
     const producto = this.productos.find(
-      (unProducto) => unProducto.getId() === id
+      (unProducto) => unProducto.getId() == id
     );
     return producto ?? null;
   }
@@ -36,7 +36,7 @@ export class ProductoRepository {
 
   delete(id) {
     const indice = this.productos.findIndex(
-      (unProducto) => unProducto.getId() === id
+      (unProducto) => unProducto.getId() == id
     );
     if (indice === -1) return false;
 
@@ -45,19 +45,20 @@ export class ProductoRepository {
   }
 
   actualizar(id, datosActualizar) {
-    const indice = this.productos.findIndex((prod) => prod.getId() === id);
+  const indice = this.productos.findIndex((prod) => prod.getId() === id);
 
-    if (indice === -1) return null;
+  if (indice === -1) return null;
 
-    const productoActualizado = {
-      ...this.productos[indice],
-      ...datosActualizar,
-    };
+  // Reemplazamos completamente el objeto
+  const productoActualizado = new Producto({
+    ...datosActualizar,
+    id // mantenemos la id original
+  });
 
-    this.productos[indice] = productoActualizado;
+  this.productos[indice] = productoActualizado;
 
-    return productoActualizado;
-  }
+  return productoActualizado;
+}
 
   buscarPorCategoria(categorias) {
     return this.productos.filter(
