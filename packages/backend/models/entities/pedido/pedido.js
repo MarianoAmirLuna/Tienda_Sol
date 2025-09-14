@@ -43,4 +43,8 @@ export class Pedido {
     getEstado(){
         return this.estado;
     }
+
+    getComprador(){
+        return this.comprador;
+    }
 }

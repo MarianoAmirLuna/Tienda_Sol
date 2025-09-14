@@ -7,6 +7,9 @@ import { ProductoController } from "./controllers/productoController.js";
 import { PedidoRepository } from "./models/repository/pedidoRepository.js";
 import { PedidoService } from "./services/pedidoService.js";
 import { PedidoController } from "./controllers/pedidoController.js";
+import { UsuarioRepository } from "./models/repository/usuarioRepository.js";
+import { UsuarioService } from "./services/usuarioService.js";
+import { UsuarioController } from "./controllers/usuarioController.js";
 
 import { Server } from "./server.js";
 import routes from "./routes/routes.js";
@@ -42,6 +45,13 @@ const pedidoService = new PedidoService(pedidoRepo, productoRepo);
 const pedidoController = new PedidoController(pedidoService);
 
 server.setController(PedidoController, pedidoController);
+
+// usuario
+const usuarioRepo = new UsuarioRepository();
+const usuarioService = new UsuarioService(usuarioRepo, pedidoRepo);
+const usuarioController = new UsuarioController(usuarioService);
+
+server.setController(UsuarioController, usuarioController);
 
 routes.forEach((route) => server.addRoute(route));
 server.configureRoutes();
