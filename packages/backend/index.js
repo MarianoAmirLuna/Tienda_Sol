@@ -38,8 +38,8 @@ server.setController(ProductoController, productoController);
 
 // Pedidos
 const pedidoRepo = new PedidoRepository();
-const pedidoService = new PedidoService(pedidoRepo);
-const pedidoController = new PedidoController(pedidoService); 
+const pedidoService = new PedidoService(pedidoRepo, productoRepo);
+const pedidoController = new PedidoController(pedidoService);
 
 server.setController(PedidoController, pedidoController);
 

@@ -31,4 +31,8 @@ export class Pedido {
     setId(id){
         this.id = id
     }
+
+    getItems(){
+        return this.items;
+    }
 }

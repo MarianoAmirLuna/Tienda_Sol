@@ -45,24 +45,40 @@ export class ProductoRepository {
   }
 
   actualizar(id, datosActualizar) {
-  const indice = this.productos.findIndex((prod) => prod.getId() === id);
+    const indice = this.productos.findIndex((prod) => prod.getId() === id);
 
-  if (indice === -1) return null;
+    if (indice === -1) return null;
 
-  // Reemplazamos completamente el objeto
-  const productoActualizado = new Producto({
-    ...datosActualizar,
-    id // mantenemos la id original
-  });
+    // Reemplazamos completamente el objeto
+    const productoActualizado = new Producto({
+      ...datosActualizar,
+      id // mantenemos la id original
+    });
 
-  this.productos[indice] = productoActualizado;
+    this.productos[indice] = productoActualizado;
 
-  return productoActualizado;
-}
+    return productoActualizado;
+  }
 
   buscarPorCategoria(categorias) {
     return this.productos.filter(
       (unProducto) => unProducto.getCategorias() == categorias
     );
   }
+
+  hayStockProducto(id, cantidad) {
+    const unProducto = this.findById(id);
+    if (unProducto === null) {
+      throw new Error(`El producto de id ${id} no existe como producto`);
+    }
+
+    if (unProducto.getStock() < cantidad) {
+      throw new Error(
+        `El producto ${unProducto.getTitulo()} tiene un stock inferior, ${unProducto.getStock()}, a la cantidad solicitada, ${cantidad}`
+      );
+    }
+  }
+
 }
+
+
