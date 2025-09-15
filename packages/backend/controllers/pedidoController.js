@@ -127,6 +127,12 @@ export class PedidoController {
       });
     }
 
+    if (!this.pedidoService.puedeEnviarPedido(pedido)) {
+      return res.status(404).json({
+        error: `Pedido con id: ${idResult.data} no puede ser enviado. Contiene productos de distintos vendedores`,
+      });
+    }
+
     this.pedidoService.enviarPedido(pedido);
     return res
       .status(200)

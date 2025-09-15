@@ -3,7 +3,7 @@ import { Usuario } from "../usuario/usuario.js";
 
 export class Producto {
   constructor(
-    vendedor,
+    vendedorID,
     titulo,
     descripcion,
     categorias,
@@ -14,7 +14,7 @@ export class Producto {
     activo
   ) {
     this.id = 1;
-    this.vendedor = vendedor;
+    this.vendedorID = vendedorID;
     this.titulo = titulo;
     this.descripcion = descripcion;
     this.categorias = categorias;
@@ -25,8 +25,8 @@ export class Producto {
     this.activo = activo;
   }
 
-  getVendedor(){
-    return this.vendedor;
+  getVendedorID(){
+    return this.vendedorID;
   }
 
   getId() {

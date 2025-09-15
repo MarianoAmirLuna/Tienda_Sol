@@ -65,17 +65,19 @@ export class PedidoService {
   }
 
   puedeEnviarPedido(pedido) {
-    const idPrimerVendedor = pedido
-      .getItems()?.[0]
-      ?.getProducto()
-      ?.getVendedor(); //el ? sino lo encuentra tira null en vez de error
+    const items = pedido.getItems() || [];
 
-    return pedido
-      .getItems()
-      .every(
-        (itemPedido) =>
-          itemPedido.getProducto().getVendedor() == idPrimerVendedor
-      );
+    if (items.length === 0) return false;
+
+    const primerProducto = this.productoRepo.findById(items[0]?.getProducto());
+    if (!primerProducto) return false;
+
+    const idPrimerVendedor = primerProducto.getVendedorID();
+
+    return items.every((itemPedido) => {
+      const producto = this.productoRepo.findById(itemPedido?.getProducto());
+      return producto?.getVendedorID() === idPrimerVendedor;
+    });
   }
 
   enviarPedido(pedido) {
