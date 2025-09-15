@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { Pedido } from "../models/entities/pedido/pedido.js";
+import { ItemPedido } from "../models/entities/pedido/itemPedido.js";
 
 //import express from "express";
 
@@ -55,11 +56,13 @@ export class PedidoController {
       return res.status(400).json(result.error.issues);
     }
 
-    
+    const itemsInstanciados = result.data.items.map(
+      (i) => new ItemPedido(i.producto, i.cantidad, i.precioUnitario)
+    );
 
     const nuevoPedido = new Pedido(
       result.data.comprador,
-      result.data.items,
+      itemsInstanciados,
       result.data.total,
       result.data.moneda,
       result.data.direccionEntrega
@@ -86,7 +89,6 @@ export class PedidoController {
   }
 
   obtenerPedido(req, res) {
-    
     const idResult = idTransform.safeParse(req.params.id);
 
     if (idResult.error) return res.status(400).json(idResult.error.issues);
@@ -98,10 +100,10 @@ export class PedidoController {
         error: `Pedido con id: ${idResult.data} no encontrado`,
       });
     }
-    
+
     return res.status(201).json(pedido);
   }
-  
+
   puedeCancelarPedido(pedido) {
     let estadoPedido = pedido.getEstado();
 
@@ -113,7 +115,6 @@ export class PedidoController {
   }
 
   marcarEnviado(req, res) {
-
     const idResult = idTransform.safeParse(req.params.id);
 
     if (idResult.error) return res.status(400).json(idResult.error.issues);
@@ -126,14 +127,9 @@ export class PedidoController {
       });
     }
 
-    if (!this.pedidoService.puedeEnviarPedido(pedido)) {
-      return res.status(404).json({
-        error: `Pedido con id: ${idResult.data} no puede ser cancelado. ya que fue enviado`,
-      });
-    }
-
     this.pedidoService.enviarPedido(pedido);
-    return res.status(200).json({ mensaje: "Pedido marcado como enviado con éxito" });
+    return res
+      .status(200)
+      .json({ mensaje: "Pedido marcado como enviado con éxito" });
   }
-
 }
