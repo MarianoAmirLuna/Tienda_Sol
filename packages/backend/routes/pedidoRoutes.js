@@ -27,8 +27,14 @@ export default function pedidoRoutes(getController) {
     getController(PedidoController).eliminarPedido(req, res);
   });
 
+  // Cancelar pedido en base al ID
   router.post(pathPedido + "/cancelar/:id", (req, res) => {
-    getController(PedidoController).cancelarPedido(req, res);
+    getController(PedidoController).cancelarPedido(req, res); //TODO:esta bien que sea post? o podemos usar otro metodo http?
+  });
+
+  // Marcar como enviado
+  router.post(pathPedido + "/marcarEnviado/:id", (req, res) => {
+    getController(PedidoController).marcarEnviado(req, res);
   });
 
   return router;

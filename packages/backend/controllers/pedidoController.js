@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { Pedido } from "../models/entities/pedido/pedido.js"
+import { Pedido } from "../models/entities/pedido/pedido.js";
 
 //import express from "express";
 
@@ -8,28 +8,29 @@ const MonedaEnum = z.enum(["PESO_ARG", "DOLAR_USA", "REAL"]); // enum de monedas
 const direccionEntregaSchema = z.object({
   calle: z.string(),
   altura: z.string(),
-  piso: z.string().optional(),          // puede ser opcional
-  departamento: z.string().optional(),  // puede ser opcional
+  piso: z.string().optional(), // puede ser opcional
+  departamento: z.string().optional(), // puede ser opcional
   codigoPostal: z.string(),
   ciudad: z.string(),
   provincia: z.string(),
   pais: z.string().default("Argentina"),
   lat: z.string().optional(),
-  lng: z.string().optional()
+  lng: z.string().optional(),
 });
 
 const itemPedido = z.object({
   producto: z.number().int().nonnegative(),
-  cantidad: z.number().int().nonnegative()
-})
+  cantidad: z.number().int().nonnegative(),
+  precioUnitario: z.number().int().nonnegative(),
+});
 
 const pedidoSchema = z.object({
   comprador: z.number().int().nonnegative(),
   items: z.array(itemPedido),
   total: z.number().int().nonnegative(),
   moneda: MonedaEnum.default("PESO_ARG"),
-  direccionEntrega: direccionEntregaSchema
-})
+  direccionEntrega: direccionEntregaSchema,
+});
 
 const idTransform = z.string().transform((val, ctx) => {
   const num = Number(val);
@@ -43,18 +44,18 @@ const idTransform = z.string().transform((val, ctx) => {
   return num;
 });
 
-
 export class PedidoController {
-
   constructor(pedidoService) {
-    this.pedidoService = pedidoService
+    this.pedidoService = pedidoService;
   }
 
   crearPedido(req, res) {
     const result = pedidoSchema.safeParse(req.body);
     if (result.error) {
-      return res.status(400).json(result.error.issues)
+      return res.status(400).json(result.error.issues);
     }
+
+    
 
     const nuevoPedido = new Pedido(
       result.data.comprador,
@@ -62,7 +63,7 @@ export class PedidoController {
       result.data.total,
       result.data.moneda,
       result.data.direccionEntrega
-    )
+    );
 
     this.pedidoService.crearPedido(nuevoPedido);
     res.status(201).json(nuevoPedido);
@@ -74,57 +75,65 @@ export class PedidoController {
       const pedidos = this.pedidoService.listarPedidos(); // devuelve directamente un array o undefined
 
       if (!pedidos || pedidos.length === 0) {
-        return res.status(404).json({ error: 'No se encontraron pedidos' });
+        return res.status(404).json({ error: "No se encontraron pedidos" });
       }
 
       return res.status(200).json({ pedidos });
     } catch (error) {
       // Captura errores inesperados, por ejemplo si la base de datos lanza un error
-      return res.status(500).json({ error: error.message || 'Error interno' });
+      return res.status(500).json({ error: error.message || "Error interno" });
     }
   }
 
   obtenerPedido(req, res) {
-
+    
     const idResult = idTransform.safeParse(req.params.id);
 
     if (idResult.error) return res.status(400).json(idResult.error.issues);
 
     const pedido = this.pedidoService.obtenerPedido(idResult.data);
+
     if (!pedido) {
       return res.status(404).json({
-        error: `Pedido con id: ${idResult.data} no encontrado`
+        error: `Pedido con id: ${idResult.data} no encontrado`,
       });
     }
+    
     return res.status(201).json(pedido);
+  }
+  
+  puedeCancelarPedido(pedido) {
+    let estadoPedido = pedido.getEstado();
 
+    return (
+      estadoPedido == estadoPedido.PENDIENTE ||
+      estadoPedido == estadoPedido.CONFIRMADO ||
+      estadoPedido == estadoPedido.EN_PREPARACION
+    );
   }
 
-  cancelarPedido(req, res){
+  marcarEnviado(req, res) {
+
     const idResult = idTransform.safeParse(req.params.id);
 
     if (idResult.error) return res.status(400).json(idResult.error.issues);
 
     const pedido = this.pedidoService.obtenerPedido(idResult.data);
+
     if (!pedido) {
       return res.status(404).json({
-        error: `Pedido con id: ${idResult.data} no encontrado`
+        error: `Pedido con id: ${idResult.data} no encontrado`,
       });
     }
 
-    if(!this.puedeCancelarPedido(pedido)){
+    if (!this.pedidoService.puedeEnviarPedido(pedido)) {
       return res.status(404).json({
-        error: `Pedido con id: ${idResult.data} no puede ser cancelado. ya que fue enviado`
+        error: `Pedido con id: ${idResult.data} no puede ser cancelado. ya que fue enviado`,
       });
     }
 
-    this.pedidoService.cancelarPedido(pedido)
-
-    return res.status(200).json({mensaje: "Pedido cancelado con éxito"});
-  }
-
-  puedeCancelarPedido(pedido){
-    return pedido.getEstado() < EstadoPedido.ENVIADO //cumple si es pendiente(0), confirmado(1) o en preparacion(2)
+    this.pedidoService.enviarPedido(pedido);
+    return res.status(200).json({ mensaje: "Pedido marcado como enviado con éxito" });
   }
 
 }

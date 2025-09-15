@@ -14,8 +14,8 @@ export class PedidoRepository{
     return pedido;
   }
 
-  findAll() {
-    return Array.from(this.pedidos.values());
+  getPedidos() {
+    return this.pedidos;
   }
 
   findById(id) {
@@ -23,6 +23,10 @@ export class PedidoRepository{
       (unPedido) => unPedido.getId() == id
     );
     return pedido ?? null;
+  }
+
+  historialPedidos(id){
+    return this.getPedidos().filter(pedido => pedido.getComprador() == id);
   }
 
 }

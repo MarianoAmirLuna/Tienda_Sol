@@ -25,6 +25,10 @@ export class Producto {
     this.activo = activo;
   }
 
+  getVendedor(){
+    return this.vendedor;
+  }
+
   getId() {
     return this.id;
   }

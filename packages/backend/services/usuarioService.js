@@ -14,7 +14,7 @@ export class UsuarioService {
   }
 
   historialPedidos(id){
-    return this.pedidoRepo.findAll().filter(pedido => pedido.getComprador() == id)
+    return this.pedidoRepo.historialPedidos(id);
   }
 
 }

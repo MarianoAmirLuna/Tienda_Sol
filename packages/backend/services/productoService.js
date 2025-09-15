@@ -21,7 +21,7 @@ export class ProductoService {
   }
 
   listarProductos() {
-    return this.productoRepo.findAll();
+    return this.productoRepo.getPedidos();
   }
 
   actualizar(id, datosActualizar) {
