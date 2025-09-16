@@ -2,40 +2,31 @@
   "name": "2025-2c-backend-grupo-09",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "workspaces": [
     "packages/*"
   ],
   "scripts": {
-    "start:backend": "npm start --workspace=backend",
-    "dev:backend": "npm run dev --workspace=backend",
+    "start:backend": "node packages/backend/index.js",
+    "dev:backend": "node packages/backend/index.js",
     "start:frontend": "npm start --workspace=frontend",
     "start:dev": "concurrently \"npm run dev:backend\" \"npm run start:frontend\"",
     "lint": "eslint .",
     "format": "prettier . --write",
-    "dev": "tsx watch packages/backend/index.ts",
-    "build:backend": "npm run build --workspace=backend",
-    "build:watch": "npm run build:watch --workspace=backend",
-    "type-check": "npm run type-check --workspace=backend",
-    "clean": "rm -rf dist packages/backend/dist"
+    "clean": "rm -rf packages/backend/dist"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/ewd7QYGY)",
   "devDependencies": {
-    "@eslint/js": "^9.31.0",
-    "@types/cors": "^2.8.19",
-    "@types/express": "^4.17.23",
-    "@types/node": "^24.3.1",
     "concurrently": "^9.2.0",
-    "eslint": "^9.31.0",
-    "eslint-plugin-react": "^7.37.5",
-    "globals": "^16.3.0",
-    "prettier": "3.6.2",
-    "tsx": "^4.20.5",
-    "typescript": "^5.9.2"
+    "eslint": "^8.57.1",
+    "globals": "^16.4.0",
+    "prettier": "3.6.2"
   },
   "dependencies": {
+    "dotenv": "^17.2.2",
     "express": "^5.1.0",
     "tslombok": "^1.2.6",
     "zod": "^4.1.5"
