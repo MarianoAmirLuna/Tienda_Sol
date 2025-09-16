@@ -17,14 +17,6 @@ export default function usuarioRoutes(getController) {
     getController(UsuarioController).historialPedidos(req, res);
   });
 
-  // usuarios/marcarEnviado/mLuna {id_pedido:id}
-  /*
-    mluna es vendedor?
-    id_pedido existe?
-    id_pedido.setEstado(enviado)
-    retrun 200
-  */
-
   // pedido/enviar/:id
   return router;
 }
