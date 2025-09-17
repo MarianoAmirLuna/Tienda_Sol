@@ -47,30 +47,25 @@ const reqPedido = {
 };
 
 // Response esperado de producto
-const producto =
-    {
-        "id": 1,
-        "vendedorID": 1,
-        "titulo": "Zapatillas deportivas",
-        "descripcion": "Zapatillas de running, talle 42, color azul",
-        "categorias": [
-            {
-                "nombre": "deporte"
-            },
-            {
-                "nombre": "calzado"
-            }
-        ],
-        "precio": 35000,
-        "moneda": "PESO_ARG",
-        "stock": 20,
-        "fotos": [
-            "https://example.com/img/zapatillas1.jpg",
-            "https://example.com/img/zapatillas2.jpg"
-        ],
-        "activo": true
+const producto = {
+    id: 1,
+    vendedorID: 1,
+    titulo: "Zapatillas deportivas",
+    descripcion: "Zapatillas de running, talle 42, color azul",
+    categorias: [
+        { nombre: "deporte" },
+        { nombre: "calzado" }
+    ],
+    precio: 35000,
+    moneda: "PESO_ARG",
+    stock: 20,
+    fotos: [
+        "https://example.com/img/zapatillas1.jpg",
+        "https://example.com/img/zapatillas2.jpg"
+    ],
+    activo: true
+};
 
-    };
 
 // Response esperado de pedido
 
@@ -102,9 +97,9 @@ const pedido =
 
 const repoProducto = {
     findById: jest.fn().mockReturnValue(producto),
-    getPrecio: jest.fn().mockReturnValue(35000), 
-    hayStockProducto: jest.fn().mockReturnValue(),
-    actualizarStock: jest.fn().mockReturnValue(),
+    getPrecio: jest.fn().mockReturnValue(35000),
+    hayStockProducto: jest.fn().mockReturnValue(), //Agregar lógica
+    actualizarStock: jest.fn().mockReturnValue(), //Agregar lógica
     create: jest.fn().mockReturnValue(pedido)
 
 };

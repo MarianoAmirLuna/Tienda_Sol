@@ -6,20 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="27360920-9b69-487d-860f-a6c2d7ae6744" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/pedidoController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/pedidoController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/productoController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/productoController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/usuarioController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/usuarioController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/repository/usuarioRepository.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/repository/usuarioRepository.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/pedidoService.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/pedidoService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/pedido.client.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/pedido.client.test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/productos.client.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/productos.client.test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/usuario.client.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/usuario.client.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/pedido.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/pedido.test.js" afterDir="false" />
     </list>
     <list id="a08b5a08-a0fb-4bbc-9180-e8582d959220" name="Changes by Amir" comment="">
-      <change beforePath="$PROJECT_DIR$/models/entities/pedido/itemPedido.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/entities/pedido/itemPedido.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/pedido.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/pedido.test.js" afterDir="false" />
     </list>
     <list id="e297941e-a81e-4233-94b6-6829570f9137" name="Changes by joaqu" comment="" />
     <list id="1f7e82d2-9b81-427b-b11a-e9e8036beb99" name="Changes by yo" comment="" />
@@ -42,6 +32,14 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/tests/pedido.test.js">
+      <ranges>
+        <range start1="49" end1="73" start2="49" end2="68" changelist="27360920-9b69-487d-860f-a6c2d7ae6744" />
+        <range start1="104" end1="107" start2="99" end2="102" changelist="a08b5a08-a0fb-4bbc-9180-e8582d959220" />
+      </ranges>
+    </file>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
@@ -165,7 +163,7 @@
       <updated>1758077806638</updated>
       <workItem from="1758077808012" duration="2893000" />
       <workItem from="1758080724261" duration="6159000" />
-      <workItem from="1758123091541" duration="8839000" />
+      <workItem from="1758123091541" duration="9401000" />
     </task>
     <servers />
   </component>
