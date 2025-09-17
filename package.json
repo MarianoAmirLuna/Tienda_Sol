@@ -1,42 +1,28 @@
 {
-  "name": "2025-2c-backend-grupo-09",
+  "name": "backend",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
-  "workspaces": [
-    "packages/*"
-  ],
   "scripts": {
-    "start:backend": "node packages/backend/index.js",
-    "dev:backend": "node packages/backend/index.js",
-    "start:frontend": "npm start --workspace=frontend",
-    "start:dev": "concurrently \"npm run dev:backend\" \"npm run start:frontend\"",
-    "lint": "eslint .",
-    "format": "prettier . --write",
-    "clean": "rm -rf packages/backend/dist"
+    "start": "node index.js",
+    "dev": "node index.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/ewd7QYGY)",
-  "devDependencies": {
-    "concurrently": "^9.2.0",
-    "eslint": "^8.57.1",
-    "globals": "^16.4.0",
-    "prettier": "3.6.2"
-  },
+  "description": "",
   "dependencies": {
+    "axios": "^1.12.2",
+    "cors": "^2.8.5",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
-    "tslombok": "^1.2.6",
-    "zod": "^4.1.5"
+    "zod": "^4.1.7"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ddsw-mn/2025-2c-backend-grupo-09.git"
-  },
-  "bugs": {
-    "url": "https://github.com/ddsw-mn/2025-2c-backend-grupo-09/issues"
-  },
-  "homepage": "https://github.com/ddsw-mn/2025-2c-backend-grupo-09#readme"
+  "devDependencies": {
+    "@babel/core": "^7.28.4",
+    "@babel/preset-env": "^7.28.3",
+    "babel-jest": "^30.1.2",
+    "jest": "^30.1.3"
+  }
 }
