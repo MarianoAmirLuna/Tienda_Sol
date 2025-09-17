@@ -29,6 +29,10 @@ export class Producto {
     return this.vendedorID;
   }
 
+  getPrecio(){
+      return this.precio;
+  }
+
   getId() {
     return this.id;
   }

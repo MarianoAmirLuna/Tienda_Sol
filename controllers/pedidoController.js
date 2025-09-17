@@ -21,14 +21,14 @@ const direccionEntregaSchema = z.object({
 
 const itemPedido = z.object({
   producto: z.number().int().nonnegative(),
-  cantidad: z.number().int().nonnegative(),
-  precioUnitario: z.number().int().nonnegative(),
+  cantidad: z.number().int().nonnegative()
+    //saque el item pedido, se calcula solo
 });
 
 const pedidoSchema = z.object({
   comprador: z.number().int().nonnegative(),
   items: z.array(itemPedido),
-  total: z.number().int().nonnegative(),
+  //total: z.number().int().nonnegative(),
   moneda: MonedaEnum.default("PESO_ARG"),
   direccionEntrega: direccionEntregaSchema,
 });
@@ -52,18 +52,24 @@ export class PedidoController {
 
   crearPedido(req, res) {
     const result = pedidoSchema.safeParse(req.body);
+    let totalCalculado = 0;
+
     if (result.error) {
       return res.status(400).json(result.error.issues);
     }
 
     const itemsInstanciados = result.data.items.map(
-      (i) => new ItemPedido(i.producto, i.cantidad, i.precioUnitario)
+      (i) => {
+          let precioUnitarioActual = this.pedidoService.getPrecioUnitario(i.producto)
+          totalCalculado += precioUnitarioActual * i.cantidad;
+          return new ItemPedido(i.producto, i.cantidad, precioUnitarioActual)
+      }
     );
 
     const nuevoPedido = new Pedido(
       result.data.comprador,
       itemsInstanciados,
-      result.data.total,
+      totalCalculado,
       result.data.moneda,
       result.data.direccionEntrega
     );

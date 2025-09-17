@@ -23,11 +23,11 @@ export default function productoRoutes(getController) {
     getController(ProductoController).eliminarProducto(req, res);
   });
 
-  // TODO: falto este para completar el crud de productos
   router.put(pathProducto + "/:id", (req, res) => {
     getController(ProductoController).actualizarProducto(req, res);
   });
 
+// TODO: esto funciona?
   router.get(pathProducto + "/categoria/:categoria", (req, res) => {
     getController(ProductoController).buscarPorCategoria(req, res);
   });

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="27360920-9b69-487d-860f-a6c2d7ae6744" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/pedidoController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/pedidoController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/productoController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/productoController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/entities/producto/producto.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/entities/producto/producto.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/repository/pedidoRepository.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/repository/pedidoRepository.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/repository/productoRepository.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/repository/productoRepository.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/productoRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/productoRoutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/pedidoService.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/pedidoService.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="32oD076nBkc27Ywn67tRckSpKcc" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;tests&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-b598e85cdad2-JavaScript-WS-252.25557.126" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="27360920-9b69-487d-860f-a6c2d7ae6744" name="Changes" comment="" />
+      <created>1758077806638</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1758077806638</updated>
+      <workItem from="1758077808012" duration="2893000" />
+      <workItem from="1758080724261" duration="1315000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

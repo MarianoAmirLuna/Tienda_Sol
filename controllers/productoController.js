@@ -104,7 +104,6 @@ export class ProductoController {
     }
   }
 
-  //Joaco
   actualizarProducto(req, res) {
 
     const resultId = idTransform.safeParse(req.params.id)
@@ -124,7 +123,6 @@ export class ProductoController {
     res.status(200).json(productoActualizado);
   }
 
-  //Bran
   buscarPorCategoria(req, res) {
     const unaCategoria = productoSchema.safeParse(req.params.categoria);
     if (unaCategoria.error) return res.status(400).json(unaCategoria.error.issues);

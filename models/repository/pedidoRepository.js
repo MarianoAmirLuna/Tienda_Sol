@@ -20,13 +20,13 @@ export class PedidoRepository{
 
   findById(id) {
     const pedido = this.pedidos.find(
-      (unPedido) => unPedido.getId() == id
+      (unPedido) => unPedido.getId() === id
     );
     return pedido ?? null;
   }
 
   historialPedidos(id){
-    return this.getPedidos().filter(pedido => pedido.getComprador() == id);
+    return this.getPedidos().filter(pedido => pedido.getComprador() === id);
   }
 
 }

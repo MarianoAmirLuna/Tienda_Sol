@@ -16,7 +16,7 @@ export class ProductoRepository {
 
   findById(id) {
     const producto = this.productos.find(
-      (unProducto) => unProducto.getId() == id
+      (unProducto) => unProducto.getId() === id
     );
     return producto ?? null;
   }
@@ -36,7 +36,7 @@ export class ProductoRepository {
 
   delete(id) {
     const indice = this.productos.findIndex(
-      (unProducto) => unProducto.getId() == id
+      (unProducto) => unProducto.getId() === id
     );
     if (indice === -1) return false;
 

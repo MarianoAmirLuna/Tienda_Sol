@@ -6,6 +6,10 @@ export class PedidoService {
     this.productoRepo = productoRepo;
   }
 
+  getPrecioUnitario(producto) {
+      return this.productoRepo.findById(producto).getPrecio();
+  }
+
   crearPedido(pedido) {
     if (!this.hayStockTodosProductos(pedido)) {
       //TODO:revisar los errores cuando no hay stock
