@@ -11,6 +11,10 @@ export class ItemPedido {
         return this.producto;
     }
 
+    getCantidad(){
+        return this.cantidad;
+    }
+
     subtotal() {
         return 0;
     }

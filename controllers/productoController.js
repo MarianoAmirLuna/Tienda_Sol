@@ -81,7 +81,7 @@ export class ProductoController {
     if(!producto){
       return res.status(404).json({ error: "Producto no encontrado" });
     }
-    return res.status(201).json(producto);
+    return res.status(200).json(producto);
   }
 
   eliminarProducto(req, res) {

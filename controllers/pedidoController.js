@@ -106,7 +106,7 @@ export class PedidoController {
       });
     }
 
-    return res.status(201).json(pedido);
+    return res.status(200).json(pedido);
   }
 
   cancelarPedido(req, res){

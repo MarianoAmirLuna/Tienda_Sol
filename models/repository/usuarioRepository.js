@@ -13,6 +13,7 @@ export class UsuarioRepository {
     return usuario;
   }
 
+  //TODO mantener consistencia
   findUserByID(id_user){
     const usuario = this.usuarios.find(
       (unUsuario) => unUsuario.getId() == id_user

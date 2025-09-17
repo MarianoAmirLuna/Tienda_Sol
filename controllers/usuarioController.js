@@ -49,7 +49,7 @@ export class UsuarioController {
     const idResult = idTransform.safeParse(req.params.id);
     if (idResult.error) return res.status(400).json(idResult.error.issues);
     
-    res.status(201).json(this.usuarioService.historialPedidos(idResult.data));
+    res.status(200).json(this.usuarioService.historialPedidos(idResult.data));
   }
 
 }

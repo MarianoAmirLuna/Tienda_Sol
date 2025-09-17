@@ -6,8 +6,8 @@ export class PedidoService {
     this.productoRepo = productoRepo;
   }
 
-  getPrecioUnitario(producto) {
-      return this.productoRepo.findById(producto).getPrecio();
+  getPrecioUnitario(productoID) {
+      return this.productoRepo.findById(productoID).precio;
   }
 
   crearPedido(pedido) {
