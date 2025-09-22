@@ -4,17 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="27360920-9b69-487d-860f-a6c2d7ae6744" name="Changes" comment="">
+    <list default="true" id="27360920-9b69-487d-860f-a6c2d7ae6744" name="Changes" comment="Los test bien hechos, algo de promesas, correccion de paths a restless, cambio en UPDATE de /productos">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/pedidoController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/pedidoController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/productoController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/productoController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/entities/pedido/itemPedido.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/entities/pedido/itemPedido.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/entities/pedido/pedido.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/entities/pedido/pedido.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/entities/producto/producto.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/entities/producto/producto.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/repository/productoRepository.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/repository/productoRepository.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/pedidoRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/pedidoRoutes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/pedidoService.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/pedidoService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/productoService.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/productoService.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/pedido.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/pedido.test.js" afterDir="false" />
     </list>
     <list id="a08b5a08-a0fb-4bbc-9180-e8582d959220" name="Changes by Amir" comment="" />
@@ -169,8 +160,17 @@
       <workItem from="1758135772475" duration="4126000" />
       <workItem from="1758549498152" duration="172000" />
       <workItem from="1758549692483" duration="15376000" />
-      <workItem from="1758565222549" duration="6009000" />
+      <workItem from="1758565222549" duration="6751000" />
     </task>
+    <task id="LOCAL-00001" summary="Los test bien hechos, algo de promesas, correccion de paths a restless, cambio en UPDATE de /productos">
+      <option name="closed" value="true" />
+      <created>1758571655034</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1758571655034</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -186,5 +186,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Los test bien hechos, algo de promesas, correccion de paths a restless, cambio en UPDATE de /productos" />
+    <option name="LAST_COMMIT_MESSAGE" value="Los test bien hechos, algo de promesas, correccion de paths a restless, cambio en UPDATE de /productos" />
   </component>
 </project>
