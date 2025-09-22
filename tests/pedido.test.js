@@ -115,4 +115,20 @@ describe("PedidoService", () => {
             `El producto ${productobase.getTitulo()} tiene un stock inferior, ${productobase.getStock()}, a la cantidad solicitada, 100`
         );
     });
+
+    test("Crear pedido de un producto con ID incorrecto", async () => {
+        // SET UP
+        const pedidoFront = pedidoConItemPedido(new ItemPedido(2, 30, 100));
+
+        const productoRepository = {
+            findById: jest.fn().mockImplementation(async (id) => null)
+        };
+
+        const pedidoService = new PedidoService({}, productoRepository);
+
+        // Llamo al metodo directamente en el expect porque sino se lanza el error y no alcanza a chequear el resultado
+        await expect(pedidoService.crearPedido(pedidoFront)).rejects.toThrow(
+            `El producto de id 2 no existe como producto`
+        );
+    });
 });
