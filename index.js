@@ -25,7 +25,7 @@ app.use(
 );
 
 // health check
-app.get("/hello", (req, res) => {
+app.get("/health-check", (req, res) => {
   res.json({ message: "hello world" });
 });
 
