@@ -1,5 +1,14 @@
 import {EstadoPedido} from "../models/entities/pedido/estadoPedido.js";
 
+const transicionesPermitidas = {
+    [EstadoPedido.PENDIENTE]: [EstadoPedido.CONFIRMADO, EstadoPedido.CANCELADO, EstadoPedido.ENVIADO],
+    [EstadoPedido.CONFIRMADO]: [EstadoPedido.EN_PREPARACION, EstadoPedido.CANCELADO, EstadoPedido.ENVIADO],
+    [EstadoPedido.EN_PREPARACION]: [EstadoPedido.ENVIADO, EstadoPedido.CANCELADO],
+    [EstadoPedido.ENVIADO]: [EstadoPedido.ENTREGADO],
+    [EstadoPedido.ENTREGADO]: [],
+    [EstadoPedido.CANCELADO]: [] // 👈 No se puede salir de CANCELADO
+};
+
 export class PedidoService {
     constructor(pedidoRepository, productoRepository) {
         this.pedidoRepository = pedidoRepository;
@@ -9,6 +18,7 @@ export class PedidoService {
     async getPrecioUnitario(productoID) {
         return await this.productoRepository.findById(productoID).precio;
     }
+
     //#############
     //CREATE pedido
     //#############
@@ -75,11 +85,9 @@ export class PedidoService {
     //#############
     //RETRIEVE pedido
     //#############
-
     async listarPedidos() {
         return await this.pedidoRepository.getPedidos();
     }
-
 
     async obtenerPedido(idPedido) {
         const pedido = await this.pedidoRepository.findById(idPedido);
@@ -116,9 +124,8 @@ export class PedidoService {
 
     async puedeEnviarPedido(pedido) {
 
-        await console.log(pedido);
         const items = pedido.getItemsPedido();
-        if(!items){
+        if (!items) {
             return false;
         }
 
@@ -149,6 +156,27 @@ export class PedidoService {
         pedido.cambiarEstado(EstadoPedido.ENVIADO);
         await this.pedidoRepository.actualizar(pedido);
         return pedido;
+    }
+
+    async cambiarEstado(id, estado){
+
+        const pedido = await this.obtenerPedido(id);
+        if (!pedido) {
+            return -1;
+        }
+
+        const estadoActual = pedido.getEstado();
+
+        if (!(transicionesPermitidas)[estadoActual].includes(estado)) {
+            return null;
+        }
+
+        if(estado === EstadoPedido.ENVIADO){
+            return await this.enviarPedido(pedido);
+        }
+        if(estado === EstadoPedido.CANCELADO){
+            return await this.cancelarPedido(pedido);
+        }
     }
 
     //#############

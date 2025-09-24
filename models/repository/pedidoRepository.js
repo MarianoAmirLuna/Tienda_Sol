@@ -24,8 +24,12 @@ export class PedidoRepository {
     }
 
     actualizar(id, pedidoActualizado) {
+        if(pedidoActualizado == null) return null;
+
         const indice = this.pedidos.findIndex((pedido) => pedido.getId() === id);
+
         if (indice === -1) return null;
+
         this.pedidos[indice] = pedidoActualizado;
 
         return pedidoActualizado;

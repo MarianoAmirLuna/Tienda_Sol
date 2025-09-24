@@ -288,16 +288,14 @@ describe("PedidoService", () => {
         expect(productoRepository.findById).toHaveBeenCalledWith(1);
         expect(pedidoEnviado).toEqual(pedidoFinal);
     });
-
 /*
-    test("Enviar un Pedido fallidamente", async () => {
+    test("Enviar un Pedido sin Items", async () => {
         // SET UP
-        const pedidoFront = pedidoConID(1);
-        pedidoFront.cambiarEstado(EstadoPedido.ENVIADO);
+        const pedidoFront = pedidoConItemPedido();
 
         const pedidoService = new PedidoService({}, {});
 
-        const pedidoCancelado = await pedidoService.cancelarPedido(pedidoFront);
-        expect(pedidoCancelado).toEqual(null);
+        const pedidoNoEnviado = await pedidoService.enviarPedido(pedidoFront);
+        expect(pedidoNoEnviado).toEqual(null);
     });*/
 });

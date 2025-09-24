@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="27360920-9b69-487d-860f-a6c2d7ae6744" name="Changes" comment="test de creación de pedidos" />
+    <list default="true" id="27360920-9b69-487d-860f-a6c2d7ae6744" name="Changes" comment="test de creación de pedidos">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/pedidoController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/pedidoController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/entities/pedido/estadoPedido.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/entities/pedido/estadoPedido.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/repository/pedidoRepository.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/repository/pedidoRepository.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/pedidoRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/pedidoRoutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/pedidoService.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/pedidoService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/pedido.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/pedido.test.js" afterDir="false" />
+    </list>
     <list id="a08b5a08-a0fb-4bbc-9180-e8582d959220" name="Changes by Amir" comment="" />
     <list id="f6324e0c-6106-4ee3-b353-738a49673d94" name="Changes by gbolocco" comment="" />
     <list id="e297941e-a81e-4233-94b6-6829570f9137" name="Changes by joaqu" comment="" />
@@ -50,6 +58,7 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/utnso/Desarrollo_de_Software/2025-2c-backend-grupo-09-corrupto&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -158,7 +167,8 @@
       <workItem from="1758549498152" duration="172000" />
       <workItem from="1758549692483" duration="15376000" />
       <workItem from="1758565222549" duration="13192000" />
-      <workItem from="1758628025967" duration="1433000" />
+      <workItem from="1758628025967" duration="2604000" />
+      <workItem from="1758722109280" duration="5003000" />
     </task>
     <task id="LOCAL-00001" summary="Los test bien hechos, algo de promesas, correccion de paths a restless, cambio en UPDATE de /productos">
       <option name="closed" value="true" />

@@ -2,9 +2,8 @@ import {z} from "zod";
 import {Pedido} from "../models/entities/pedido/pedido.js";
 import {ItemPedido} from "../models/entities/pedido/itemPedido.js";
 
-//import express from "express";
-
 const MonedaEnum = z.enum(["PESO_ARG", "DOLAR_USA", "REAL"]); // enum de monedas
+const estadoSchema = z.enum(["PENDIENTE", "CONFIRMADO", "EN_PREPARACION", "ENVIADO", "ENTREGADO", "CANCELADO"]);
 
 const direccionEntregaSchema = z.object({
     calle: z.string(),
@@ -21,13 +20,13 @@ const direccionEntregaSchema = z.object({
 
 const itemPedido = z.object({
     producto: z.number().int().nonnegative(),
-    cantidad: z.number().int().nonnegative()
+    cantidad: z.number().int().nonnegative(),
+    precioUnitario: z.number().nonnegative().optional()
 });
 
 const pedidoSchema = z.object({
     comprador: z.number().int().nonnegative(),
     items: z.array(itemPedido),
-    //total: z.number().int().nonnegative(),
     moneda: MonedaEnum.default("PESO_ARG"),
     direccionEntrega: direccionEntregaSchema,
 });
@@ -128,6 +127,28 @@ export class PedidoController {
     //UPDATE pedido
     //#############
 
+    async actualizarEstado(req, res) {
+        const idResult = idTransform.safeParse(req.params.id);
+        if (idResult.error) return res.status(400).json(idResult.error.issues);
+
+        const estadoResult = estadoSchema.safeParse(req.body.estado);
+        if (estadoResult.error) return res.status(400).json(estadoResult.error.issues);
+
+        const pedidoActualizado = await this.pedidoService.cambiarEstado(idResult.data, estadoResult.data);
+        if (!pedidoActualizado) {
+            return res.status(400).json({ error: `No se pudo cambiar el estado del pedido` });
+        }
+        if (pedidoActualizado == -1) {
+            return res.status(404).json({ error: `Pedido con id: ${idResult.data} no encontrado` });
+        }
+
+        return res.status(200).json({
+            mensaje: `Pedido actualizado al estado ${pedidoActualizado.getEstado()} con éxito`,
+            pedido: pedidoActualizado
+        });
+    }
+
+    /*
     async cancelarPedido(req, res) {
         const idResult = idTransform.safeParse(req.params.id);
 
@@ -180,7 +201,7 @@ export class PedidoController {
                 mensaje: "Pedido marcado como enviado con éxito",
                 pedido: pedidoEnviado
             });
-    }
+    }*/
 
     //#############
     //UPDATE pedido
