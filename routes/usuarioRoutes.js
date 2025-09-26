@@ -8,7 +8,7 @@ export default function usuarioRoutes(getController) {
   const router = express.Router();
 
   // Crear usuario
-  router.post(pathUsuario, (req, res) => {
+  router.post(pathUsuario, (req, res,next) => {
     getController(UsuarioController).crearUsuario(req, res);
   });
 

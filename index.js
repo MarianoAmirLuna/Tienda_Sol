@@ -13,6 +13,7 @@ import { UsuarioController } from "./controllers/usuarioController.js";
 
 import { Server } from "./server.js";
 import routes from "./routes/routes.js";
+import errorHandler from "./Middleware/ErrorHandler.js";
 
 const app = express();
 app.use(express.json());
@@ -28,6 +29,9 @@ app.use(
 app.get("/health-check", (req, res) => {
   res.json({ message: "hello world" });
 });
+
+// errorHandler
+app.use(errorHandler);
 
 const PORT = Number(process.env.SERVER_PORT) || 8000;
 
@@ -56,6 +60,8 @@ server.setController(UsuarioController, usuarioController);
 
 routes.forEach((route) => server.addRoute(route));
 server.configureRoutes();
+
+
 server.launch();
 
 // app.listen(PORT, () => {

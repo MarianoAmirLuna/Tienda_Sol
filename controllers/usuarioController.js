@@ -2,6 +2,7 @@ import { z } from "zod";
 import { Usuario } from "../models/entities/usuario/usuario.js";
 import {usuarioSchema} from "../Middleware/schemas/usuarioSchema.js";
 import {idTransform} from "../Middleware/schemas/usuarioSchema.js";
+import {asyncHandler} from "../Middleware/asyncHandler.js";
 
 
 export class UsuarioController {
@@ -10,25 +11,26 @@ export class UsuarioController {
     this.usuarioService = usuarioService
   }
 
-  crearUsuario(req, res) {
+    crearUsuario = asyncHandler(async (req, res) => {
+        // Validación con safeParse y throw del error
+        const result = usuarioSchema.safeParse(req.body);
 
-    const result = usuarioSchema.safeParse(req.body);
+        if (result.error) {
+            throw result.error;
+        }
 
-    if (result.error) {
-      return res.status(400).json(result.error.issues)
-    };
+        // Tu lógica original sin el if de validación
+        const nuevoUsuario = new Usuario(
+            result.data.nombre,
+            result.data.email,
+            result.data.telefono,
+            result.data.tipo
+        );
 
-    const nuevoUsuario = new Usuario(
-      result.data.nombre,
-      result.data.email,
-      result.data.telefono,
-      result.data.tipo
-    )
-
-    this.usuarioService.crearUsuario(nuevoUsuario);
-
-    res.status(201).json(nuevoUsuario);
-  }
+        // Asegúrate de que tu service también maneje errores correctamente
+        const usuarioCreado = await this.usuarioService.crearUsuario(nuevoUsuario);
+        res.status(201).json(usuarioCreado);
+    });
 
   historialPedidos(req, res){
 
