@@ -1,8 +1,5 @@
-//import { ProductoService } from "../services/productoService.js";
-import {z} from "zod";
 import {Producto} from "../models/entities/producto/producto.js";
-import {Categoria} from "../models/entities/producto/categoria.js";
-import {productoSchema, idTransform} from "../Middleware/schemas/productoSchema.js";
+import {productoSchema} from "../Middleware/schemas/productoSchema.js";
 
 
 export class ProductoController {
@@ -12,27 +9,14 @@ export class ProductoController {
     }
 
     async crearProducto(req, res) {
-        const result = productoSchema.safeParse(req.body);
-        if (result.error) {
-            return res.status(400).json(result.error.issues);
-        }
-        const nuevoProducto = new Producto(
-            result.data.vendedor,
-            result.data.titulo,
-            result.data.descripcion,
-            result.data.categorias,
-            result.data.precio,
-            result.data.moneda,
-            result.data.stock,
-            result.data.fotos,
-            result.data.activo
-        )
+        const nuevoProducto = productoSchema.parsearProducto(req);
+
         const p = await this.productoService.crearProducto(nuevoProducto);
         res.status(201).json(p);
     }
 
     obtenerProducto(req, res) {
-        const idResult = idTransform.safeParse(req.params.id);
+        const idResult = productoSchema.idTransform.safeParse(req.params.id);
         if (idResult.error) return res.status(400).json(idResult.error.issues);
         const producto = this.productoService.obtenerProducto(idResult.data);
         if (!producto) {

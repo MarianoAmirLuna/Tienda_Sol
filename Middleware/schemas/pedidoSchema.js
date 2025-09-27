@@ -1,8 +1,16 @@
 import {z} from "zod";
+import {schemaBase} from "./SchemaBase.js";
+import {productSchema} from "./productoSchema.js";
+import {Producto} from "../../models/entities/producto/producto.js";
+import {Pedido} from "../../models/entities/pedido/pedido.js";
 
 const MonedaEnum = z.enum(["PESO_ARG", "DOLAR_USA", "REAL"]); // enum de monedas
 export const estadoSchema = z.enum(["PENDIENTE", "CONFIRMADO", "EN_PREPARACION", "ENVIADO", "ENTREGADO", "CANCELADO"]);
-
+const itemPedido = z.object({
+    producto: z.number().int().nonnegative(),
+    cantidad: z.number().int().nonnegative(),
+    precioUnitario: z.number().nonnegative().optional()
+});
 const direccionEntregaSchema = z.object({
     calle: z.string(),
     altura: z.string(),
@@ -15,28 +23,27 @@ const direccionEntregaSchema = z.object({
     lat: z.string().optional(),
     lng: z.string().optional(),
 });
-
-const itemPedido = z.object({
-    producto: z.number().int().nonnegative(),
-    cantidad: z.number().int().nonnegative(),
-    precioUnitario: z.number().nonnegative().optional()
-});
-
-export const pedidoSchema = z.object({
+const pedido = z.object({
     comprador: z.number().int().nonnegative(),
     items: z.array(itemPedido),
     moneda: MonedaEnum.default("PESO_ARG"),
     direccionEntrega: direccionEntregaSchema,
 });
 
-export const idTransform = z.string().transform((val, ctx) => {
-    const num = Number(val);
-    if (isNaN(num)) {
-        ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: "id must be a number",
-        });
-        return z.NEVER;
+export class pedidoSchema extends schemaBase {
+
+    static parsearPedido(req) {
+        const result = pedido.safeParse(req.body);
+        if (result.error) {
+            throw result.error;
+        }
+
+        return result;
     }
-    return num;
-});
+
+    static parsearEstado(req){
+        const nuevoEstado = estadoSchema.safeParse(req.body.estado);
+        if (nuevoEstado.error) throw result.error;
+        return nuevoEstado;
+    }
+}

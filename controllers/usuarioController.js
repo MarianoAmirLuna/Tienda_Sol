@@ -1,6 +1,6 @@
 import {z} from "zod";
 import {Usuario} from "../models/entities/usuario/usuario.js";
-import {parsearUsuario, parsearId} from "../Middleware/schemas/usuarioSchemaValidator.js";
+import {usuarioSchema} from "../Middleware/schemas/usuarioSchema.js";
 import {asyncHandler} from "../Middleware/asyncHandler.js";
 
 
@@ -12,7 +12,7 @@ export class UsuarioController {
 
     crearUsuario(req, res, next) {
 
-        const nuevoUsuario = parsearUsuario(req)
+        const nuevoUsuario = usuarioSchema.parsearUsuario(req)
         this.usuarioService.crearUsuario(nuevoUsuario)
         .then(usuarioCreado => {
             return res.status(201).json(usuarioCreado);
@@ -23,7 +23,7 @@ export class UsuarioController {
     }
 
     historialPedidos(req, res, next) {
-        const idResult = parsearId(req);
+        const idResult = usuarioSchema.parsearId(req);
         this.usuarioService.historialPedidos(idResult)
         .then(historial => {
             return res.status(200).json(historial);
