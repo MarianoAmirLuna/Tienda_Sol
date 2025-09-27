@@ -27,8 +27,6 @@ export class ProductoRepository {
 
         if (indice === -1) return Promise.resolve(null);
 
-        productoActualizado.setId(id);
-
         this.productos[indice] = productoActualizado;
         return Promise.resolve(productoActualizado);
     }

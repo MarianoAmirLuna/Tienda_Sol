@@ -5,8 +5,9 @@ export class ProductoService {
         this.productoRepository = productoRepository;
     }
 
-    crearProducto(producto) {
-        return this.productoRepository.create(producto);
+    async crearProducto(producto) {
+        const nuevoProducto = await this.productoRepository.create(producto);
+        return nuevoProducto;
     }
 
 
@@ -16,13 +17,14 @@ export class ProductoService {
         return producto;
     }
 
-
-    listarProductos() {
-        return this.productoRepository.findAll();
+    async listarProductos() {
+        const productos = await this.productoRepository.findAll();
+        return productos;
     }
 
     async actualizar(id, productoActualizado) {
 
+        productoActualizado.setId(id);
         const productoGuardado = await this.productoRepository.update(id, productoActualizado);
         
         if (!productoGuardado) throw new NotFoundError(`${id}`);
