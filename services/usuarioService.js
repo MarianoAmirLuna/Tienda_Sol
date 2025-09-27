@@ -4,16 +4,16 @@ export class UsuarioService {
         this.pedidoService = pedidoService;
     }
 
-    crearUsuario(usuario) {
-        return this.usuarioRepo.create(usuario);
+    async crearUsuario(usuario) {
+        return await this.usuarioRepo.create(usuario);
     }
 
-    findUserByID(id_user) {
-        return this.usuarioRepo.findUserByID(id_user);
+    async findUserByID(id_user) {
+        return await this.usuarioRepo.findUserByID(id_user);
     }
 
-    historialPedidos(id) {
-        return this.pedidoService.historialPedido(id);
+    async historialPedidos(id) {
+        return await this.pedidoService.historialPedido(id);
     }
 
 }

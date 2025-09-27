@@ -48,9 +48,8 @@ export class PedidoRepository {
     }
 
 
-    historialPedidos(id) {
-        console.log("param historialPedidos : "+id);
-        return Promise.resolve(this.getPedidos().filter(pedido => pedido.getCompradorID() == id));
+    historialPedidos(compradorID) {
+        return Promise.resolve(this.pedidos.filter(pedido => pedido.getCompradorID() == compradorID));
     }
 
 }
