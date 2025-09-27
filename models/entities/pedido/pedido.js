@@ -4,6 +4,7 @@ import { Moneda } from "../moneda.js";
 import { ItemPedido } from "./itemPedido.js";
 import { DireccionEntrega } from "./direccionEntrega.js";
 import { CambioEstadoPedido } from "./cambioEstadoPedido.js";
+import { tr } from "zod/locales";
 
 
 export class Pedido {
@@ -19,13 +20,16 @@ export class Pedido {
         this.historialEstados = []
     }
 
-    cambiarEstado(estado) {
+    cambiarEstado(nuevoEstado) {
         this.historialEstados.push(this.estado);
-        this.setEstado(estado);
-    }
+        if (nuevoEstado === EstadoPedido.ENVIADO && ![EstadoPedido.PENDIENTE, EstadoPedido.CONFIRMADO, EstadoPedido.EN_PREPARACION].includes(this.estado)) {
+            throw new Error(`No se puede cambiar al estado ${nuevoEstado} desde el estado ${this.estado}`); // TODO hacer una clase de error personalizada
+        }
 
-    setEstado(unEstado) {
-        this.estado = unEstado;
+        if(nuevoEstado === EstadoPedido.CANCELADO && ![EstadoPedido.PENDIENTE, EstadoPedido.CONFIRMADO, EstadoPedido.EN_PREPARACION].includes(this.estado)){
+            throw new Error(`No se puede cambiar al estado ${nuevoEstado} desde el estado ${this.estado}`); // TODO hacer una clase de error personalizada
+        }
+        this.estado = nuevoEstado;
     }
 
     setId(id){

@@ -5,12 +5,15 @@ import {Producto} from "../../models/entities/producto/producto.js";
 import {Pedido} from "../../models/entities/pedido/pedido.js";
 
 const MonedaEnum = z.enum(["PESO_ARG", "DOLAR_USA", "REAL"]); // enum de monedas
+
 export const estadoSchema = z.enum(["PENDIENTE", "CONFIRMADO", "EN_PREPARACION", "ENVIADO", "ENTREGADO", "CANCELADO"]);
+
 const itemPedido = z.object({
     producto: z.number().int().nonnegative(),
     cantidad: z.number().int().nonnegative(),
     precioUnitario: z.number().nonnegative().optional()
 });
+
 const direccionEntregaSchema = z.object({
     calle: z.string(),
     altura: z.string(),
@@ -23,6 +26,7 @@ const direccionEntregaSchema = z.object({
     lat: z.string().optional(),
     lng: z.string().optional(),
 });
+
 const pedido = z.object({
     comprador: z.number().int().nonnegative(),
     items: z.array(itemPedido),
@@ -43,7 +47,7 @@ export class pedidoSchema extends schemaBase {
 
     static parsearEstado(req){
         const nuevoEstado = estadoSchema.safeParse(req.body.estado);
-        if (nuevoEstado.error) throw result.error;
+        if (nuevoEstado.error) throw nuevoEstado.error;
         return nuevoEstado;
     }
 }

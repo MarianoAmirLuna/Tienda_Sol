@@ -1,13 +1,14 @@
+import { NotFoundError } from "../middleware/appError.js";
 import {EstadoPedido} from "../models/entities/pedido/estadoPedido.js";
 
-const transicionesPermitidas = {
-    [EstadoPedido.PENDIENTE]: [EstadoPedido.CONFIRMADO, EstadoPedido.CANCELADO, EstadoPedido.ENVIADO],
-    [EstadoPedido.CONFIRMADO]: [EstadoPedido.EN_PREPARACION, EstadoPedido.CANCELADO, EstadoPedido.ENVIADO],
-    [EstadoPedido.EN_PREPARACION]: [EstadoPedido.ENVIADO, EstadoPedido.CANCELADO],
-    [EstadoPedido.ENVIADO]: [EstadoPedido.ENTREGADO],
-    [EstadoPedido.ENTREGADO]: [],
-    [EstadoPedido.CANCELADO]: []
-};
+// const transicionesPermitidas = {
+//     [EstadoPedido.PENDIENTE]: [EstadoPedido.CONFIRMADO, EstadoPedido.CANCELADO, EstadoPedido.ENVIADO],
+//     [EstadoPedido.CONFIRMADO]: [EstadoPedido.EN_PREPARACION, EstadoPedido.CANCELADO, EstadoPedido.ENVIADO],
+//     [EstadoPedido.EN_PREPARACION]: [EstadoPedido.ENVIADO, EstadoPedido.CANCELADO],
+//     [EstadoPedido.ENVIADO]: [EstadoPedido.ENTREGADO],
+//     [EstadoPedido.ENTREGADO]: [],
+//     [EstadoPedido.CANCELADO]: []
+// };
 
 export class PedidoService {
     constructor(pedidoRepository, productoService) {
@@ -32,37 +33,28 @@ export class PedidoService {
     async crearPedido(pedido) {
 
         await this.actualizarStockProductos(pedido);
-
         return await this.pedidoRepository.create(pedido);
     }
 
 
-    /// hasta aca todo ok, se lanza el error de stock desde el mismo producto falta seguir de aca para abajo
-
-    //#############
-    //CREATE pedido
-    //#############
-
-    //#############
-    //RETRIEVE pedido
-    //#############
-
     async listarPedidos() {
-        return await this.pedidoRepository.getPedidos();
+        const pedidos = await this.pedidoRepository.getPedidos();
+        return pedidos || [];
     }
+
 
     async obtenerPedido(idPedido) {
         const pedido = await this.pedidoRepository.findById(idPedido);
+        if (!pedido) {throw new NotFoundError(`${idPedido}`);}
         return pedido;
     }
 
-    //#############
-    //RETRIEVE pedido
-    //#############
+    async delete(id){
+        const pedido = await this.pedidoRepository.delete(id);
+        if (!pedido) {throw new NotFoundError(`${id}`);}
+        return pedido;
+    }
 
-    //#############
-    //UPDATE pedido
-    //#############
 
     puedeCancelarPedido(pedido) {
         const estadosPermitidos = [
@@ -83,6 +75,7 @@ export class PedidoService {
         return pedido;
     }
 
+    // ====================
 
     async puedeEnviarPedido(pedido) {
 
@@ -120,25 +113,15 @@ export class PedidoService {
         return pedido;
     }
 
-    async cambiarEstado(id, estado){
+    async cambiarEstado(id, nuevoEstado){
 
         const pedido = await this.obtenerPedido(id);
-        if (!pedido) {
-            return -1;
-        }
 
-        const estadoActual = pedido.getEstado();
+        if(!pedido) throw new NotFoundError(`${id}`);
 
-        if (!(transicionesPermitidas)[estadoActual].includes(estado)) {
-            return null;
-        }
+        pedido.cambiarEstado(nuevoEstado); // para validar que el estado es correcto
 
-        if(estado === EstadoPedido.ENVIADO){
-            return await this.enviarPedido(pedido);
-        }
-        if(estado === EstadoPedido.CANCELADO){
-            return await this.cancelarPedido(pedido);
-        }
+         await this.pedidoRepository.actualizar(id, pedido);
     }
 
     //#############
@@ -148,10 +131,6 @@ export class PedidoService {
     //#############
     //DELETE pedido
     //#############
-
-    async delete(id){
-        return await this.pedidoRepository.delete(id);
-    }
 
 
     //#############

@@ -9,92 +9,79 @@ export class PedidoController {
         this.pedidoService = pedidoService;
     }
 
+
     crearPedido(req, res, next) {
-    const result = pedidoSchema.parsearPedido(req);
+        const result = pedidoSchema.parsearPedido(req);
 
-    // mapear y obtener los precios de los productos
-    Promise.all(
-        result.data.items.map(i =>
-        this.pedidoService.getPrecioUnitario(i.producto)
-            .then(precioUnitario => new ItemPedido(i.producto, i.cantidad, precioUnitario))
+        Promise.all(
+            result.data.items.map(i =>
+            this.pedidoService.getPrecioUnitario(i.producto)
+                .then(precioUnitario => new ItemPedido(i.producto, i.cantidad, precioUnitario))
+            )
         )
-    )
-    .then(itemsInstanciados => {
-        const nuevoPedido = new Pedido(
-        result.data.comprador,
-        itemsInstanciados,
-        result.data.moneda,
-        result.data.direccionEntrega
-        );
-        
-        // crear el pedido
-        return this.pedidoService.crearPedido(nuevoPedido)
-        .then(() => nuevoPedido); // para poder enviarlo en la respuesta
-    })
-    .then(nuevoPedido => res.status(201).json(nuevoPedido))
-    .catch(error => next(error));
+        .then(itemsInstanciados => {
+            const nuevoPedido = new Pedido(
+            result.data.comprador,
+            itemsInstanciados,
+            result.data.moneda,
+            result.data.direccionEntrega
+            );
+            
+            return this.pedidoService.crearPedido(nuevoPedido)
+            .then(() => nuevoPedido);
+        })
+        .then(nuevoPedido => res.status(201).json(nuevoPedido))
+        .catch(error => next(error));
     }
 
 
-    async listarPedidos(req, res) {
-        try {
-            const pedidos = await this.pedidoService.listarPedidos(); // devuelve directamente un array o undefined
+    listarPedidos(req, res, next) {
 
-            if (!pedidos || pedidos.length === 0) {
-                return res.status(404).json({error: "No se encontraron pedidos"});
-            }
+        this.pedidoService.listarPedidos()
+            .then(pedidos => {
+                return res.status(200).json({ pedidos });
+            })
+            .catch(error => next(error));   
 
-            return res.status(200).json({pedidos});
-        } catch (error) {
-            // Captura errores inesperados, por ejemplo si la base de datos lanza un error
-            return res.status(500).json({error: error.message || "Error interno"});
-        }
     }
 
-    async obtenerPedido(req, res) {
+
+    obtenerPedido(req, res, next) {
+
         const idResult = pedidoSchema.parsearId(req);
-        const pedido = await this.pedidoService.obtenerPedido(idResult);
 
-        if (!pedido) {
-            return res.status(404).json({
-                error: `Pedido con id: ${idResult.data} no encontrado`,
-            });
-        }
-
-        return res.status(200).json(pedido);
+        this.pedidoService.obtenerPedido(idResult)
+            .then(pedido => res.status(200).json(pedido))
+            .catch(error => next(error));
     }
 
-    async actualizarEstado(req, res) {
+
+    eliminarPedido(req, res, next){
+
         const idResult = pedidoSchema.parsearId(req);
-        const estadoResult = pedidoSchema.parsearEstado(req);
 
-        const pedidoActualizado = await this.pedidoService.cambiarEstado(idResult, estadoResult.data);
-        if (!pedidoActualizado) {
-            return res.status(400).json({ error: `No se pudo cambiar el estado del pedido` });
-        }
-        if (pedidoActualizado == -1) {
-            return res.status(404).json({ error: `Pedido con id: ${idRidResult} no encontrado` });
-        }
-
-        return res.status(200).json({
-            mensaje: `Pedido actualizado al estado ${pedidoActualizado.getEstado()} con éxito`,
-            pedido: pedidoActualizado
-        });
+        this.pedidoService.delete(idResult)
+            .then(pedidoEliminado => {
+                res.status(200).json({
+                    mensaje: `Pedido eliminado con éxito`,
+                    pedido: pedidoEliminado
+                });
+            })
+            .catch(error => next(error));
     }
 
-
-    async delete(req, res){
+    async actualizarEstado(req, res, next) {
         const idResult = pedidoSchema.parsearId(req);
-        if (idResult.error) return res.status(400).json(idResult.error.issues);
+        const nuevoEstado = pedidoSchema.parsearEstado(req);
 
-        const pedidoEliminado = await this.pedidoService.delete(idResult.data);
-        if (!pedidoEliminado) {
-            return res.status(404).json({ error: `Pedido con ID ${idResult.data} no existe` });
-        }
-
-        return res.status(200).json({
-            mensaje: `Pedido eliminado con éxito`,
-            pedido: pedidoEliminado
-        });
+        this.pedidoService.actualizarEstado(idResult, nuevoEstado)
+            .then(pedidoActualizado => {
+                res.status(200).json({
+                    mensaje: `Pedido actualizado al estado ${pedidoActualizado.getEstado()} con éxito`,
+                    pedido: pedidoActualizado
+                });
+            })
+            .catch(error => next(error));
     }
+
 }

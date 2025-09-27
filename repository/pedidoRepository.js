@@ -9,35 +9,38 @@ export class PedidoRepository {
         pedido.setId(this.id);
         this.id++;
         this.pedidos.push(pedido);
-        return pedido;
+        return Promise.resolve(pedido);
     }
-
 
     findById(id) {
         const pedido = this.pedidos.find(
             (unPedido) => unPedido.getId() === id
         );
-        return pedido ?? null;
+        return Promise.resolve(pedido ?? null);
     }
 
-    actualizar(id, pedidoActualizado) {
-        if(pedidoActualizado == null) return null;
-
-        const indice = this.obtenerIndicePorID(id);
-
-        if (indice === -1) return null;
-
-        this.pedidos[indice] = pedidoActualizado;
-
-        return pedidoActualizado;
+    getPedidos() {
+        return Promise.resolve(this.pedidos);
     }
 
     delete(id){
         const indice = this.obtenerIndicePorID(id);
-        if(indice === -1) return null;
+        if(indice === -1) return Promise.resolve(null);
         const [pedidoEliminado] = this.pedidos.splice(indice, 1);//borra desde indice la cantidad de elementos que indiques.
-        console.log(pedidoEliminado);
-        return pedidoEliminado;
+        return Promise.resolve(pedidoEliminado);
+    }
+
+    actualizar(id, pedidoActualizado) {
+
+        if(pedidoActualizado == null) return Promise.resolve(null);
+
+        const indice = this.obtenerIndicePorID(id);
+
+        if (indice === -1) return Promise.resolve(null);
+
+        this.pedidos[indice] = pedidoActualizado;
+
+        return Promise.resolve(pedidoActualizado);
     }
 
     obtenerIndicePorID(id){
@@ -46,10 +49,6 @@ export class PedidoRepository {
         return this.pedidos.findIndex((pedido) => pedido.getId() === id);
     }
 
-    //TODO: Esto es equivalente a traerte toda la BD, Esta mal mantenerlo a futuro
-    getPedidos() {
-        return this.pedidos;
-    }
 
     historialPedidos(id) {
         console.log("param historialPedidos : "+id);
