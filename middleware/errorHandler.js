@@ -1,7 +1,8 @@
 import { ZodError } from "zod";
+import { NotFoundError } from "../middleware/appError.js";
+import e from "express";
 
 export const errorHandler = (err, req, res, next) => {
-
 
     if (err instanceof ZodError) {
 
@@ -11,10 +12,16 @@ export const errorHandler = (err, req, res, next) => {
         });
     }
 
-    const status = err.status || err.statusCode || 500;
+    if(err instanceof NotFoundError) {
+        return res.status(err.statusCode).json({ error: err.message });
+    }
+
+      // cualquier otro error
+    const statusCode = err.statusCode || 500;
     const message = err.message || 'Error interno del servidor';
 
-    res.status(status).json({
+    return res.status(statusCode).json({
+        status: 'error',
         error: message
     });
 }

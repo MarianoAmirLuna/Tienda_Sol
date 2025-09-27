@@ -1,3 +1,5 @@
+import { NotFoundError } from "../middleware/appError.js";
+
 export class ProductoService {
     constructor(productoRepository) {
         this.productoRepository = productoRepository;
@@ -7,29 +9,30 @@ export class ProductoService {
         return this.productoRepository.create(producto);
     }
 
-    eliminarProducto(id) {
-        return this.productoRepository.delete(id);
+
+    async obtenerProducto(id) {
+        const producto = await this.productoRepository.findById(id);
+        if (!producto) throw new NotFoundError(`${id}`);
+        return producto;
     }
 
-    obtenerProducto(id) {
-        return this.productoRepository.findById(id);
-    }
 
     listarProductos() {
         return this.productoRepository.findAll();
     }
 
-    actualizar(id, productoActualizado) {
-        const productoGuardado = this.productoRepository.actualizar(id, productoActualizado);
+    async actualizar(id, productoActualizado) {
+
+        const productoGuardado = await this.productoRepository.update(id, productoActualizado);
+        
+        if (!productoGuardado) throw new NotFoundError(`${id}`);
+        
         return productoGuardado;
     }
 
-    buscarPorCategoria(categorias) {
-        const productos = this.productoRepository.buscarPorCategoria(categorias);
-        if (!productos) {
-            throw new Error("No se encontró ningún producto con esas categorías");
-        }
-        return productos;
+    async eliminarProducto(id) {
+        const prod = await this.productoRepository.delete(id);
+        if (!prod) throw new NotFoundError(`${id}`);
     }
 
     // validarStock(id, cantidad) {

@@ -8,12 +8,12 @@ const pathProductoID = "/productos/:id";
 export default function productoRoutes(getController) {
   const router = express.Router();
 
-  router.get(pathProducto, (req, res, next) => {
-    getController(ProductoController).listarProductos(req, res, next);
-  });
-
   router.post(pathProducto, (req, res, next) => {
     getController(ProductoController).crearProducto(req, res, next);
+  });
+
+  router.get(pathProducto, (req, res, next) => {
+    getController(ProductoController).listarProductos(req, res, next);
   });
 
   router.get(pathProductoID, (req, res, next) => {
@@ -29,9 +29,8 @@ export default function productoRoutes(getController) {
   });
 
   // TODO: implementar estas
-  // router.get(pathProducto + "/vendedor/:vendedorId", (req, res) => {
-  //   getController(ProductoController).buscarPorVendedor(req, res);
-  // });
+  // buscarPorCategoria
+  //buscarPorVendedor
 
   return router;
 }

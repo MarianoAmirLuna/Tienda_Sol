@@ -1,4 +1,4 @@
-import {usuarioSchema} from "../Middleware/schemas/usuarioSchema.js";
+import {usuarioSchema} from "../middleware/schemas/usuarioSchema.js";
 
 export class UsuarioController {
 

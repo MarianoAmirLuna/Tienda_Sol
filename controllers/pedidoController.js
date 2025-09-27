@@ -1,6 +1,6 @@
 import {Pedido} from "../models/entities/pedido/pedido.js";
 import {ItemPedido} from "../models/entities/pedido/itemPedido.js";
-import {pedidoSchema, estadoSchema } from "../Middleware/schemas/pedidoSchema.js";
+import {pedidoSchema, estadoSchema } from "../middleware/schemas/pedidoSchema.js";
 
 
 export class PedidoController {

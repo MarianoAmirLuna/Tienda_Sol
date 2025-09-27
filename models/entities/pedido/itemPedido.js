@@ -15,7 +15,4 @@ export class ItemPedido {
         return this.cantidad;
     }
 
-    subtotal() {
-        return 0;
-    }
 }

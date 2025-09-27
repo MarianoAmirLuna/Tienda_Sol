@@ -1,6 +1,6 @@
 // server.js
 import express from "express";
-import {errorHandler} from "./Middleware/errorHandler.js";
+import {errorHandler} from "./middleware/errorHandler.js";
 
 export class Server {
     constructor(app, port) {

@@ -22,6 +22,17 @@ export class ProductoRepository {
         return Promise.resolve(this.productos);
     }
 
+    update(id, productoActualizado) {
+        const indice = this.productos.findIndex((prod) => prod.getId() == id);
+
+        if (indice === -1) return Promise.resolve(null);
+
+        productoActualizado.setId(id);
+
+        this.productos[indice] = productoActualizado;
+        return Promise.resolve(productoActualizado);
+    }
+
     delete(id) {
         const indice = this.productos.findIndex(
             (unProducto) => unProducto.getId() === id
@@ -32,19 +43,6 @@ export class ProductoRepository {
         return true;
     }
 
-    async actualizar(id, productoActualizado) {
-        const indice = this.productos.findIndex((prod) => prod.getId() === id);
-        if (indice === -1) return null;
-        this.productos[indice] = productoActualizado;
-
-        return productoActualizado;
-    }
-
-    buscarPorCategoria(categorias) {
-        return this.productos.filter(
-            (unProducto) => unProducto.getCategorias() == categorias
-        );
-    }
 
     /*
   actualizarStock(id_item, cantidad_comprada){
