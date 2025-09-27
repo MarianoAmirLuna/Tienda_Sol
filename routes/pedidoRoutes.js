@@ -8,8 +8,8 @@ export default function pedidoRoutes(getController) {
     const router = express.Router();
 
     // Crear pedido
-    router.post(pathPedido, (req, res) => {
-        getController(PedidoController).crearPedido(req, res);
+    router.post(pathPedido, (req, res, next) => {
+        getController(PedidoController).crearPedido(req, res, next);
     });
 
     // Listar todos los pedidos
@@ -32,16 +32,6 @@ export default function pedidoRoutes(getController) {
         getController(PedidoController).actualizarEstado(req, res);
     });
 
-    /*
-    // Cancelar pedido en base al ID
-    router.post(pathPedido + "/:id/cancelar", (req, res) => {
-        getController(PedidoController).cancelarPedido(req, res);
-    });
-
-    // Marcar como enviado
-    router.post(pathPedido + "/:id/enviar", (req, res) => {
-        getController(PedidoController).marcarEnviado(req, res);
-    });*/
 
     return router;
 }

@@ -4,49 +4,37 @@ import {pedidoSchema, estadoSchema } from "../middleware/schemas/pedidoSchema.js
 
 
 export class PedidoController {
+
     constructor(pedidoService) {
         this.pedidoService = pedidoService;
     }
 
-    //#############
-    //CREATE pedido
-    //#############
+    crearPedido(req, res, next) {
+    const result = pedidoSchema.parsearPedido(req);
 
-    async crearPedido(req, res) {
-        const result = pedidoSchema.parsearPedido(req);
-        let totalCalculado = 0;
-
-        if (result.error) {
-            return res.status(400).json(result.error.issues);
-        }
-
-        const itemsInstanciados = await Promise.all(
-            result.data.items.map(async (i) => {
-                const precioUnitarioActual = await this.pedidoService.getPrecioUnitario(i.producto);
-                totalCalculado += precioUnitarioActual * i.cantidad;
-                return new ItemPedido(i.producto, i.cantidad, precioUnitarioActual);
-            })
-        );
-
+    // mapear y obtener los precios de los productos
+    Promise.all(
+        result.data.items.map(i =>
+        this.pedidoService.getPrecioUnitario(i.producto)
+            .then(precioUnitario => new ItemPedido(i.producto, i.cantidad, precioUnitario))
+        )
+    )
+    .then(itemsInstanciados => {
         const nuevoPedido = new Pedido(
-            result.data.comprador,
-            itemsInstanciados,
-            totalCalculado,
-            result.data.moneda,
-            result.data.direccionEntrega
+        result.data.comprador,
+        itemsInstanciados,
+        result.data.moneda,
+        result.data.direccionEntrega
         );
-
-        await this.pedidoService.crearPedido(nuevoPedido);
-        return res.status(201).json(nuevoPedido);
+        
+        // crear el pedido
+        return this.pedidoService.crearPedido(nuevoPedido)
+        .then(() => nuevoPedido); // para poder enviarlo en la respuesta
+    })
+    .then(nuevoPedido => res.status(201).json(nuevoPedido))
+    .catch(error => next(error));
     }
 
-    //#############
-    //CREATE pedido
-    //#############
-
-    //#############
-    //RETRIEVE pedido
-    //#############
 
     async listarPedidos(req, res) {
         try {
@@ -76,15 +64,6 @@ export class PedidoController {
         return res.status(200).json(pedido);
     }
 
-    //#############
-    //RETRIEVE pedido
-    //#############
-
-    //#############
-    //UPDATE pedido
-    //#############
-
-
     async actualizarEstado(req, res) {
         const idResult = pedidoSchema.parsearId(req);
         const estadoResult = pedidoSchema.parsearEstado(req);
@@ -103,13 +82,6 @@ export class PedidoController {
         });
     }
 
-    //#############
-    //UPDATE pedido
-    //#############
-
-    //#############
-    //DELETE pedido
-    //#############
 
     async delete(req, res){
         const idResult = pedidoSchema.parsearId(req);
@@ -125,9 +97,4 @@ export class PedidoController {
             pedido: pedidoEliminado
         });
     }
-
-    //#############
-    //DELETE pedido
-    //#############
-
 }

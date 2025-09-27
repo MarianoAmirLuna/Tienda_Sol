@@ -7,12 +7,12 @@ import { CambioEstadoPedido } from "./cambioEstadoPedido.js";
 
 
 export class Pedido {
-    constructor(compradorID, itemsPedido, total, moneda, direccionEntrega) {
+    constructor(compradorID, itemsPedido, moneda, direccionEntrega) {
         this.id = 1;
         this.compradorID = compradorID;
         this.itemsPedido = itemsPedido;
-        this.total = total; //Int
-        this.moneda = moneda; //String
+        this.total = this.calcularTotal();
+        this.moneda = moneda;
         this.direccionEntrega = direccionEntrega; //DireccionEntrega
         this.estado = EstadoPedido.PENDIENTE;
         this.fechaCreacion = new Date();
@@ -46,5 +46,9 @@ export class Pedido {
 
     getCompradorID(){
         return this.compradorID;
+    }
+
+    calcularTotal() {
+        return this.itemsPedido.reduce((acc, item) => acc + item.getPrecioUnitario() * item.getCantidad(), 0);
     }
 }

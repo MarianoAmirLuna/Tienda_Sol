@@ -37,6 +37,14 @@ export class ProductoService {
         if (!prod) throw new NotFoundError(`${id}`);
     }
 
+    async actualizarStock(id, cantidadComprada) {
+        const unProducto = await this.obtenerProducto(id);
+        unProducto.reducirStock(cantidadComprada);
+
+        return this.productoRepository.update(id, unProducto);
+
+    }
+
     // validarStock(id, cantidad) {
     //   const producto = this.productoRepository.findById(id);
     //   if (!producto) {

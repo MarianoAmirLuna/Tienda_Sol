@@ -43,7 +43,7 @@ server.setController(ProductoController, productoController);
 
 // Pedidos
 const pedidoRepo = new PedidoRepository();
-const pedidoService = new PedidoService(pedidoRepo, productoRepo);
+const pedidoService = new PedidoService(pedidoRepo, productoService);
 const pedidoController = new PedidoController(pedidoService);
 
 server.setController(PedidoController, pedidoController);

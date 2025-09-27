@@ -15,4 +15,8 @@ export class ItemPedido {
         return this.cantidad;
     }
 
+    getPrecioUnitario(){
+        return this.precioUnitario;
+    }
+
 }

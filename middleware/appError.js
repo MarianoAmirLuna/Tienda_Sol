@@ -20,3 +20,9 @@ export class BadRequestError extends AppError {
     super(message, 400);
   }
 }
+
+export class StockError extends AppError {
+  constructor(message) {
+    super(`Stock insuficiente para ${message}`, 400);
+  }
+}

@@ -42,12 +42,6 @@ export class ProductoRepository {
     }
 
 
-    /*
-  actualizarStock(id_item, cantidad_comprada){
-    const unProducto = this.findById(id_item);
-
-    unProducto.setStock(unProducto.getStock() - cantidad_comprada);
-  }*/
 
 }
 

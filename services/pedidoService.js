@@ -6,78 +6,38 @@ const transicionesPermitidas = {
     [EstadoPedido.EN_PREPARACION]: [EstadoPedido.ENVIADO, EstadoPedido.CANCELADO],
     [EstadoPedido.ENVIADO]: [EstadoPedido.ENTREGADO],
     [EstadoPedido.ENTREGADO]: [],
-    [EstadoPedido.CANCELADO]: [] // 👈 No se puede salir de CANCELADO
+    [EstadoPedido.CANCELADO]: []
 };
 
 export class PedidoService {
-    constructor(pedidoRepository, productoRepository) {
+    constructor(pedidoRepository, productoService) {
         this.pedidoRepository = pedidoRepository;
-        this.productoRepository = productoRepository;
+        this.productoService = productoService;
     }
 
     async getPrecioUnitario(productoID) {
-        return await this.productoRepository.findById(productoID).precio;
+        const producto = await this.productoService.obtenerProducto(productoID);
+        return producto ? producto.getPrecio() : null;
     }
 
-    //#############
-    //CREATE pedido
-    //#############
 
-    async hayStockProducto(id, cantidad) {
-        const unProducto = await this.productoRepository.findById(id);
-
-        //TODO: mover el manejo de errores a la capa de controller, de esta forma no tira el 400 al usuario
-        if (unProducto === null) {
-            throw new Error(`El producto de id ${id} no existe como producto`);
-        }
-
-        if (unProducto.stock < cantidad) {
-            throw new Error(
-                `El producto ${unProducto.getTitulo()} tiene un stock inferior, ${unProducto.getStock()}, a la cantidad solicitada, ${cantidad}`
-            );
-        }
-        return true;
-    }
-
-    async hayStockTodosProductos(pedido) {
-        // .every() no espera a las promesas hay que utilizar Promise.all
-        /*return pedido.getItemsPedido().every(
-              (item) =>
-              this.hayStockProducto(item.producto, item.cantidad)
-        );*/
-
-        const resultados = await Promise.all(
-            pedido.getItemsPedido().map(
-                (item) => this.hayStockProducto(item.productoID, item.cantidad)
+    async actualizarStockProductos(pedido) {
+        await Promise.all(
+            pedido.getItemsPedido().map(item =>
+                this.productoService.actualizarStock(item.productoID, item.cantidad)
             )
         );
-        return resultados.every(r => r);
-    }
-
-    async actualizarStock(id_producto, cantidad_comprada) {
-        const unProducto = await this.productoRepository.findById(id_producto);
-        const nuevoStock = unProducto.stock - cantidad_comprada;
-        unProducto.setStock(nuevoStock);
-        await this.productoRepository.actualizar(id_producto, unProducto);
-    }
-
-    //Foreach no espera a las promesas
-    async actualizarStockProductos(pedido) {
-        for (const item of pedido.getItemsPedido()) {
-            await this.actualizarStock(item.productoID, item.cantidad);
-        }
     }
 
     async crearPedido(pedido) {
-        if (!await this.hayStockTodosProductos(pedido)) {
-            //TODO:revisar los errores cuando no hay stock
-            return;
-        }
 
         await this.actualizarStockProductos(pedido);
 
         return await this.pedidoRepository.create(pedido);
     }
+
+
+    /// hasta aca todo ok, se lanza el error de stock desde el mismo producto falta seguir de aca para abajo
 
     //#############
     //CREATE pedido
