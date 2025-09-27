@@ -1,6 +1,6 @@
 import {z} from "zod";
 import {Usuario} from "../models/entities/usuario/usuario.js";
-import {parsearUsuario, idTransform, parsearId} from "../Middleware/schemas/usuarioSchemaValidator.js";
+import {parsearUsuario, parsearId} from "../Middleware/schemas/usuarioSchemaValidator.js";
 import {asyncHandler} from "../Middleware/asyncHandler.js";
 
 
@@ -21,16 +21,6 @@ export class UsuarioController {
             next(error);
         })
     }
-
-    historialPedidos = asyncHandler(async (req, res) => {
-        const idResult = idTransform.safeParse(req.params.id);
-
-        if (idResult.error) {
-            throw idResult.error;
-        }
-
-        res.status(200).json(this.usuarioService.historialPedidos(idResult.data));
-    });
 
     historialPedidos(req, res, next) {
         const idResult = parsearId(req);
