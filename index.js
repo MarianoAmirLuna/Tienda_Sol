@@ -3,8 +3,6 @@ import express from "express";
 import cors from "cors";
 import { ProductoTest } from "./middleware/schemas/mongoSchemas/prueba.js";
 
-
-
 // import {dotenv} from "dotenv";
 // dotenv.config();
 
@@ -21,11 +19,9 @@ import { UsuarioController } from "./controllers/usuarioController.js";
 import { NotificacionRepository } from "./repository/notificacionRepository.js";
 import { NotificacionService } from "./services/notificacionService.js";
 
-
 import { Server } from "./server.js";
 import routes from "./routes/routes.js";
 import { connectDB } from "./config/database.js";
-
 
 const app = express();
 app.use(express.json());
@@ -37,12 +33,10 @@ app.use(
   })
 );
 
-
 // health check
 app.get("/health-check", (req, res) => {
   res.json({ message: "hello world" });
 });
-
 
 const PORT = Number(process.env.SERVER_PORT) || 8000;
 
@@ -62,34 +56,33 @@ server.setController(ProductoController, productoController);
 
 // Pedidos
 const pedidoRepo = new PedidoRepository();
-const pedidoService = new PedidoService(pedidoRepo, productoService, notificacionService);
+const pedidoService = new PedidoService(
+  pedidoRepo,
+  productoService,
+  notificacionService
+);
 const pedidoController = new PedidoController(pedidoService);
 
 server.setController(PedidoController, pedidoController);
 
 // usuario
 const usuarioRepo = new UsuarioRepository();
-const usuarioService = new UsuarioService(usuarioRepo, pedidoService, notificacionService);
+const usuarioService = new UsuarioService(
+  usuarioRepo,
+  pedidoService,
+  notificacionService
+);
 const usuarioController = new UsuarioController(usuarioService);
 
 server.setController(UsuarioController, usuarioController);
-
 
 routes.forEach((route) => server.addRoute(route));
 server.configureRoutes();
 server.configureErrorHandling();
 
-
 const startServer = async () => {
   try {
     await connectDB();
-
-    const prod = await ProductoTest.create({
-      nombre: "Producto de prueba",
-      precio: 123
-    });
-    console.log("Documento de prueba creado:", prod);
-
     server.launch();
   } catch (error) {
     console.error("Error al iniciar servidor:", error);
@@ -97,6 +90,5 @@ const startServer = async () => {
 };
 
 startServer();
-
 
 export default app;
