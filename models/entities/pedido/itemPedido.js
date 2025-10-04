@@ -15,7 +15,8 @@ export class ItemPedido {
         return this.cantidad;
     }
 
-    subtotal() {
-        return 0;
+    getPrecioUnitario(){
+        return this.precioUnitario;
     }
+
 }

@@ -1,59 +1,52 @@
-import { ProductoRepository } from "../models/repository/productoRepository.js";
-import { Producto } from "../models/entities/producto/producto.js";
-import { Categoria } from "../models/entities/producto/categoria.js";
+import { NotFoundError } from "../middleware/appError.js";
 
 export class ProductoService {
-  constructor(productoRepository) {
-    this.productoRepository = productoRepository;
-  }
+    constructor(productoRepository) {
+        this.productoRepository = productoRepository;
+    }
+
 
     async crearProducto(producto) {
-    return await this.productoRepository.create(producto);
-  }
-
-  eliminarProducto(id) {
-    return this.productoRepository.delete(id);
-  }
-
-  obtenerProducto(id) {
-    const producto = this.productoRepository.findById(id);
-    return producto;
-  }
-
-  listarProductos() {
-    return this.productoRepository.findAll();
-  }
-
-  actualizar(id, productoActualizado) {
-    const productoGuardado = this.productoRepository.actualizar(id, productoActualizado);
-    return productoGuardado;
-  }
-
-  buscarPorCategoria(categorias) {
-    const productos = this.productoRepository.buscarPorCategoria(categorias);
-    if (!productos) {
-      throw new Error("No se encontró ningún producto con esas categorías");
+        const nuevoProducto = await this.productoRepository.create(producto);
+        return nuevoProducto;
     }
-    return productos;
-  }
 
-  // validarStock(id, cantidad) {
-  //   const producto = this.productoRepository.findById(id);
-  //   if (!producto) {
-  //     throw new Error("Producto no encontrado");
-  //   }
-  //   return producto.getStock() >= cantidad;
-  // }
 
-  // reducirStock(id, cantidad) {
-  //   const producto = this.obtenerProducto(id);
-  //   producto.reducirStock(cantidad);
-  //   return this.productoRepository.update(producto);
-  // }
+    async obtenerProducto(id) {
+        const producto = await this.productoRepository.findById(id);
+        if (!producto) throw new NotFoundError(`${id}`);
+        return producto;
+    }
 
-  // aumentarStock(id, cantidad) {
-  //   const producto = this.obtenerProducto(id);
-  //   producto.aumentarStock(cantidad);
-  //   return this.productoRepository.update(producto);
-  // }
+
+    async listarProductos() {
+        const productos = await this.productoRepository.findAll();
+        return productos;
+    }
+
+
+    async actualizar(id, productoActualizado) {
+
+        productoActualizado.setId(id);
+        const productoGuardado = await this.productoRepository.update(id, productoActualizado);
+        
+        if (!productoGuardado) throw new NotFoundError(`${id}`);
+        
+        return productoGuardado;
+    }
+
+
+    async eliminarProducto(id) {
+        const prod = await this.productoRepository.delete(id);
+        if (!prod) throw new NotFoundError(`${id}`);
+    }
+
+
+    async actualizarStock(id, cantidadComprada) {
+        const unProducto = await this.obtenerProducto(id);
+        unProducto.reducirStock(cantidadComprada);
+
+        return this.productoRepository.update(id, unProducto);
+
+    }
 }

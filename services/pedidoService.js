@@ -1,200 +1,92 @@
+import { NotFoundError } from "../middleware/appError.js";
+import { NotificacionPedido, NotificacionEstadoPedido, NotificacionCancelacionPedido } from "../models/entities/notificacion/notificacion.js";
 import {EstadoPedido} from "../models/entities/pedido/estadoPedido.js";
 
-const transicionesPermitidas = {
-    [EstadoPedido.PENDIENTE]: [EstadoPedido.CONFIRMADO, EstadoPedido.CANCELADO, EstadoPedido.ENVIADO],
-    [EstadoPedido.CONFIRMADO]: [EstadoPedido.EN_PREPARACION, EstadoPedido.CANCELADO, EstadoPedido.ENVIADO],
-    [EstadoPedido.EN_PREPARACION]: [EstadoPedido.ENVIADO, EstadoPedido.CANCELADO],
-    [EstadoPedido.ENVIADO]: [EstadoPedido.ENTREGADO],
-    [EstadoPedido.ENTREGADO]: [],
-    [EstadoPedido.CANCELADO]: [] // 👈 No se puede salir de CANCELADO
-};
-
 export class PedidoService {
-    constructor(pedidoRepository, productoRepository) {
+    constructor(pedidoRepository, productoService, notificacionService) {
         this.pedidoRepository = pedidoRepository;
-        this.productoRepository = productoRepository;
+        this.productoService = productoService;
+        this.notificacionService = notificacionService;
     }
 
     async getPrecioUnitario(productoID) {
-        return await this.productoRepository.findById(productoID).precio;
+        const producto = await this.productoService.obtenerProducto(productoID);
+        return producto ? producto.getPrecio() : null;
     }
 
-    //#############
-    //CREATE pedido
-    //#############
 
-    async hayStockProducto(id, cantidad) {
-        const unProducto = await this.productoRepository.findById(id);
-
-        //TODO: mover el manejo de errores a la capa de controller, de esta forma no tira el 400 al usuario
-        if (unProducto === null) {
-            throw new Error(`El producto de id ${id} no existe como producto`);
-        }
-
-        if (unProducto.stock < cantidad) {
-            throw new Error(
-                `El producto ${unProducto.getTitulo()} tiene un stock inferior, ${unProducto.getStock()}, a la cantidad solicitada, ${cantidad}`
-            );
-        }
-        return true;
-    }
-
-    async hayStockTodosProductos(pedido) {
-        // .every() no espera a las promesas hay que utilizar Promise.all
-        /*return pedido.getItemsPedido().every(
-              (item) =>
-              this.hayStockProducto(item.producto, item.cantidad)
-        );*/
-
-        const resultados = await Promise.all(
-            pedido.getItemsPedido().map(
-                (item) => this.hayStockProducto(item.productoID, item.cantidad)
+    async actualizarStockProductos(pedido) {
+        await Promise.all(
+            pedido.getItemsPedido().map(item =>
+                this.productoService.actualizarStock(item.productoID, item.cantidad)
             )
         );
-        return resultados.every(r => r);
     }
 
-    async actualizarStock(id_producto, cantidad_comprada) {
-        const unProducto = await this.productoRepository.findById(id_producto);
-        const nuevoStock = unProducto.stock - cantidad_comprada;
-        unProducto.setStock(nuevoStock);
-        await this.productoRepository.actualizar(id_producto, unProducto);
-    }
 
-    //Foreach no espera a las promesas
-    async actualizarStockProductos(pedido) {
-        for (const item of pedido.getItemsPedido()) {
-            await this.actualizarStock(item.productoID, item.cantidad);
-        }
+    async getIdVendedor(pedido) {
+        const idPrimerProducto = pedido.getItemsPedido()[0].productoID;
+        const producto = await this.productoService.obtenerProducto(idPrimerProducto);
+
+        return producto.vendedorID;
     }
 
     async crearPedido(pedido) {
-        if (!await this.hayStockTodosProductos(pedido)) {
-            //TODO:revisar los errores cuando no hay stock
-            return;
-        }
-
         await this.actualizarStockProductos(pedido);
 
-        return await this.pedidoRepository.create(pedido);
+        const nuevoPedido = await this.pedidoRepository.create(pedido);
+
+        const idVendedor = await this.getIdVendedor(pedido);
+
+        this.notificacionService.crearNotificacion(new NotificacionPedido(idVendedor, nuevoPedido.id, pedido.compradorID));
+
+        return nuevoPedido;
     }
 
-    //#############
-    //CREATE pedido
-    //#############
-
-    //#############
-    //RETRIEVE pedido
-    //#############
 
     async listarPedidos() {
-        return await this.pedidoRepository.getPedidos();
+        const pedidos = await this.pedidoRepository.findAll();
+        return pedidos || [];
     }
+
 
     async obtenerPedido(idPedido) {
         const pedido = await this.pedidoRepository.findById(idPedido);
+        if (!pedido) {throw new NotFoundError(`${idPedido}`);}
         return pedido;
     }
 
-    //#############
-    //RETRIEVE pedido
-    //#############
-
-    //#############
-    //UPDATE pedido
-    //#############
-
-    puedeCancelarPedido(pedido) {
-        const estadosPermitidos = [
-            EstadoPedido.PENDIENTE,
-            EstadoPedido.CONFIRMADO,
-            EstadoPedido.EN_PREPARACION
-        ];
-        return estadosPermitidos.includes(pedido.getEstado());
-    }
-
-    async cancelarPedido(pedido) {
-        if (!this.puedeCancelarPedido(pedido)) {
-            return null;
-        }
-
-        pedido.cambiarEstado(EstadoPedido.CANCELADO);
-        await this.pedidoRepository.actualizar(pedido);
+    async eliminarPedido(id){
+        const pedido = await this.pedidoRepository.delete(id);
+        if (!pedido) {throw new NotFoundError(`${id}`);}
         return pedido;
     }
 
 
-    async puedeEnviarPedido(pedido) {
-
-        const items = pedido.getItemsPedido();
-        if (!items) {
-            return false;
-        }
-
-        const estadosPermitidos = [
-            EstadoPedido.PENDIENTE,
-            EstadoPedido.CONFIRMADO,
-            EstadoPedido.EN_PREPARACION
-        ];
-
-        const productos = await Promise.all(
-            items.map((item) => this.productoRepository.findById(item.getProductoID()))
-        );
-
-        const todosExisten = productos.every((p) => p);
-        const estadoValido = estadosPermitidos.includes(pedido.getEstado());
-        const mismoVendedor = productos.every(
-            (p) => p.getVendedorID() === productos[0].getVendedorID()
-        );
-
-        return todosExisten && estadoValido && mismoVendedor;
-    }
-
-    async enviarPedido(pedido) {
-        if (!this.puedeEnviarPedido(pedido)) {
-            return null;
-        }
-
-        pedido.cambiarEstado(EstadoPedido.ENVIADO);
-        await this.pedidoRepository.actualizar(pedido);
-        return pedido;
-    }
-
-    async cambiarEstado(id, estado){
+    async actualizarEstado(id, nuevoEstado){
 
         const pedido = await this.obtenerPedido(id);
-        if (!pedido) {
-            return -1;
+
+        if(!pedido) throw new NotFoundError(`${id}`);
+
+
+        const estadoAnterior = pedido.estado;
+
+        pedido.cambiarEstado(nuevoEstado);
+
+        this.notificacionService.crearNotificacion(new NotificacionEstadoPedido(pedido.compradorID, pedido.id, nuevoEstado, estadoAnterior));
+
+        if(nuevoEstado === EstadoPedido.CANCELADO){
+            const idVendedor = await this.getIdVendedor(pedido);
+            this.notificacionService.crearNotificacion(new NotificacionCancelacionPedido(idVendedor, pedido.id, pedido.compradorID));
         }
 
-        const estadoActual = pedido.getEstado();
-
-        if (!(transicionesPermitidas)[estadoActual].includes(estado)) {
-            return null;
-        }
-
-        if(estado === EstadoPedido.ENVIADO){
-            return await this.enviarPedido(pedido);
-        }
-        if(estado === EstadoPedido.CANCELADO){
-            return await this.cancelarPedido(pedido);
-        }
-    }
-
-    //#############
-    //UPDATE pedido
-    //#############
-
-    //#############
-    //DELETE pedido
-    //#############
-
-    async delete(id){
-        return await this.pedidoRepository.delete(id);
+        await this.pedidoRepository.actualizar(id, pedido);
+        return pedido;
     }
 
 
-    //#############
-    //DELETE pedido
-    //#############
+    async historialPedido(idCliente) {
+        return await this.pedidoRepository.historialPedidos(idCliente);
+    }
 }

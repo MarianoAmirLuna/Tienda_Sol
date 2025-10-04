@@ -1,5 +1,6 @@
 import {Categoria} from "./categoria.js";
 import {Usuario} from "../usuario/usuario.js";
+import { StockError } from "../../../middleware/appError.js";
 
 export class Producto {
     constructor(
@@ -25,7 +26,7 @@ export class Producto {
         this.activo = activo;//Bool
     }
 
-    getVendedorID() {
+    getIdVendedor() {
         return this.vendedorID;
     }
 
@@ -63,7 +64,7 @@ export class Producto {
 
     reducirStock(cantidad) {
         if (this.stock < cantidad) {
-            throw new Error(`Stock insuficiente para ${this.titulo}`);
+            throw new StockError('id: ' + this.id + ', titulo: ' + this.titulo);
         }
         this.stock -= cantidad;
     }

@@ -1,0 +1,115 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"27360920-9b69-487d-860f-a6c2d7ae6744\" name=\"Changes\" comment=\"\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/tests/pedido.test.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/tests/pedido.test.js\" afterDir=\"false\" />\n    </list>\n    <list id=\"a08b5a08-a0fb-4bbc-9180-e8582d959220\" name=\"Changes by Amir\" comment=\"\">\n      <change beforePath=\"$PROJECT_DIR$/controllers/pedidoController.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/controllers/pedidoController.js\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/tests/pedido.test.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/tests/pedido.test.js\" afterDir=\"false\" />\n    </list>\n    <list id=\"f6324e0c-6106-4ee3-b353-738a49673d94\" name=\"Changes by gbolocco\" comment=\"\">\n      <change beforePath=\"$PROJECT_DIR$/models/repository/productoRepository.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/models/repository/productoRepository.js\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/services/pedidoService.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/services/pedidoService.js\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/tests/pedido.test.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/tests/pedido.test.js\" afterDir=\"false\" />\n    </list>\n    <list id=\"e297941e-a81e-4233-94b6-6829570f9137\" name=\"Changes by joaqu\" comment=\"\" />\n    <list id=\"1f7e82d2-9b81-427b-b11a-e9e8036beb99\" name=\"Changes by yo\" comment=\"\" />\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"JavaScript File\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\n      <map>\n        <entry key=\"$PROJECT_DIR$\" value=\"refactor-patch-cancelar-marcarEnviado\" />\n      </map>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"LineStatusTrackerManager\">\n    <file path=\"$PROJECT_DIR$/tests/pedido.test.js\">\n      <ranges>\n        <range start1=\"72\" end1=\"96\" start2=\"72\" end2=\"99\" changelist=\"a08b5a08-a0fb-4bbc-9180-e8582d959220\" />\n        <range start1=\"100\" end1=\"101\" start2=\"103\" end2=\"103\" changelist=\"f6324e0c-6106-4ee3-b353-738a49673d94\" />\n        <range start1=\"102\" end1=\"103\" start2=\"104\" end2=\"106\" changelist=\"a08b5a08-a0fb-4bbc-9180-e8582d959220\" />\n        <range start1=\"106\" end1=\"108\" start2=\"109\" end2=\"111\" changelist=\"a08b5a08-a0fb-4bbc-9180-e8582d959220\" />\n        <range start1=\"123\" end1=\"123\" start2=\"126\" end2=\"127\" changelist=\"f6324e0c-6106-4ee3-b353-738a49673d94\" />\n        <range start1=\"126\" end1=\"149\" start2=\"130\" end2=\"145\" changelist=\"27360920-9b69-487d-860f-a6c2d7ae6744\" />\n        <range start1=\"151\" end1=\"151\" start2=\"147\" end2=\"159\" changelist=\"27360920-9b69-487d-860f-a6c2d7ae6744\" />\n        <range start1=\"154\" end1=\"154\" start2=\"162\" end2=\"163\" changelist=\"f6324e0c-6106-4ee3-b353-738a49673d94\" />\n      </ranges>\n    </file>\n  </component>\n  <component name=\"ProjectColorInfo\">{\n  &quot;associatedIndex&quot;: 2\n}</component>\n  <component name=\"ProjectId\" id=\"32oD076nBkc27Ywn67tRckSpKcc\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\"><![CDATA[{\n  \"keyToString\": {\n    \"Jest.Crea un pedido exitosamente (1).executor\": \"Run\",\n    \"Jest.Crea un pedido exitosamente (2).executor\": \"Run\",\n    \"Jest.Crea un pedido exitosamente.executor\": \"Run\",\n    \"Jest.pedido_test2.js.executor\": \"Run\",\n    \"Jest.prueba.executor\": \"Run\",\n    \"ModuleVcsDetector.initialDetectionPerformed\": \"true\",\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\n    \"RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252\": \"true\",\n    \"RunOnceActivity.git.unshallow\": \"true\",\n    \"git-widget-placeholder\": \"main\",\n    \"junie.onboarding.icon.badge.shown\": \"true\",\n    \"node.js.detected.package.eslint\": \"true\",\n    \"node.js.detected.package.tslint\": \"true\",\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\n    \"nodejs.jest.jest_package\": \"/home/gbolocco/Desktop/dds/2025-2c-backend-grupo-09/node_modules/jest\",\n    \"nodejs_package_manager_path\": \"npm\",\n    \"to.speed.mode.migration.done\": \"true\",\n    \"ts.external.directory.path\": \"C:\\\\Program Files\\\\JetBrains\\\\WebStorm 2025.2.1\\\\plugins\\\\javascript-plugin\\\\jsLanguageServicesImpl\\\\external\",\n    \"vue.rearranger.settings.migration\": \"true\"\n  }\n}]]></component>\n  <component name=\"RecentsManager\">\n    <key name=\"MoveFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$/tests\" />\n      <recent name=\"$PROJECT_DIR$/tests/LosBuenos\" />\n    </key>\n  </component>\n  <component name=\"RunManager\" selected=\"Jest.Crea un pedido exitosamente (2)\">\n    <configuration name=\"Crea un pedido exitosamente (1)\" type=\"JavaScriptTestRunnerJest\" temporary=\"true\" nameIsGenerated=\"true\">\n      <node-interpreter value=\"project\" />\n      <jest-package value=\"$PROJECT_DIR$/node_modules/jest\" />\n      <working-dir value=\"$PROJECT_DIR$\" />\n      <envs />\n      <scope-kind value=\"TEST\" />\n      <test-file value=\"$PROJECT_DIR$/tests/LosBuenos/pedido_test2.js\" />\n      <test-names>\n        <test-name value=\"Crea un pedido exitosamente\" />\n      </test-names>\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"Crea un pedido exitosamente (2)\" type=\"JavaScriptTestRunnerJest\" temporary=\"true\" nameIsGenerated=\"true\">\n      <node-interpreter value=\"project\" />\n      <jest-package value=\"$PROJECT_DIR$/node_modules/jest\" />\n      <working-dir value=\"$PROJECT_DIR$\" />\n      <envs />\n      <scope-kind value=\"TEST\" />\n      <test-file value=\"$PROJECT_DIR$/tests/pedido.test.js\" />\n      <test-names>\n        <test-name value=\"Crea un pedido exitosamente\" />\n      </test-names>\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"Crea un pedido exitosamente\" type=\"JavaScriptTestRunnerJest\" temporary=\"true\" nameIsGenerated=\"true\">\n      <node-interpreter value=\"project\" />\n      <jest-package value=\"$PROJECT_DIR$/node_modules/jest\" />\n      <working-dir value=\"$PROJECT_DIR$\" />\n      <envs />\n      <scope-kind value=\"TEST\" />\n      <test-file value=\"$PROJECT_DIR$/tests/pedido_test2.js\" />\n      <test-names>\n        <test-name value=\"Crea un pedido exitosamente\" />\n      </test-names>\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"pedido_test2.js\" type=\"JavaScriptTestRunnerJest\" temporary=\"true\" nameIsGenerated=\"true\">\n      <node-interpreter value=\"project\" />\n      <jest-package value=\"$PROJECT_DIR$/node_modules/jest\" />\n      <working-dir value=\"$PROJECT_DIR$\" />\n      <envs />\n      <scope-kind value=\"TEST_FILE\" />\n      <test-file value=\"$PROJECT_DIR$/tests/pedido_test2.js\" />\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"prueba\" type=\"JavaScriptTestRunnerJest\" temporary=\"true\" nameIsGenerated=\"true\">\n      <node-interpreter value=\"project\" />\n      <jest-package value=\"$PROJECT_DIR$/node_modules/jest\" />\n      <working-dir value=\"$PROJECT_DIR$\" />\n      <envs />\n      <scope-kind value=\"TEST\" />\n      <test-file value=\"$PROJECT_DIR$/tests/pedido_test2.js\" />\n      <test-names>\n        <test-name value=\"prueba\" />\n      </test-names>\n      <method v=\"2\" />\n    </configuration>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"Jest.Crea un pedido exitosamente (2)\" />\n        <item itemvalue=\"Jest.Crea un pedido exitosamente\" />\n        <item itemvalue=\"Jest.pedido_test2.js\" />\n        <item itemvalue=\"Jest.Crea un pedido exitosamente (1)\" />\n        <item itemvalue=\"Jest.prueba\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SharedIndexes\">\n    <attachedChunks>\n      <set>\n        <option value=\"bundled-js-predefined-d6986cc7102b-b598e85cdad2-JavaScript-WS-252.25557.126\" />\n      </set>\n    </attachedChunks>\n  </component>\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"27360920-9b69-487d-860f-a6c2d7ae6744\" name=\"Changes\" comment=\"\" />\n      <created>1758077806638</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1758077806638</updated>\n      <workItem from=\"1758077808012\" duration=\"2893000\" />\n      <workItem from=\"1758080724261\" duration=\"6159000\" />\n      <workItem from=\"1758123091541\" duration=\"9401000\" />\n      <workItem from=\"1758135590669\" duration=\"118000\" />\n      <workItem from=\"1758135772475\" duration=\"4126000\" />\n    </task>\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 3865e7fdc3a8d5d5a24f55046f57cdeddd22cad2)
++++ b/.idea/workspace.xml	(date 1758168896085)
+@@ -6,17 +6,9 @@
+   <component name="ChangeListManager">
+     <list default="true" id="27360920-9b69-487d-860f-a6c2d7ae6744" name="Changes" comment="">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/tests/pedido.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/pedido.test.js" afterDir="false" />
+-    </list>
+-    <list id="a08b5a08-a0fb-4bbc-9180-e8582d959220" name="Changes by Amir" comment="">
+-      <change beforePath="$PROJECT_DIR$/controllers/pedidoController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/pedidoController.js" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/tests/pedido.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/pedido.test.js" afterDir="false" />
+-    </list>
+-    <list id="f6324e0c-6106-4ee3-b353-738a49673d94" name="Changes by gbolocco" comment="">
+-      <change beforePath="$PROJECT_DIR$/models/repository/productoRepository.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/repository/productoRepository.js" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/services/pedidoService.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/pedidoService.js" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/tests/pedido.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/pedido.test.js" afterDir="false" />
+     </list>
++    <list id="a08b5a08-a0fb-4bbc-9180-e8582d959220" name="Changes by Amir" comment="" />
++    <list id="f6324e0c-6106-4ee3-b353-738a49673d94" name="Changes by gbolocco" comment="" />
+     <list id="e297941e-a81e-4233-94b6-6829570f9137" name="Changes by joaqu" comment="" />
+     <list id="1f7e82d2-9b81-427b-b11a-e9e8036beb99" name="Changes by yo" comment="" />
+     <option name="SHOW_DIALOG" value="false" />
+@@ -38,20 +30,6 @@
+       </map>
+     </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+-  </component>
+-  <component name="LineStatusTrackerManager">
+-    <file path="$PROJECT_DIR$/tests/pedido.test.js">
+-      <ranges>
+-        <range start1="72" end1="96" start2="72" end2="99" changelist="a08b5a08-a0fb-4bbc-9180-e8582d959220" />
+-        <range start1="100" end1="101" start2="103" end2="103" changelist="f6324e0c-6106-4ee3-b353-738a49673d94" />
+-        <range start1="102" end1="103" start2="104" end2="106" changelist="a08b5a08-a0fb-4bbc-9180-e8582d959220" />
+-        <range start1="106" end1="108" start2="109" end2="111" changelist="a08b5a08-a0fb-4bbc-9180-e8582d959220" />
+-        <range start1="123" end1="123" start2="126" end2="127" changelist="f6324e0c-6106-4ee3-b353-738a49673d94" />
+-        <range start1="126" end1="149" start2="130" end2="145" changelist="27360920-9b69-487d-860f-a6c2d7ae6744" />
+-        <range start1="151" end1="151" start2="147" end2="159" changelist="27360920-9b69-487d-860f-a6c2d7ae6744" />
+-        <range start1="154" end1="154" start2="162" end2="163" changelist="f6324e0c-6106-4ee3-b353-738a49673d94" />
+-      </ranges>
+-    </file>
+   </component>
+   <component name="ProjectColorInfo">{
+   &quot;associatedIndex&quot;: 2
+@@ -61,30 +39,31 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "Jest.Crea un pedido exitosamente (1).executor": "Run",
+-    "Jest.Crea un pedido exitosamente (2).executor": "Run",
+-    "Jest.Crea un pedido exitosamente.executor": "Run",
+-    "Jest.pedido_test2.js.executor": "Run",
+-    "Jest.prueba.executor": "Run",
+-    "ModuleVcsDetector.initialDetectionPerformed": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+-    "RunOnceActivity.git.unshallow": "true",
+-    "git-widget-placeholder": "main",
+-    "junie.onboarding.icon.badge.shown": "true",
+-    "node.js.detected.package.eslint": "true",
+-    "node.js.detected.package.tslint": "true",
+-    "node.js.selected.package.eslint": "(autodetect)",
+-    "node.js.selected.package.tslint": "(autodetect)",
+-    "nodejs.jest.jest_package": "/home/gbolocco/Desktop/dds/2025-2c-backend-grupo-09/node_modules/jest",
+-    "nodejs_package_manager_path": "npm",
+-    "to.speed.mode.migration.done": "true",
+-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2025.2.1\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
+-    "vue.rearranger.settings.migration": "true"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;Jest.Crea un pedido exitosamente (1).executor&quot;: &quot;Run&quot;,
++    &quot;Jest.Crea un pedido exitosamente (2).executor&quot;: &quot;Run&quot;,
++    &quot;Jest.Crea un pedido exitosamente.executor&quot;: &quot;Run&quot;,
++    &quot;Jest.pedido_test2.js.executor&quot;: &quot;Run&quot;,
++    &quot;Jest.prueba.executor&quot;: &quot;Run&quot;,
++    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
++    &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
++    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
++    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
++    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
++    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
++    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
++    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
++    &quot;nodejs.jest.jest_package&quot;: &quot;/home/gbolocco/Desktop/dds/2025-2c-backend-grupo-09/node_modules/jest&quot;,
++    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
++    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
++    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\WebStorm 2025.2.1\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
++    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+   }
+-}]]></component>
++}</component>
+   <component name="RecentsManager">
+     <key name="MoveFile.RECENT_KEYS">
+       <recent name="$PROJECT_DIR$/tests" />
+@@ -178,6 +157,8 @@
+       <workItem from="1758123091541" duration="9401000" />
+       <workItem from="1758135590669" duration="118000" />
+       <workItem from="1758135772475" duration="4126000" />
++      <workItem from="1758142116668" duration="1946000" />
++      <workItem from="1758168894249" duration="2000" />
+     </task>
+     <servers />
+   </component>
