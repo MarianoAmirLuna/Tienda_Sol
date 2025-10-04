@@ -1,6 +1,14 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
+import { ProductoTest } from "./middleware/schemas/mongoSchemas/prueba.js";
+
+
+
+// import {dotenv} from "dotenv";
+// dotenv.config();
+
+// Importación de repositorios, servicios y controladores
 import { ProductoRepository } from "./repository/productoRepository.js";
 import { ProductoService } from "./services/productoService.js";
 import { ProductoController } from "./controllers/productoController.js";
@@ -16,7 +24,8 @@ import { NotificacionService } from "./services/notificacionService.js";
 
 import { Server } from "./server.js";
 import routes from "./routes/routes.js";
-import { no } from "zod/locales";
+import { connectDB } from "./config/database.js";
+
 
 const app = express();
 app.use(express.json());
@@ -27,6 +36,7 @@ app.use(
       : true,
   })
 );
+
 
 // health check
 app.get("/health-check", (req, res) => {
@@ -42,8 +52,6 @@ const server = new Server(app, PORT);
 // Notificaciones
 const notificacionRepo = new NotificacionRepository();
 const notificacionService = new NotificacionService(notificacionRepo);
-//const notificacionController = new NotificacionController(notificacionService);
-//server.setController(NotificacionController, notificacionController);
 
 // Productos
 const productoRepo = new ProductoRepository();
@@ -66,14 +74,29 @@ const usuarioController = new UsuarioController(usuarioService);
 
 server.setController(UsuarioController, usuarioController);
 
+
 routes.forEach((route) => server.addRoute(route));
 server.configureRoutes();
+server.configureErrorHandling();
 
-server.configureErrorHandling()
 
-server.launch();
+const startServer = async () => {
+  try {
+    await connectDB();
 
-// app.listen(PORT, () => {
-//   console.log(`Backend escuchando en puerto ${PORT}`);
-// });
+    const prod = await ProductoTest.create({
+      nombre: "Producto de prueba",
+      precio: 123
+    });
+    console.log("Documento de prueba creado:", prod);
+
+    server.launch();
+  } catch (error) {
+    console.error("Error al iniciar servidor:", error);
+  }
+};
+
+startServer();
+
+
 export default app;

@@ -4,28 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="27360920-9b69-487d-860f-a6c2d7ae6744" name="Changes" comment="a">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/productoController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/productoController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/repository/pedidoRepository.js" beforeDir="false" afterPath="$PROJECT_DIR$/repository/pedidoRepository.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/repository/productoRepository.js" beforeDir="false" afterPath="$PROJECT_DIR$/repository/productoRepository.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/repository/usuarioRepository.js" beforeDir="false" afterPath="$PROJECT_DIR$/repository/usuarioRepository.js" afterDir="false" />
-    </list>
+    <list default="true" id="27360920-9b69-487d-860f-a6c2d7ae6744" name="Changes" comment="a" />
     <list id="a08b5a08-a0fb-4bbc-9180-e8582d959220" name="Changes by Amir" comment="" />
     <list id="f6324e0c-6106-4ee3-b353-738a49673d94" name="Changes by gbolocco" comment="" />
     <list id="e297941e-a81e-4233-94b6-6829570f9137" name="Changes by joaqu" comment="" />
-    <list id="b8e76615-fc13-4ea1-b665-59d9e0bf277a" name="Changes by todas_butas" comment="">
-      <change beforePath="$PROJECT_DIR$/Middleware/asyncHandler.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/productoRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/productoRoutes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
-    </list>
-    <list id="2eaa10de-a4a6-4561-bf86-c4dc1087707b" name="Changes by utnso" comment="">
-      <change beforePath="$PROJECT_DIR$/controllers/productoController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/productoController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/usuarioController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/usuarioController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/repository/productoRepository.js" beforeDir="false" afterPath="$PROJECT_DIR$/repository/productoRepository.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/productoService.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/productoService.js" afterDir="false" />
-    </list>
+    <list id="b8e76615-fc13-4ea1-b665-59d9e0bf277a" name="Changes by todas_butas" comment="" />
+    <list id="2eaa10de-a4a6-4561-bf86-c4dc1087707b" name="Changes by utnso" comment="" />
     <list id="1f7e82d2-9b81-427b-b11a-e9e8036beb99" name="Changes by yo" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,30 +31,6 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/controllers/productoController.js">
-      <ranges>
-        <range start1="10" end1="11" start2="10" end2="15" changelist="2eaa10de-a4a6-4561-bf86-c4dc1087707b" />
-        <range start1="12" end1="15" start2="16" end2="19" changelist="27360920-9b69-487d-860f-a6c2d7ae6744" />
-        <range start1="17" end1="25" start2="21" end2="30" changelist="2eaa10de-a4a6-4561-bf86-c4dc1087707b" />
-        <range start1="27" end1="45" start2="32" end2="37" changelist="2eaa10de-a4a6-4561-bf86-c4dc1087707b" />
-        <range start1="47" end1="47" start2="39" end2="55" changelist="2eaa10de-a4a6-4561-bf86-c4dc1087707b" />
-        <range start1="66" end1="67" start2="74" end2="77" changelist="2eaa10de-a4a6-4561-bf86-c4dc1087707b" />
-        <range start1="68" end1="72" start2="78" end2="88" changelist="2eaa10de-a4a6-4561-bf86-c4dc1087707b" />
-        <range start1="73" end1="73" start2="89" end2="93" changelist="2eaa10de-a4a6-4561-bf86-c4dc1087707b" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/repository/productoRepository.js">
-      <ranges>
-        <range start1="0" end1="3" start2="0" end2="0" changelist="27360920-9b69-487d-860f-a6c2d7ae6744" />
-        <range start1="9" end1="10" start2="6" end2="7" changelist="27360920-9b69-487d-860f-a6c2d7ae6744" />
-        <range start1="13" end1="14" start2="10" end2="11" changelist="27360920-9b69-487d-860f-a6c2d7ae6744" />
-        <range start1="16" end1="17" start2="13" end2="14" changelist="2eaa10de-a4a6-4561-bf86-c4dc1087707b" />
-        <range start1="20" end1="21" start2="17" end2="18" changelist="27360920-9b69-487d-860f-a6c2d7ae6744" />
-        <range start1="24" end1="25" start2="21" end2="22" changelist="2eaa10de-a4a6-4561-bf86-c4dc1087707b" />
-      </ranges>
-    </file>
-  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -79,32 +39,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Jest.Crea un pedido exitosamente (1).executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Crea un pedido exitosamente (2).executor&quot;: &quot;Run&quot;,
-    &quot;Jest.Crea un pedido exitosamente.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.pedido_test2.js.executor&quot;: &quot;Run&quot;,
-    &quot;Jest.prueba.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;pruebas-Error-handler&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/Documentos/UNIVERSIDAD/UTN 4/Desarrollo de software/TP TiendaSol/2025-2c-backend-grupo-09&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs.jest.jest_package&quot;: &quot;/home/gbolocco/Desktop/dds/2025-2c-backend-grupo-09/node_modules/jest&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\WebStorm 2025.2.1\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Jest.Crea un pedido exitosamente (1).executor": "Run",
+    "Jest.Crea un pedido exitosamente (2).executor": "Run",
+    "Jest.Crea un pedido exitosamente.executor": "Run",
+    "Jest.pedido_test2.js.executor": "Run",
+    "Jest.prueba.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "entrega-2-persistencia",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "E:/Documentos/UNIVERSIDAD/UTN 4/Desarrollo de software/TP TiendaSol/2025-2c-backend-grupo-09",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs.jest.jest_package": "/home/gbolocco/Desktop/dds/2025-2c-backend-grupo-09/node_modules/jest",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "to.speed.mode.migration.done": "true",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2025.2.1\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\Documentos\UNIVERSIDAD\UTN 4\Desarrollo de software\TP TiendaSol\2025-2c-backend-grupo-09" />
@@ -183,7 +143,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-b598e85cdad2-JavaScript-WS-252.25557.126" />
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-WS-252.26830.93" />
       </set>
     </attachedChunks>
   </component>
@@ -209,6 +169,7 @@
       <workItem from="1758935477953" duration="937000" />
       <workItem from="1758945511915" duration="1612000" />
       <workItem from="1758947159980" duration="3884000" />
+      <workItem from="1759583434911" duration="123000" />
     </task>
     <task id="LOCAL-00001" summary="Los test bien hechos, algo de promesas, correccion de paths a restless, cambio en UPDATE de /productos">
       <option name="closed" value="true" />

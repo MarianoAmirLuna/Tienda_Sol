@@ -2,6 +2,7 @@
 import express from "express";
 import {errorHandler} from "./middleware/errorHandler.js";
 
+
 export class Server {
     constructor(app, port) {
         this.controllers = {};
@@ -48,4 +49,7 @@ export class Server {
             console.log(`Server running on port ${this.port}`);
         });
     }
+
+    
+
 }
