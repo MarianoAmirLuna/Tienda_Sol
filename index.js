@@ -41,6 +41,8 @@ const PORT = Number(process.env.SERVER_PORT) || 8000;
 // Se envía al server el puerto
 const server = new Server(app, PORT);
 
+//Direcciones
+
 // Notificaciones
 const notificacionRepo = new NotificacionRepository();
 const notificacionService = new NotificacionService(notificacionRepo);

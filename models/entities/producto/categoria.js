@@ -1,9 +1,6 @@
-export class Categoria {
-    constructor(nombre) {
-        this.nombre = nombre;
-    }
-
-    getCategoria() {
-        return this.nombre;
-    }
-}
+export const Categoria = Object.freeze({
+  REMERA: 0,
+  PANTALON: 1,
+  ZAPATOS: 2,
+  CAMPERA: 3,
+});

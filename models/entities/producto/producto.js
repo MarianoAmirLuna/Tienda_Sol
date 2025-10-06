@@ -5,7 +5,7 @@ import { StockError } from "../../../middleware/appError.js";
 export class Producto {
   constructor(
     vendedorID,
-    titulo,
+    nombre,
     descripcion,
     categorias,
     precio,
@@ -15,7 +15,7 @@ export class Producto {
     activo
   ) {
     this.vendedorID = vendedorID;
-    this.titulo = titulo;
+    this.nombre = nombre;
     this.descripcion = descripcion;
     this.categorias = categorias; // [String]
     this.precio = precio; //Int
@@ -49,8 +49,8 @@ export class Producto {
     this.stock = nuevoStock;
   }
 
-  getTitulo() {
-    return this.titulo;
+  getNombre() {
+    return this.nombre;
   }
 
   getCategorias() {
@@ -63,7 +63,7 @@ export class Producto {
 
   reducirStock(cantidad) {
     if (this.stock < cantidad) {
-      throw new StockError("id: " + this.id + ", titulo: " + this.titulo);
+      throw new StockError("id: " + this.id + ", nombre: " + this.nombre);
     }
     this.stock -= cantidad;
   }

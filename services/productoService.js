@@ -4,44 +4,33 @@ import { ProductoModel } from "../schemasDB/productoSchema.js";
 export class ProductoService {
   constructor(productoRepository) {
     this.productoRepository = productoRepository;
-    this.productoSchema = ProductoModel;
   }
 
   async crearProducto(prod) {
-    const producto = new this.productoSchema(prod);
-    return await producto.save();
+    return await this.productoRepository.create(prod);
   }
 
   async obtenerProducto(id) {
-    const producto = await this.productoSchema.findById(id);
-
-    if (!producto) throw new NotFoundError(`${id}`);
-    return producto;
+    return await this.productoRepository.findById(id);
   }
 
+  //TODO: Arreglar y agregar paginación
   async listarProductos() {
-    return await this.productoSchema.find();
+    return await this.productoRepository.findAll();
+  }
+
+  async obtenerProductosVendedor(condicionesDeObtencion) {
+    return await this.productoRepository.findProductosVendedorFiltrados(
+      condicionesDeObtencion
+    );
   }
 
   async actualizar(id, productoActualizado) {
-    const productoGuardado = await this.productoSchema.findByIdAndUpdate(
-      id,
-      productoActualizado
-    );
-
-    if (!productoGuardado) throw new NotFoundError(`${id}`);
-
-    return productoGuardado;
-  }
-
-  async eliminarProducto(id) {
-    const prod = await this.productoSchema.deleteOne(id);
-    if (!prod) throw new NotFoundError(`${id}`);
+    return await this.productoRepository.update(id, productoActualizado);
   }
 
   async actualizarStock(id, cantidadComprada) {
-    const unProducto = await this.productoSchema.findById(id);
-    if (!unProducto) throw new Error("Producto no encontrado");
+    const unProducto = await this.obtenerProducto(id);
 
     // Reducir stock
     unProducto.reducirStock(cantidadComprada);
@@ -49,39 +38,9 @@ export class ProductoService {
     // Guardar los cambios
     return await unProducto.save();
   }
+
+  async eliminarProducto(id) {
+    const prod = await this.productoSchema.deleteOne(id);
+    if (!prod) throw new NotFoundError(`${id}`);
+  }
 }
-
-/*
-
-
-  async findById(id) {
-    return await this.model.findById(id);
-  }
-
-  async findAll() {
-    return;
-  }
-
-  findAll() {
-    return Promise.resolve(this.productos);
-  }
-
-  update(id, productoActualizado) {
-    const indice = this.productos.findIndex((prod) => prod.getId() == id);
-
-    if (indice === -1) return Promise.resolve(null);
-
-    this.productos[indice] = productoActualizado;
-    return Promise.resolve(productoActualizado);
-  }
-
-  delete(id) {
-    const indice = this.productos.findIndex(
-      (unProducto) => unProducto.getId() === id
-    );
-    if (indice === -1) return false;
-
-    this.productos.splice(indice, 1);
-    return true;
-  }
-*/

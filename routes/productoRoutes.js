@@ -20,12 +20,16 @@ export default function productoRoutes(getController) {
     getController(ProductoController).obtenerProducto(req, res, next);
   });
 
-  router.delete(pathProductoID, (req, res, next) => {
-    getController(ProductoController).eliminarProducto(req, res, next);
+  router.get("/searchSeller", (req, res, next) => {
+    getController(ProductoController).obtenerProductosVendedor(req, res, next);
   });
 
   router.put(pathProductoID, (req, res, next) => {
     getController(ProductoController).actualizarProducto(req, res, next);
+  });
+
+  router.delete(pathProductoID, (req, res, next) => {
+    getController(ProductoController).eliminarProducto(req, res, next);
   });
 
   // TODO: implementar estas

@@ -1,42 +1,75 @@
+import { ProductoModel } from "../schemasDB/productoSchema.js";
+
 export class ProductoRepository {
   constructor() {
-    //this.model = ProductoModel;
+    this.productoSchema = ProductoModel;
   }
-  /*
-    async create(usuarioData) {
-    const usuario = new this.model(usuarioData);
-    return await usuario.save();
-    }
-
-    async findUserByID(id) {
-       return await this.model.findById(id);
-    }
-    */
 
   async create(prod) {
-    const producto = new this.model(prod);
+    const producto = new this.productoSchema(prod);
     return await producto.save();
   }
 
   async findById(id) {
-    return await this.model.findById(id);
+    const producto = await this.productoSchema.findById(id);
+
+    if (!producto) throw new NotFoundError(`${id}`);
+    return producto;
   }
 
+  /*
+      sellerID: result.data.sellerID,
+      category: result.data.category,
+      keyWord: result.data.keyWord,
+      minPrice: result.data.minPrice,
+      maxPrice: result.data.maxPrice,
+  */
+
+  async findProductosVendedorFiltrados(condicionesDeObtencion) {
+    const { sellerID, category, keyWord, minPrice, maxPrice } =
+      condicionesDeObtencion;
+
+    const filtros = {};
+
+    if (sellerID) filtros.vendedor = sellerID;
+    if (category) filtros.categoria = category;
+    if (keyWord) {
+      filtros.$or = [
+        { nombre: { $regex: keyWord, $options: "i" } },
+        { descripcion: { $regex: keyWord, $options: "i" } }, //la i es case insensitive
+      ];
+    }
+    if (minPrice && maxPrice) {
+      filtros.precio = {};
+      if (minPrice) filtros.precio.$gte = Number(minPrice); //gte equivale a >=
+      if (maxPrice) filtros.precio.$lte = Number(maxPrice); //gte equivale a <=
+    }
+
+    console.log(filtros);
+
+    return await this.productoSchema.find(filtros);
+  }
+
+  /*
   async findAll() {
     return;
   }
+  
 
   findAll() {
     return Promise.resolve(this.productos);
   }
+  */
 
-  update(id, productoActualizado) {
-    const indice = this.productos.findIndex((prod) => prod.getId() == id);
+  async update(id, productoActualizado) {
+    const productoGuardado = await this.productoSchema.findByIdAndUpdate(
+      id,
+      productoActualizado
+    );
 
-    if (indice === -1) return Promise.resolve(null);
+    if (!productoGuardado) throw new NotFoundError(`${id}`);
 
-    this.productos[indice] = productoActualizado;
-    return Promise.resolve(productoActualizado);
+    return productoGuardado;
   }
 
   delete(id) {

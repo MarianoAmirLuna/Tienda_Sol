@@ -11,9 +11,9 @@ const productoSchema = new mongoose.Schema(
       ref: "Usuario",
       required: true,
     },
-    titulo: {
+    nombre: {
       type: String,
-      required: [true, "El titulo es obligatorio"],
+      required: [true, "El nombre es obligatorio"],
     },
     descripcion: {
       type: String,
@@ -22,9 +22,9 @@ const productoSchema = new mongoose.Schema(
       maxlength: [1000, "El nombre no puede exceder 1000 caracteres"],
     },
     categorias: {
-      type: [String],
-      ref: "Categoria",
-      required: false,
+      type: [Number],
+      enum: [0, 1, 2, 3],
+      required: true,
     },
     precio: {
       type: Number,

@@ -31,11 +31,19 @@ export class ProductoController {
   listarProductos(req, res, next) {
     //const idResult = productoSchema.parsearId(req);
     this.productoService
-      .listarProductos(idResult)
+      .listarProductos()
       .then((productos) => res.status(200).json(productos))
       .catch((error) => {
         next(error);
       });
+  }
+
+  obtenerProductosVendedor(req, res, next) {
+    const condicionesDeObtencion = productoSchema.parsearBusquedaProducto(req);
+    this.productoService
+      .obtenerProductosVendedor(condicionesDeObtencion)
+      .then((productosObtenidos) => res.status(200).json(productosObtenidos))
+      .catch(next);
   }
 
   actualizarProducto(req, res, next) {
