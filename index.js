@@ -12,6 +12,7 @@ import { ProductoController } from "./controllers/productoController.js";
 import { PedidoRepository } from "./repository/pedidoRepository.js";
 import { PedidoService } from "./services/pedidoService.js";
 import { PedidoController } from "./controllers/pedidoController.js";
+import { UsuarioRepository } from "./repository/usuarioRepository.js";
 import { UsuarioService } from "./services/usuarioService.js";
 import { UsuarioController } from "./controllers/usuarioController.js";
 import { NotificacionRepository } from "./repository/notificacionRepository.js";
@@ -66,8 +67,8 @@ const pedidoController = new PedidoController(pedidoService);
 server.setController(PedidoController, pedidoController);
 
 // usuario
-//const usuarioRepo = new UsuarioRepository();
-const usuarioService = new UsuarioService(pedidoService, notificacionService);
+const usuarioRepo = new UsuarioRepository();
+const usuarioService = new UsuarioService(usuarioRepo, pedidoService, notificacionService);
 const usuarioController = new UsuarioController(usuarioService);
 
 server.setController(UsuarioController, usuarioController);

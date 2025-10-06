@@ -1,26 +1,19 @@
 import { Usuario } from "../models/entities/usuario/usuario.js";
-import { UsuarioModel } from "../schemasDB/usuarioSchema.js";
 
 export class UsuarioService {
   constructor(usuarioRepo, pedidoService, notificacionService) {
     this.usuarioRepo = usuarioRepo;
     this.pedidoService = pedidoService;
     this.notificacionService = notificacionService;
-    this.usuarioSchema = UsuarioModel;
   }
 
   async crearUsuario(usuarioData) {
-    const usuario = await new this.usuarioSchema(usuarioData);
-    return await usuario.save();
+    return await this.usuarioRepo.create(usuarioData);
   }
 
-  async obtenerUsuario(id_user) {
-    const user = await this.usuarioSchema.findById(id_user);
+  async obtenerUsuario(id) {
 
-    if (!user) {
-      throw new NotFoundError(`${id}`); //TODO: lanzar un error posta
-    }
-
+    const user = await this.usuarioRepo.findById(id);
     return user;
   }
 
