@@ -23,36 +23,30 @@ export class PedidoService {
 
   async actualizarStockProductosPorVenta(pedido) {
     await Promise.all(
-      pedido
-        .getItemsPedido()
-        .map((item) => {
-          this.productoService.actualizarStock(
-            item.productoID,
-            item.cantidad,
-            (producto, cantidad) => producto.reducirStock(cantidad)  
-          )
-        })
+      pedido.getItemsPedido().map((item) => {
+        this.productoService.actualizarStock(
+          item.productoID,
+          item.cantidad,
+          (producto, cantidad) => producto.reducirStock(cantidad)
+        );
+      })
     );
   }
 
-  
   async actualizarStockProductosPorCancelacion(pedido) {
     await Promise.all(
-      pedido
-        .getItemsPedido()
-        .map((item) => {
-          this.productoService.actualizarStock(
-            item.productoID,
-            item.cantidad,
-            (producto, cantidad) => {
-              producto.aumentarStock(cantidad);
-              producto.reducirUnidadesVendidas(cantidad);
-            }
-          )
-        })
+      pedido.getItemsPedido().map((item) => {
+        this.productoService.actualizarStock(
+          item.productoID,
+          item.cantidad,
+          (producto, cantidad) => {
+            producto.aumentarStock(cantidad);
+            producto.reducirUnidadesVendidas(cantidad);
+          }
+        );
+      })
     );
   }
-  
 
   async getIdVendedor(pedido) {
     const idPrimerProducto = pedido.getItemsPedido()[0].productoID;
@@ -64,9 +58,9 @@ export class PedidoService {
     );
 
     //console.log(JSON.stringify(producto, null, 2));
-    console.log(producto)
+    console.log(producto);
 
-    return producto.vendedorID;
+    return producto.vendedor;
   }
 
   async crearPedido(pedido) {
@@ -76,8 +70,10 @@ export class PedidoService {
 
     const idVendedor = await this.getIdVendedor(pedido);
 
+    console.log("la id del vendedor: ", idVendedor);
+
     await this.notificacionService.crearNotificacion(
-      new Notificacion(idVendedor,"hola soy un mensaje de notificacion")
+      new Notificacion(idVendedor, "hola soy un mensaje de notificacion")
     );
 
     //usuarioDestino
