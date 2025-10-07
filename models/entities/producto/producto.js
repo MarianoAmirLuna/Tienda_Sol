@@ -62,18 +62,22 @@ export class Producto {
     return this.stock >= cantidad && this.activo;
   }
 
+
   reducirStock(cantidad) {
     if (this.stock < cantidad) {
       throw new StockError("id: " + this.id + ", nombre: " + this.nombre);
     }
+    this.unidadesVendidas += cantidad;
     this.stock -= cantidad;
   }
 
   aumentarStock(cantidad) {
+    
     this.stock += cantidad;
   }
 
-  aumentarVentas(ventas){
-    this.unidadesVendidas += ventas;
+  reducirUnidadesVendidas(ventas) {
+    this.unidadesVendidas -= ventas;
   }
+
 }

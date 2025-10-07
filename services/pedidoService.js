@@ -20,15 +20,38 @@ export class PedidoService {
     return producto ? producto.getPrecio() : null;
   }
 
-  async actualizarStockProductos(pedido) {
+  async actualizarStockProductosPorVenta(pedido) {
     await Promise.all(
       pedido
         .getItemsPedido()
         .map((item) => {
-          this.productoService.actualizarStock(item.productoID, item.cantidad)
+          this.productoService.actualizarStock(
+            item.productoID,
+            item.cantidad,
+            (producto, cantidad) => producto.reducirStock(cantidad)  
+          )
         })
     );
   }
+
+  
+  async actualizarStockProductosPorCancelacion(pedido) {
+    await Promise.all(
+      pedido
+        .getItemsPedido()
+        .map((item) => {
+          this.productoService.actualizarStock(
+            item.productoID,
+            item.cantidad,
+            (producto, cantidad) => {
+              producto.aumentarStock(cantidad);
+              producto.reducirUnidadesVendidas(cantidad);
+            }
+          )
+        })
+    );
+  }
+  
 
   async getIdVendedor(pedido) {
     const idPrimerProducto = pedido.getItemsPedido()[0].productoID;
@@ -40,7 +63,7 @@ export class PedidoService {
   }
 
   async crearPedido(pedido) {
-    await this.actualizarStockProductos(pedido);
+    await this.actualizarStockProductosPorVenta(pedido);
 
     const nuevoPedido = await this.pedidoRepository.create(pedido);
 
@@ -94,6 +117,7 @@ export class PedidoService {
 
     if (nuevoEstado === EstadoPedido.CANCELADO) {
       const idVendedor = await this.getIdVendedor(pedido);
+      await this.actualizarStockProductosPorCancelacion(pedido);
       this.notificacionService.crearNotificacion(
         new NotificacionCancelacionPedido(
           idVendedor,

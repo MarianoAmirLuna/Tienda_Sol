@@ -32,12 +32,10 @@ export class ProductoService {
     return await this.productoRepository.update(id, camposActualizados);
   }
 
-  async actualizarStock(id, cantidadComprada) {
+  async actualizarStock(id, unidades, modificarStock) {
     const unProducto = await this.obtenerProducto(id);
 
-    // Reducir stock
-    unProducto.reducirStock(cantidadComprada);
-    unProducto.aumentarVentas(cantidadComprada);
+    modificarStock(unProducto, unidades);
 
     // Guardar los cambios
     return await unProducto.save();
