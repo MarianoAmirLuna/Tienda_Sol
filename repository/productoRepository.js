@@ -17,9 +17,18 @@ export class ProductoRepository {
     return producto;
   }
 
-  async findProductosVendedorFiltrados(condicionesDeObtencion) {
+  async findProductosVendedorFiltrados(
+    condicionesDeObtencion,
+    page,
+    documentosXpagina
+  ) {
     const { sellerID, category, keyWord, minPrice, maxPrice } =
       condicionesDeObtencion;
+
+    const skip = (page - 1) * documentosXpagina;
+
+    console.log("la pagina: ", page);
+    console.log("cuantos traer:", documentosXpagina);
 
     const filtros = {};
 
@@ -39,11 +48,14 @@ export class ProductoRepository {
 
     console.log(filtros);
 
-    return await this.productoSchema.find(filtros);
+    return await this.productoSchema
+      .find(filtros)
+      .limit(documentosXpagina)
+      .skip(skip);
   }
 
   async update(id, camposActualizados) {
-    const productoActualizado = await ProductoModel.findByIdAndUpdate(
+    const productoActualizado = await this.productoSchema.findByIdAndUpdate(
       id,
       { $set: camposActualizados },
       { new: true, runValidators: true } // devuelve el nuevo documento validado
@@ -59,5 +71,14 @@ export class ProductoRepository {
     if (!productoEliminado) throw new NotFoundError(`${id}`);
 
     return productoEliminado;
+  }
+
+  async findAll(page, documentosXpagina) {
+    const skip = (page - 1) * documentosXpagina;
+
+    console.log("la pagina: ", page);
+    console.log("cuantos traer:", documentosXpagina);
+
+    return await this.productoSchema.find().limit(documentosXpagina).skip(skip);
   }
 }

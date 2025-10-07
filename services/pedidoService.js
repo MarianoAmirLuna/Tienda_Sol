@@ -110,7 +110,7 @@ export class PedidoService {
     return pedido;
   }
 
-  async historialPedido(idCliente) {
-    return await this.pedidoRepository.historialPedidos(idCliente);
+  async historialPedido(idCliente, page, limit) {
+    return await this.pedidoRepository.historialPedidos(idCliente, page, limit);
   }
 }

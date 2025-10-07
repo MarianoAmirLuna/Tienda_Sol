@@ -11,7 +11,7 @@ export default function pedidoRoutes(getController) {
   });
 
   router.get(pathPedido, (req, res, next) => {
-    getController(PedidoController).listarPedidos(req, res, next); //agregar paginacion
+    getController(PedidoController).listarPedidos(req, res, next); //agregar paginacion HECHO
   });
 
   router.get(pathPedido + "/:id", (req, res, next) => {

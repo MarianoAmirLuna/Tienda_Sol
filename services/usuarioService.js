@@ -12,13 +12,12 @@ export class UsuarioService {
   }
 
   async obtenerUsuario(id) {
-
     const user = await this.usuarioRepo.findById(id);
     return user;
   }
 
-  async historialPedidos(id) {
-    return await this.pedidoService.historialPedido(id);
+  async historialPedidos(id, page, limit) {
+    return await this.pedidoService.historialPedido(id, page, limit);
   }
 
   // Notificaciones

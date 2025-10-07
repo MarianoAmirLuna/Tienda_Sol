@@ -13,7 +13,7 @@ export default function productoRoutes(getController) {
   });
 
   router.get(pathProducto, (req, res, next) => {
-    getController(ProductoController).listarProductos(req, res, next); //agregar paginacion
+    getController(ProductoController).listarProductos(req, res, next); //agregar paginacion HECHO
   });
 
   router.get(pathProductoID, (req, res, next) => {
@@ -21,7 +21,7 @@ export default function productoRoutes(getController) {
   });
 
   router.get("/searchSeller", (req, res, next) => {
-    getController(ProductoController).obtenerProductosVendedor(req, res, next); //agregar paginacion
+    getController(ProductoController).obtenerProductosVendedor(req, res, next); //agregar paginacion HECHO
   });
 
   router.patch(pathProductoID, (req, res, next) => {

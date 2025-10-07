@@ -29,9 +29,10 @@ export class ProductoController {
   }
 
   listarProductos(req, res, next) {
-    //const idResult = productoSchema.parsearId(req);
+    const { page = 1, limit = 10 } = req.query;
+
     this.productoService
-      .listarProductos()
+      .listarProductos(page, limit)
       .then((productos) => res.status(200).json(productos))
       .catch((error) => {
         next(error);

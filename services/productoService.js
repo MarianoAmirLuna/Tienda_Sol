@@ -15,13 +15,15 @@ export class ProductoService {
   }
 
   //TODO: Arreglar y agregar paginación
-  async listarProductos() {
-    return await this.productoRepository.findAll();
+  async listarProductos(page, limit) {
+    return await this.productoRepository.findAll(page, limit);
   }
 
-  async obtenerProductosVendedor(condicionesDeObtencion) {
+  async obtenerProductosVendedor(condicionesDeObtencion, page, limit) {
     return await this.productoRepository.findProductosVendedorFiltrados(
-      condicionesDeObtencion
+      condicionesDeObtencion,
+      page,
+      limit
     );
   }
 
