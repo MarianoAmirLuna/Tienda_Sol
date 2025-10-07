@@ -23,7 +23,6 @@ export const errorHandler = (err, req, res, next) => {
     if(err instanceof StatusTransitionError) {
         return res.status(err.statusCode).json({ error: err.message });
     }
-
       // cualquier otro error
     const statusCode = err.statusCode || 500;
     const message = err.message || 'Error interno del servidor';

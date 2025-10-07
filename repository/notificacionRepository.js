@@ -1,42 +1,54 @@
+import { NotificacionModel } from "../schemasDB/notificacionSchema.js";
+
 export class NotificacionRepository {
-    constructor() {
-        this.notificaciones = [];
-        this.id = 1;
-    }
+  constructor() {
+    this.notificacionSchema = NotificacionModel;
+  }
 
-    create(notificacion) {
-        notificacion.setId(this.id);
-        this.id++;
-        this.notificaciones.push(notificacion);
-        return Promise.resolve(notificacion);
-    }
+  async create(notificacion) {
+    const nuevaNotificacion = new this.notificacionSchema(notificacion);
+    return await nuevaNotificacion.save();
+  }
 
-    obtenerNotificacionesDeUsuario(idUsuario) {
-        const notificacionesUsuario = this.notificaciones.filter(n => n.usuarioDestino == idUsuario);
-        return Promise.resolve(notificacionesUsuario);
-    }
+  /*
+  async create(notificacion) {
+    const notificacionData = {
+    usuarioDestino: notificacion.usuarioDestino,
+    mensaje: notificacion.mensaje
+    };
+    const nuevaNotificacion = new this.notificacionSchema(notificacionData);
+    return await nuevaNotificacion.save();
+  }
+  */
+  obtenerNotificacionesDeUsuario(idUsuario) {
+    const notificacionesUsuario = this.notificaciones.filter(
+      (n) => n.usuarioDestino == idUsuario
+    );
+    return Promise.resolve(notificacionesUsuario);
+  }
 
-    findById(id) {
-        const notificacion = this.notificaciones.find(
-            (unaNotificacion) => unaNotificacion.id == id
-        );
-        return Promise.resolve(notificacion ?? null);
-    }
+  async findById(id) {
+    const notificacion = await this.notificacionSchema.findById(id);
 
-    update(id, notificacionActualizada) {
+    if (!notificacion) throw new NotFoundError(`${id}`);
+    return notificacion;
+  }
 
-        if(notificacionActualizada == null) return Promise.resolve(null);
+  update(id, notificacionActualizada) {
+    if (notificacionActualizada == null) return Promise.resolve(null);
 
-        const indice = this.obtenerIndicePorID(id);
+    const indice = this.obtenerIndicePorID(id);
 
-        if (indice === -1) return Promise.resolve(null);
+    if (indice === -1) return Promise.resolve(null);
 
-        this.notificaciones[indice] = notificacionActualizada;
+    this.notificaciones[indice] = notificacionActualizada;
 
-        return Promise.resolve(notificacionActualizada);
-    }
+    return Promise.resolve(notificacionActualizada);
+  }
 
-    obtenerIndicePorID(id){
-        return this.notificaciones.findIndex((notificacion) => notificacion.id == id);
-    }
+  obtenerIndicePorID(id) {
+    return this.notificaciones.findIndex(
+      (notificacion) => notificacion.id == id
+    );
+  }
 }

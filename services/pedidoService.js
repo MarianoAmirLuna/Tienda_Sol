@@ -1,6 +1,7 @@
 import { NotFoundError } from "../middleware/appError.js";
 import {
   NotificacionPedido,
+  Notificacion,
   NotificacionEstadoPedido,
   NotificacionCancelacionPedido,
 } from "../models/entities/notificacion/notificacion.js";
@@ -55,9 +56,15 @@ export class PedidoService {
 
   async getIdVendedor(pedido) {
     const idPrimerProducto = pedido.getItemsPedido()[0].productoID;
+
+    console.log("el id del primer producto: ", idPrimerProducto);
+
     const producto = await this.productoService.obtenerProducto(
       idPrimerProducto
     );
+
+    //console.log(JSON.stringify(producto, null, 2));
+    console.log(producto)
 
     return producto.vendedorID;
   }
@@ -69,9 +76,12 @@ export class PedidoService {
 
     const idVendedor = await this.getIdVendedor(pedido);
 
-    this.notificacionService.crearNotificacion(
-      new NotificacionPedido(idVendedor, nuevoPedido.id, pedido.compradorID)
+    await this.notificacionService.crearNotificacion(
+      new Notificacion(idVendedor,"hola soy un mensaje de notificacion")
     );
+
+    //usuarioDestino
+    //mensaje
 
     return nuevoPedido;
   }

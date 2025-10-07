@@ -4,6 +4,7 @@ export class NotificacionService {
     }
 
     async crearNotificacion(notificacion) {
+        //console.log(notificacion.usuarioDestino)
         return await this.notificacionRepo.create(notificacion);
     }
 

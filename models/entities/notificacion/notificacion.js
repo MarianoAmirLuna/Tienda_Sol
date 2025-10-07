@@ -1,9 +1,10 @@
 export class Notificacion {
     usuarioDestino;
-    mensaje
+    mensaje;
     fechaAlta;
-    leida
-    fechaLeida
+    leida;
+    fechaLeida;
+    
     constructor(usuarioDestino, mensaje) {
         this.usuarioDestino = usuarioDestino;
         this.mensaje = mensaje;

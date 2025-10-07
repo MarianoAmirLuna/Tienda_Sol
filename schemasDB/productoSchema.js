@@ -7,9 +7,9 @@ import { Moneda } from "../models/entities/moneda.js";
 const productoSchema = new mongoose.Schema(
   {
     vendedor: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Usuario",
-      required: true,
+      type: String, //mongoose.Schema.Types.ObjectId,
+      //ref: "Usuario",
+      required: [true, "Me quiero matar y grabarlo en 4k"],
     },
     nombre: {
       type: String,
@@ -32,7 +32,7 @@ const productoSchema = new mongoose.Schema(
     },
     moneda: {
       type: Number,
-      enum: [0, 1, 2], // PESO_ARG, DOLAR_USA, REAL
+      enum: [0, 1, 2],
       required: [true, "La moneda es obligatoria"],
     },
     stock: {

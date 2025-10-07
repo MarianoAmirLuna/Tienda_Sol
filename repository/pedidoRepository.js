@@ -5,9 +5,9 @@ export class PedidoRepository {
     this.pedidoSchema = PedidoModel;
   }
 
-  async create(prod) {
-    const pedido = new this.pedidoSchema(prod);
-    return await pedido.save();
+  async create(pedido) {
+    const nuevoPedido = new this.pedidoSchema(pedido);
+    return await nuevoPedido.save();
   }
 
   async findById(id) {
