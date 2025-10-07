@@ -8,87 +8,39 @@ export class PedidoController {
     this.pedidoService = pedidoService;
   }
 
-  // async crearPedido(req, res, next) {
-  //   const result = pedidoSchema.parsearPedido(req);
-
-  //   // console.log(
-  //   //   "🔍 1. Body recibido en crearPedido:",
-  //   //   JSON.stringify(req.body, null, 2)
-  //   // );
-
-  //   //console.log(result.data.itemsPedido);
-
-  //   await Promise.all(
-  //     result.data.itemsPedido.map(async (i) => {
-  //       //console.log("HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: "+i);
-  //       await this.pedidoService
-  //         .getPrecioUnitario(i.productoID)
-  //         .then(
-  //           (precioUnitario) => {
-  //             console.log("precioUnitario es: ", i.precioUnitario);
-  //             new ItemPedido(i.productoID, i.cantidad, precioUnitario)
-  //           }
-
-  //         );
-  //     })
-  //   )
-  //     .then((itemsInstanciados) => {
-  //       const nuevoPedido = new Pedido(
-  //         result.data.comprador,
-  //         itemsInstanciados,
-  //         result.data.moneda,
-  //         result.data.direccionEntrega
-  //       );
-
-  //       return this.pedidoService
-  //         .crearPedido(nuevoPedido)
-  //         .then(() => nuevoPedido);
-  //     })
-  //     .then((nuevoPedido) => res.status(201).json(nuevoPedido))
-  //     .catch((error) => next(error));
-  // }
-
   crearPedido(req, res, next) {
-  const result = pedidoSchema.parsearPedido(req);
+    const result = pedidoSchema.parsearPedido(req);
 
-  console.log("🧾 Pedido recibido:", JSON.stringify(result.data, null, 2));
+    Promise.all(
+      result.data.itemsPedido.map((i) => {
+        return this.pedidoService
+          .getPrecioUnitario(i.productoID)
+          .then((precioUnitario) => {
+            return new ItemPedido(i.productoID, i.cantidad, precioUnitario);
+          });
+      })
+    )
 
-  // 1️⃣ Crear todos los items con su precio unitario
-  Promise.all(
-    result.data.itemsPedido.map((i) => {
-      return this.pedidoService
-        .getPrecioUnitario(i.productoID)
-        .then((precioUnitario) => {
-          console.log(`💰 Producto ${i.productoID} -> Precio unitario: ${precioUnitario}`);
-          return new ItemPedido(i.productoID, i.cantidad, precioUnitario);
-        });
-    })
-  )
-    // 2️⃣ Cuando todos los items están listos, crear el pedido
-    .then((itemsInstanciados) => {
-      const nuevoPedido = new Pedido(
-        result.data.compradorID,         // 👈 importante: tu esquema usa compradorID, no comprador
-        itemsInstanciados,
-        result.data.moneda,
-        result.data.direccionEntrega
-      );
+      .then((itemsInstanciados) => {
+        const nuevoPedido = new Pedido(
+          result.data.compradorID,
+          itemsInstanciados,
+          result.data.moneda,
+          result.data.direccionEntrega
+        );
 
-      console.log("📦 Pedido instanciado:", JSON.stringify(nuevoPedido, null, 2));
+        return this.pedidoService
+          .crearPedido(nuevoPedido)
+          .then(() => nuevoPedido);
+      })
 
-      // 3️⃣ Guardar en base de datos
-      return this.pedidoService.crearPedido(nuevoPedido)
-        .then(() => nuevoPedido); // devolvemos el pedido para el siguiente .then
-    })
-    // 4️⃣ Enviar respuesta HTTP
-    .then((nuevoPedido) => {
-      res.status(201).json(nuevoPedido);
-    })
-    // 5️⃣ Manejo de errores
-    .catch((error) => {
-      console.error("❌ Error al crear pedido:", error);
-      next(error);
-    });
-}
+      .then((nuevoPedido) => {
+        res.status(201).json(nuevoPedido);
+      })
+      .catch((error) => {
+        next(error);
+      });
+  }
 
   listarPedidos(req, res, next) {
     const { page = 1, limit = 10 } = req.query;
