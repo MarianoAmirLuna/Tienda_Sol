@@ -31,7 +31,7 @@ export class PedidoController {
 
         return this.pedidoService
           .crearPedido(nuevoPedido)
-          .then(() => nuevoPedido);
+          .then((nuevoPedido) => nuevoPedido);
       })
 
       .then((nuevoPedido) => {

@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 import { Pedido } from "../models/entities/pedido/pedido.js";
+import { Moneda } from "../models/entities/moneda.js";
+import { EstadoPedido } from "../models/entities/pedido/estadoPedido.js";
 
 const pedidoSchema = new mongoose.Schema(
   {
@@ -35,7 +37,7 @@ const pedidoSchema = new mongoose.Schema(
     },
     moneda: {
       type: Number,
-      enum: [0, 1, 2], // PESO_ARG, DOLAR_USA, REAL
+      enum: Moneda, // PESO_ARG, DOLAR_USA, REAL
       required: [true, "La moneda es obligatoria"],
     },
     direccionEntrega: {
@@ -83,7 +85,7 @@ const pedidoSchema = new mongoose.Schema(
     },
     estado: {
       type: String,
-      enum: ["PENDIENTE", "CONFIRMADO", "EN_PREPARACION", "ENVIADO", "ENTREGADO", "CANCELADO"],
+      enum: EstadoPedido,
       default: "PENDIENTE",
       required: false,
     },
@@ -94,7 +96,7 @@ const pedidoSchema = new mongoose.Schema(
     },
     historialEstados: {
       type: [String],
-      enum: ["PENDIENTE", "CONFIRMADO", "EN_PREPARACION", "ENVIADO", "ENTREGADO", "CANCELADO"],
+      enum: EstadoPedido,
       default: [],
       required: false,
     },

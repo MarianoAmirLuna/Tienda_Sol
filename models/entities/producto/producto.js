@@ -34,10 +34,6 @@ export class Producto {
     return this.precio;
   }
 
-  getId() {
-    return this.id;
-  }
-
   setId(new_id) {
     this.id = new_id;
   }

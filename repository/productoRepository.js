@@ -69,6 +69,10 @@ export class ProductoRepository {
     return productoActualizado;
   }
 
+  async save(producto){
+    return await producto.save();
+  }
+
   delete(id) {
     const productoEliminado = this.productoSchema.findByIdAndDelete(id);
     if (!productoEliminado) throw new NotFoundError(`${id}`);
@@ -84,7 +88,7 @@ export class ProductoRepository {
       return { precio: -1 };
     } // Precio descendente (mayor a menor)
     if (sortOrder === "masVendido") {
-      return { cantidadVendida: -1 };
+      return { unidadesVendidas: -1 };
     }
 
     throw new BadQuery(`${sortOrder}`);

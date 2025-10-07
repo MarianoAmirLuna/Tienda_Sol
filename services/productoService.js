@@ -38,7 +38,7 @@ export class ProductoService {
     modificarStock(unProducto, unidades);
 
     // Guardar los cambios
-    return await unProducto.save();
+    return await this.productoRepository.save(unProducto);
   }
 
   async eliminarProducto(id) {
