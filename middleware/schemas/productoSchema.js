@@ -43,7 +43,7 @@ export class productoSchema extends schemaBase {
 
     // Crear objeto plano en lugar de instancia de Producto
     return {
-      vendedor: new mongoose.Types.ObjectId(result.data.vendedor),
+      vendedor: result.data.vendedor,//new mongoose.Types.ObjectId(result.data.vendedor),
       nombre: result.data.nombre,
       descripcion: result.data.descripcion,
       categorias: result.data.categorias,

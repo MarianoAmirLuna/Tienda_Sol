@@ -19,8 +19,6 @@ export class Pedido {
         this.historialEstados = []
     }
 
-
-
     cambiarEstado(nuevoEstado) {
 
         const transicionesPermitidas = {
@@ -46,8 +44,6 @@ export class Pedido {
     getItemsPedido(){
         return this.itemsPedido;
     }
-
-
 
     getEstado(){
         return this.estado;

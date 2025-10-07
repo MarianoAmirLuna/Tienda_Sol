@@ -22,8 +22,8 @@ export class UsuarioService {
 
   // Notificaciones
 
-  async obtenerNotificaciones(id) {
-    return await this.notificacionService.obtenerNotificaciones(id);
+  async obtenerNotificaciones(id, leidas, page, limit) {
+    return await this.notificacionService.obtenerNotificaciones(id, leidas, page, limit);
   }
 
   async obtenerNotificacionesNoLeidas(id) {
@@ -34,7 +34,7 @@ export class UsuarioService {
     return await this.notificacionService.obtenerNotificacionesLeidas(id);
   }
 
-  async marcarComoLeida(idNotificacion) {
-    return await this.notificacionService.marcarComoLeida(idNotificacion);
+  async marcarLectura(idNotificacion, camposActualizados) {
+    return await this.notificacionService.marcarLectura(idNotificacion, camposActualizados);
   }
 }

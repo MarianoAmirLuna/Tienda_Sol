@@ -7,7 +7,7 @@ const pedidoSchema = new mongoose.Schema(
   {
     compradorID: {
       //type: mongoose.Schema.Types.ObjectId,
-      //ref: "Usuario",
+      //ref: "Usuario", //TODO: descomentar y arreglar
       type: String,
       required: true,
     },

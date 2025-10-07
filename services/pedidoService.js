@@ -1,6 +1,7 @@
 import { NotFoundError } from "../middleware/appError.js";
 import {
   NotificacionPedido,
+  Notificacion,
   NotificacionEstadoPedido,
   NotificacionCancelacionPedido,
 } from "../models/entities/notificacion/notificacion.js";
@@ -22,44 +23,40 @@ export class PedidoService {
 
   async actualizarStockProductosPorVenta(pedido) {
     await Promise.all(
-      pedido
-        .getItemsPedido()
-        .map((item) => {
-          this.productoService.actualizarStock(
-            item.productoID,
-            item.cantidad,
-            (producto, cantidad) => producto.reducirStock(cantidad)  
-          )
-        })
+      pedido.getItemsPedido().map((item) =>
+        this.productoService.actualizarStock(
+          item.productoID,
+          item.cantidad,
+          (producto, cantidad) => producto.reducirStock(cantidad)
+        )
+      )
     );
   }
 
-  
+
   async actualizarStockProductosPorCancelacion(pedido) {
     await Promise.all(
-      pedido
-        .getItemsPedido()
-        .map((item) => {
-          this.productoService.actualizarStock(
-            item.productoID,
-            item.cantidad,
-            (producto, cantidad) => {
-              producto.aumentarStock(cantidad);
-              producto.reducirUnidadesVendidas(cantidad);
-            }
-          )
-        })
+      pedido.getItemsPedido().map((item) => 
+        this.productoService.actualizarStock(
+          item.productoID,
+          item.cantidad,
+          (producto, cantidad) => {
+            producto.aumentarStock(cantidad);
+            producto.reducirUnidadesVendidas(cantidad);
+          }
+        )
+      )
     );
   }
-  
 
   async getIdVendedor(pedido) {
     const idPrimerProducto = pedido.getItemsPedido()[0].productoID;
+
     const producto = await this.productoService.obtenerProducto(
       idPrimerProducto
     );
 
-    return producto.vendedorID;
+    return producto.vendedor;
   }
 
   async crearPedido(pedido) {
@@ -69,8 +66,8 @@ export class PedidoService {
 
     const idVendedor = await this.getIdVendedor(pedido);
 
-    this.notificacionService.crearNotificacion(
-      new NotificacionPedido(idVendedor, nuevoPedido.id, pedido.compradorID)
+    await this.notificacionService.crearNotificacion(
+      new Notificacion(idVendedor, `Tiene un nuevo pedido con ID: ${nuevoPedido.id} / [-] Comprador: ${pedido.compradorID}`)
     );
 
     return nuevoPedido;
@@ -107,23 +104,14 @@ export class PedidoService {
     pedido.cambiarEstado(nuevoEstado);
 
     this.notificacionService.crearNotificacion(
-      new NotificacionEstadoPedido(
-        pedido.compradorID,
-        pedido.id,
-        nuevoEstado,
-        estadoAnterior
-      )
+        new Notificacion(pedido.compradorID, `El estado de su pedido con ID: ${id} ha cambiado de ${estadoAnterior} a ${nuevoEstado}`)
     );
 
     if (nuevoEstado === EstadoPedido.CANCELADO) {
       const idVendedor = await this.getIdVendedor(pedido);
       await this.actualizarStockProductosPorCancelacion(pedido);
       this.notificacionService.crearNotificacion(
-        new NotificacionCancelacionPedido(
-          idVendedor,
-          pedido.id,
-          pedido.compradorID
-        )
+        new Notificacion(idVendedor, `El estado de su pedido con ID: ${id} ha cambiado de ${estadoAnterior} a ${nuevoEstado}`)
       );
     }
 
