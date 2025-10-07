@@ -23,19 +23,20 @@ export class PedidoService {
 
   async actualizarStockProductosPorVenta(pedido) {
     await Promise.all(
-      pedido.getItemsPedido().map((item) => {
+      pedido.getItemsPedido().map((item) =>
         this.productoService.actualizarStock(
           item.productoID,
           item.cantidad,
           (producto, cantidad) => producto.reducirStock(cantidad)
-        );
-      })
+        )
+      )
     );
   }
 
+
   async actualizarStockProductosPorCancelacion(pedido) {
     await Promise.all(
-      pedido.getItemsPedido().map((item) => {
+      pedido.getItemsPedido().map((item) => 
         this.productoService.actualizarStock(
           item.productoID,
           item.cantidad,
@@ -43,22 +44,17 @@ export class PedidoService {
             producto.aumentarStock(cantidad);
             producto.reducirUnidadesVendidas(cantidad);
           }
-        );
-      })
+        )
+      )
     );
   }
 
   async getIdVendedor(pedido) {
     const idPrimerProducto = pedido.getItemsPedido()[0].productoID;
 
-    console.log("el id del primer producto: ", idPrimerProducto);
-
     const producto = await this.productoService.obtenerProducto(
       idPrimerProducto
     );
-
-    //console.log(JSON.stringify(producto, null, 2));
-    console.log(producto);
 
     return producto.vendedor;
   }
@@ -70,14 +66,9 @@ export class PedidoService {
 
     const idVendedor = await this.getIdVendedor(pedido);
 
-    console.log("la id del vendedor: ", idVendedor);
-
     await this.notificacionService.crearNotificacion(
-      new Notificacion(idVendedor, "hola soy un mensaje de notificacion")
+      new Notificacion(idVendedor, `Tiene un nuevo pedido con ID: ${nuevoPedido.id} / [-] Comprador: ${pedido.compradorID}`)
     );
-
-    //usuarioDestino
-    //mensaje
 
     return nuevoPedido;
   }
@@ -113,23 +104,14 @@ export class PedidoService {
     pedido.cambiarEstado(nuevoEstado);
 
     this.notificacionService.crearNotificacion(
-      new NotificacionEstadoPedido(
-        pedido.compradorID,
-        pedido.id,
-        nuevoEstado,
-        estadoAnterior
-      )
+        new Notificacion(pedido.compradorID, `El estado de su pedido con ID: ${id} ha cambiado de ${estadoAnterior} a ${nuevoEstado}`)
     );
 
     if (nuevoEstado === EstadoPedido.CANCELADO) {
       const idVendedor = await this.getIdVendedor(pedido);
       await this.actualizarStockProductosPorCancelacion(pedido);
       this.notificacionService.crearNotificacion(
-        new NotificacionCancelacionPedido(
-          idVendedor,
-          pedido.id,
-          pedido.compradorID
-        )
+        new Notificacion(idVendedor, `El estado de su pedido con ID: ${id} ha cambiado de ${estadoAnterior} a ${nuevoEstado}`)
       );
     }
 

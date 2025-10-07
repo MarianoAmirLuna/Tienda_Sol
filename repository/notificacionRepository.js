@@ -1,4 +1,5 @@
 import { NotificacionModel } from "../schemasDB/notificacionSchema.js";
+import { NotFoundError } from "../middleware/appError.js";
 
 export class NotificacionRepository {
   constructor() {
@@ -10,21 +11,18 @@ export class NotificacionRepository {
     return await nuevaNotificacion.save();
   }
 
-  /*
-  async create(notificacion) {
-    const notificacionData = {
-    usuarioDestino: notificacion.usuarioDestino,
-    mensaje: notificacion.mensaje
-    };
-    const nuevaNotificacion = new this.notificacionSchema(notificacionData);
-    return await nuevaNotificacion.save();
-  }
-  */
-  obtenerNotificacionesDeUsuario(idUsuario) {
-    const notificacionesUsuario = this.notificaciones.filter(
-      (n) => n.usuarioDestino == idUsuario
-    );
-    return Promise.resolve(notificacionesUsuario);
+  async obtenerNotificacionesDeUsuario(idUsuario, leidas, page, limit) {
+    const skip = (page - 1) * limit;
+    const filtro = {}
+
+    if(leidas !== null){
+       filtro.leida = leidas
+    }
+
+    return await this.notificacionSchema
+      .find(filtro)
+      .limit(limit)
+      .skip(skip);
   }
 
   async findById(id) {
@@ -34,16 +32,16 @@ export class NotificacionRepository {
     return notificacion;
   }
 
-  update(id, notificacionActualizada) {
-    if (notificacionActualizada == null) return Promise.resolve(null);
+  async update(id, camposActualizados) {
+    const notificacion = await this.notificacionSchema.findByIdAndUpdate(
+      id,
+      { $set: camposActualizados },
+      { new: true, runValidators: true } // devuelve el nuevo documento validado
+    );
 
-    const indice = this.obtenerIndicePorID(id);
+    if (!notificacion) throw new NotFoundError(`${id}`);
 
-    if (indice === -1) return Promise.resolve(null);
-
-    this.notificaciones[indice] = notificacionActualizada;
-
-    return Promise.resolve(notificacionActualizada);
+    return notificacion;
   }
 
   obtenerIndicePorID(id) {

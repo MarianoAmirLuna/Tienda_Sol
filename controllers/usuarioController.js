@@ -5,9 +5,9 @@ export class UsuarioController {
     this.usuarioService = usuarioService;
   }
 
-  crearUsuario(req, res, next) {
+  async crearUsuario(req, res, next) {
     const nuevoUsuario = usuarioSchema.parsearUsuario(req);
-    this.usuarioService
+    await this.usuarioService
       .crearUsuario(nuevoUsuario)
       .then((usuarioCreado) => {
         return res.status(201).json(usuarioCreado);
@@ -17,9 +17,9 @@ export class UsuarioController {
       });
   }
 
-  obtenerUsuario(req, res, next) {
+  async obtenerUsuario(req, res, next) {
     const idResult = usuarioSchema.parsearId(req);
-    this.usuarioService
+    await this.usuarioService
       .obtenerUsuario(idResult)
       .then((usuario) => {
         return res.status(200).json(usuario);
@@ -29,11 +29,11 @@ export class UsuarioController {
       });
   }
 
-  historialPedidos(req, res, next) {
+  async historialPedidos(req, res, next) {
     const idResult = usuarioSchema.parsearId(req);
     const { page = 1, limit = 10 } = req.query;
 
-    this.usuarioService
+    await this.usuarioService
       .historialPedidos(idResult, page, limit)
       .then((historial) => {
         return res.status(200).json(historial);
@@ -45,10 +45,12 @@ export class UsuarioController {
 
   // Notificaciones
 
-  obtenerNotificaciones(req, res, next) {
+  async obtenerNotificaciones(req, res, next) {
     const idResult = usuarioSchema.parsearId(req);
-    this.usuarioService
-      .obtenerNotificaciones(idResult)
+    const { page = 1, limit = 10, leidas = null } = req.query;
+
+    await this.usuarioService
+      .obtenerNotificaciones(idResult, leidas, page, limit)
       .then((notificaciones) => {
         return res.status(200).json(notificaciones);
       })
@@ -81,10 +83,12 @@ export class UsuarioController {
       });
   }
 
-  marcarComoLeida(req, res, next) {
+  async marcarLectura(req, res, next) {
     const idResult = usuarioSchema.parsearId(req);
-    this.usuarioService
-      .marcarComoLeida(idResult)
+    const camposActualizados = req.body
+
+    return await this.usuarioService
+      .marcarLectura(idResult, camposActualizados)
       .then((notificaciones) => {
         return res.status(200).json(notificaciones);
       })
