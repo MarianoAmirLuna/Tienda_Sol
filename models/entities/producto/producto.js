@@ -17,12 +17,13 @@ export class Producto {
     this.vendedorID = vendedorID;
     this.nombre = nombre;
     this.descripcion = descripcion;
-    this.categorias = categorias; // [String]
+    this.categorias = categorias; // [categoria]
     this.precio = precio; //Int
     this.moneda = moneda; //String
     this.stock = stock; //Int
     this.fotos = fotos; // [String]
     this.activo = activo; //Bool
+    this.unidadesVendidas = 0;
   }
 
   getIdVendedor() {
@@ -70,5 +71,9 @@ export class Producto {
 
   aumentarStock(cantidad) {
     this.stock += cantidad;
+  }
+
+  aumentarVentas(ventas){
+    this.unidadesVendidas += ventas;
   }
 }

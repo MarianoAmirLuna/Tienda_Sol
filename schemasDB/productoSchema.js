@@ -47,6 +47,11 @@ const productoSchema = new mongoose.Schema(
       type: Boolean,
       required: [true, "Tenes que indicar si el producto está activo."],
     },
+    unidadesVendidas: {
+      type: Number,
+      required: false,
+      default: 0,
+    }
   },
   {
     collection: "productos", //como se va a llamar la coleccion en la DB

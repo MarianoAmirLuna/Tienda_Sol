@@ -37,13 +37,13 @@ export class ProductoService {
 
     // Reducir stock
     unProducto.reducirStock(cantidadComprada);
+    unProducto.aumentarVentas(cantidadComprada);
 
     // Guardar los cambios
     return await unProducto.save();
   }
 
   async eliminarProducto(id) {
-    const prod = await this.productoSchema.deleteOne(id);
-    if (!prod) throw new NotFoundError(`${id}`);
+    return await this.productoRepository.delete(id);
   }
 }

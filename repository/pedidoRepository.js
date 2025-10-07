@@ -21,9 +21,6 @@ export class PedidoRepository {
   async findAll(page, documentosXpagina) {
     const skip = (page - 1) * documentosXpagina;
 
-    console.log("la pagina: ", page);
-    console.log("cuantos traer:", documentosXpagina);
-
     return await this.pedidoSchema.find().limit(documentosXpagina).skip(skip);
   }
 

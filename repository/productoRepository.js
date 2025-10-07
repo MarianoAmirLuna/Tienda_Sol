@@ -31,8 +31,8 @@ export class ProductoRepository {
 
     const skip = (page - 1) * documentosXpagina;
 
-    console.log("la pagina: ", page);
-    console.log("cuantos traer:", documentosXpagina);
+    // console.log("la pagina: ", page);
+    // console.log("cuantos traer:", documentosXpagina);
 
     const filtros = {};
 

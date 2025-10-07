@@ -43,15 +43,11 @@ const pedido = z.object({
 
 export class pedidoSchema extends schemaBase {
   static parsearPedido(req) {
-    //console.log("🔍 parsearPedido - Body recibido:", req.body);
     const result = pedido.safeParse(req.body);
-    //console.log("🔍 parsearPedido - Result de Zod:", result);
     if (result.error) {
-      console.log("🔍 parsearPedido - ERROR de validación:", result.error);
       throw result.error;
     }
 
-    //console.log("🔍 parsearPedido - Datos validados:", result.data);
     return result;
   }
 
