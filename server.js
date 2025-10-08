@@ -2,7 +2,6 @@
 import express from "express";
 import {errorHandler} from "./middleware/errorHandler.js";
 
-
 export class Server {
     constructor(app, port) {
         this.controllers = {};
@@ -44,12 +43,13 @@ export class Server {
         });
     }
 
-    launch() {
+    launch(callback) {
         this.app.listen(this.port, () => {
-            console.log(`Server running on port ${this.port}`);
+            if (callback) {
+                callback();
+            } else {
+                console.log(`Server running on port ${this.port}`);
+            }
         });
     }
-
-    
-
 }

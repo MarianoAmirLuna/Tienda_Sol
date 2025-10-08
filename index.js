@@ -1,9 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
-
-// import {dotenv} from "dotenv";
-// dotenv.config();
+import swaggerUi from "swagger-ui-express";
 
 // Importación de repositorios, servicios y controladores
 import { ProductoRepository } from "./repository/productoRepository.js";
@@ -21,28 +19,47 @@ import { NotificacionService } from "./services/notificacionService.js";
 import { Server } from "./server.js";
 import routes from "./routes/routes.js";
 import { connectDB } from "./config/database.js";
+import swaggerSpec from "./config/swagger.js";
 
 const app = express();
 app.use(express.json());
 app.use(
-  cors({
-    origin: process.env.ALLOWED_ORIGINS
-      ? process.env.ALLOWED_ORIGINS.split(",").map((o) => o.trim())
-      : true,
-  })
+    cors({
+        origin: process.env.ALLOWED_ORIGINS
+            ? process.env.ALLOWED_ORIGINS.split(",").map((o) => o.trim())
+            : true,
+    })
 );
+
+// Configuración de Swagger UI
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
+    explorer: true,
+    customSiteTitle: "API Docs - TiendaSol Grupo 09",
+    swaggerOptions: {
+        persistAuthorization: true,
+    }
+}));
 
 // health check
 app.get("/health-check", (req, res) => {
-  res.json({ message: "hello world" });
+    res.json({
+        message: "hello world",
+        timestamp: new Date().toISOString(),
+        status: "healthy",
+        documentation: "/api-docs"
+    });
+});
+
+// Ruta para obtener el JSON de Swagger
+app.get('/api-docs-json', (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.send(swaggerSpec);
 });
 
 const PORT = Number(process.env.SERVER_PORT) || 8000;
 
 // Se envía al server el puerto
 const server = new Server(app, PORT);
-
-//Direcciones
 
 // Notificaciones
 const notificacionRepo = new NotificacionRepository();
@@ -58,9 +75,9 @@ server.setController(ProductoController, productoController);
 // Pedidos
 const pedidoRepo = new PedidoRepository();
 const pedidoService = new PedidoService(
-  pedidoRepo,
-  productoService,
-  notificacionService
+    pedidoRepo,
+    productoService,
+    notificacionService
 );
 const pedidoController = new PedidoController(pedidoService);
 
@@ -78,12 +95,16 @@ server.configureRoutes();
 server.configureErrorHandling();
 
 const startServer = async () => {
-  try {
-    await connectDB();
-    server.launch();
-  } catch (error) {
-    console.error("Error al iniciar servidor:", error);
-  }
+    try {
+        await connectDB();
+        server.launch(() => {
+            console.log(`🚀 Servidor ejecutándose en puerto ${PORT}`);
+            console.log(`📚 Documentación Swagger disponible en: http://localhost:${PORT}/api-docs`);
+            console.log(`❤️  Health check en: http://localhost:${PORT}/health-check`);
+        });
+    } catch (error) {
+        console.error("Error al iniciar servidor:", error);
+    }
 };
 
 startServer();
