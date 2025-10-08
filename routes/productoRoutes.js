@@ -95,7 +95,7 @@ export default function productoRoutes(getController) {
      *                 $ref: '#/components/schemas/Producto'
      */
     router.get(pathProducto, (req, res, next) => {
-        getController(ProductoController).obtenerProductos(req, res, next);
+        getController(ProductoController).obtenerProductosSegun(req, res, next);
     });
 
     /**

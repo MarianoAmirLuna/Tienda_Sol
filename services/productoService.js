@@ -25,7 +25,7 @@ export class ProductoService {
     minPrice,
     maxPrice
   ) {
-    return await this.productoRepository.obtenerProductos(
+    return await this.productoRepository.obtenerProductosSegun(
       page,
       limit,
       sortOrder,
