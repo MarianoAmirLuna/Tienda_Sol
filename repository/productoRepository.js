@@ -34,7 +34,7 @@ export class ProductoRepository {
     throw new BadQuery(`${sortOrder}`);
   }
 
-  async obtenerProductos(
+  async obtenerProductosSegun(
     page,
     limit,
     sortOrder,

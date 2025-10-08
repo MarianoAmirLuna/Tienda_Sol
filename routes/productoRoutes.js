@@ -63,6 +63,10 @@ export default function productoRoutes(getController) {
         getController(ProductoController).crearProducto(req, res, next);
     });
 
+    router.get(pathProductoID, (req, res, next) => {
+        getController(ProductoController).obtenerProducto(req,res,next);
+    })
+
     /**
      * @swagger
      * /productos:

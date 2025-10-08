@@ -18,7 +18,7 @@ export class ProductoController {
       });
   }
 
-  /*obtenerProducto(req, res, next) {
+  obtenerProducto(req, res, next) {
     const idResult = productoSchema.parsearId(req);    
     this.productoService
       .obtenerProducto(idResult)
@@ -26,7 +26,7 @@ export class ProductoController {
       .catch((error) => {
         next(error);
       });
-  }*/
+  }
 
   //vendedorId=:vendedorID&categoria=:categoria&minPrice=:minPrice&maxPrice=:maxPrice&keyWord=:keyWord
 
@@ -35,7 +35,7 @@ export class ProductoController {
       keyWord: result.data.keyWord,
       minPrice: result.data.minPrice,
       maxPrice: result.data.maxPrice,*/
-  obtenerProductos(req, res, next) {
+  obtenerProductosSegun(req, res, next) {
     const {
       page = 1,
       limit = 10,
@@ -48,7 +48,7 @@ export class ProductoController {
     } = req.query;
 
     this.productoService
-      .obtenerProductos(
+      .obtenerProductosSegun(
         page,
         limit,
         sortOrder,

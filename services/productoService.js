@@ -11,11 +11,11 @@ export class ProductoService {
     return await this.productoRepository.create(prod);
   }
 
-  /*async obtenerProducto(id) {
+  async obtenerProducto(id) {
     return await this.productoRepository.findById(id);
-  }*/
+  }
 
-  async obtenerProductos(
+  async obtenerProductosSegun(
     page,
     limit,
     sortOrder,
