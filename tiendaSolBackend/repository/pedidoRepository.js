@@ -1,4 +1,5 @@
 import { PedidoModel } from "../schemasDB/pedidoSchema.js";
+import { NotFoundError } from "../middleware/appError.js";
 
 export class PedidoRepository {
   constructor() {

@@ -28,13 +28,6 @@ export class ProductoController {
       });
   }
 
-  //vendedorId=:vendedorID&categoria=:categoria&minPrice=:minPrice&maxPrice=:maxPrice&keyWord=:keyWord
-
-  /*sellerID: result.data.sellerID,
-      category: result.data.category,
-      keyWord: result.data.keyWord,
-      minPrice: result.data.minPrice,
-      maxPrice: result.data.maxPrice,*/
   obtenerProductosSegun(req, res, next) {
     const {
       page = 1,

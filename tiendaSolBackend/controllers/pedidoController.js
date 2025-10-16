@@ -70,7 +70,6 @@ export class PedidoController {
       .then((pedidoEliminado) => {
         res.status(200).json({
           mensaje: `Pedido ${idResult} eliminado con éxito`,
-          //pedido: pedidoEliminado
         });
       })
       .catch((error) => next(error));
