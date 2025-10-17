@@ -2,11 +2,7 @@ import { useState, useEffect } from "react";
 import { ShoppingCart, Moon, Sun, User } from "lucide-react";
 import logo from "/logoTiendaSol.png";
 
-export default function Navbar() {
-  const [darkMode, setDarkMode] = useState(false);
-  useEffect(() => {
-    document.documentElement.classList.toggle("dark", darkMode);
-  }, [darkMode]);
+export default function Navbar({ darkMode, setDarkMode }) {
 
   const [userOpen, setUserOpen] = useState(false);
 
@@ -16,45 +12,33 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-neutral-900/95 backdrop-blur-md border-b border-neutral-200/40 dark:border-neutral-800/40 font-[Outfit,sans-serif]">
+    <nav className="w-full z-50 bg-neutral-900/95 backdrop-blur-md border-b border-neutral-200/40 dark:border-neutral-800/40 font-[Outfit,sans-serif]">
       <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
-        {/* LOGO */}
-        <a
-          href="/"
-          className="flex items-center gap-3 text-lg font-semibold tracking-wide text-white"
-        >
-          <img src={logo} alt="Logo Tienda Sol" className="h-16 w-auto" />
+        <a href="/">
+          <img href="/" src={logo} alt="Logo Tienda Sol" className="h-16 w-auto" />
         </a>
 
-        {/* LINKS */}
-        <div className="hidden md:flex items-center space-x-10 text-base text-white">
-          {["Inicio", "Productos"].map((link) => (
-            <a
-              key={link}
-              href="#"
-              className="relative font-medium transition-colors duration-300 text-white hover:text-neutral-400"
-            >
-              {link}
-              <span className="absolute left-0 bottom-0 w-0 h-1 bg-neutral-400 rounded-full transition-all duration-300 group-hover:w-full"></span>
-            </a>
-          ))}
+        <div className="hidden md:flex items-center space-x-8 text-base">
+          <a href="/" className="relative font-medium text-white hover:text-neutral-400 transition" >
+            Inicio
+          </a>
+
+          <a href="/productos" className="relative font-medium text-white hover:text-neutral-400 transition" > Productos </a>
         </div>
 
-        {/* ACCIONES */}
         <div className="flex items-center space-x-4">
-          {/* MODO OSCURO */}
+
           <button
             onClick={() => setDarkMode(!darkMode)}
-            className="p-3 rounded-full hover:bg-neutral-800/70 transition"
+            className="p-3 rounded-full hover:bg-neutral-200/20 dark:hover:bg-neutral-800/70 transition"
           >
             {darkMode ? (
               <Sun className="w-6 h-6 text-yellow-400" />
             ) : (
-              <Moon className="w-6 h-6 text-white" />
+              <Moon className="w-6 h-6 text-neutral-100" />
             )}
           </button>
 
-          {/* CARRITO */}
           <button className="relative p-3 rounded-full hover:bg-neutral-800/70 transition">
             <ShoppingCart className="w-6 h-6 text-white" />
             <span className="absolute -top-1 -right-1 bg-neutral-400 text-neutral-900 text-xs px-2 rounded-full">
@@ -62,8 +46,7 @@ export default function Navbar() {
             </span>
           </button>
 
-          {/* USUARIO */}
-          <div className="relative">
+          <div>
             <button
               onClick={() => setUserOpen(!userOpen)}
               className="p-3 rounded-full hover:bg-neutral-800/70 transition"
@@ -86,14 +69,19 @@ export default function Navbar() {
                     </span>
                   )}
                 </button>
+
                 <button className="w-full text-left px-4 py-2 text-sm hover:bg-neutral-700/50 transition text-red-400">
                   Cerrar sesión
                 </button>
+                
               </div>
             )}
           </div>
+
         </div>
+
       </div>
+
     </nav>
   );
 }

@@ -1,26 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import { Route, Routes } from 'react-router-dom'
-import Home from './pages/Home'
-import ProductDetail from './pages/ProductDetail'
-import Navbar from './components/Navbar'
+import { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import ProductDetail from "./pages/ProductDetail";
+import Footer from "./components/Footer";
 
 function App() {
+
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", darkMode);
+    console.log("Dark mode:", darkMode ? "ON" : "OFF");
+  }, [darkMode]);
+
   return (
-    <>
-      <Navbar /> 
+    <div className="bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 min-h-screen">
+      <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
+      
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/productos/:idProducto" element={<ProductDetail />} />
-        {/* <Route path="/productos" element={<ProductList />} />
-        <Route path="/carrito" element={<Cart />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="*" element={<div className="p-10 text-center text-2xl font-bold text-red-600 bg-white rounded-xl shadow-lg">404 - Página No Encontrada</div>} /> */}
       </Routes>
-    </>
 
-    
+      <Footer/>
+    </div>
   );
 }
 
-export default App
+export default App;
