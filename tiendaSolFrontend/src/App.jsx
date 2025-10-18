@@ -6,9 +6,10 @@ import ProductDetail from "./pages/ProductDetail";
 import Footer from "./components/Footer";
 import Cart from "./pages/Cart";
 import NotificationPage from "./pages/NotificationPage";
+import CreateProductPage from "./pages/CreateProductPage";
+import Login from "./pages/Login";
 
 function App() {
-
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
@@ -25,6 +26,8 @@ function App() {
         <Route path="/productos/:idProducto" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/notificaciones" element={<NotificationPage />} />
+        <Route path="/nuevo-producto" element={<CreateProductPage />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
 
       <Footer />

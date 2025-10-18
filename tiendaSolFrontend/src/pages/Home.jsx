@@ -1,4 +1,5 @@
 import ProductList from "../components/ProductList";
+import Filtros from "../components/filtros";
 import { useEffect, useState } from "react";
 
 function Home() {
@@ -18,6 +19,9 @@ function Home() {
   return (
     <>
       <div className="text-center text-2xl py-10">Bienvenido a Tienda Sol</div>
+
+      <Filtros />
+
       <ProductList products={productos} />
     </>
   );

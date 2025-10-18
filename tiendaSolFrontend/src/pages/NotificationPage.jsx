@@ -1,5 +1,5 @@
 // NotificationPage.jsx
-import { useState, useEffect } from "react";
+import { useState } from "react";
 //import { useAuth } from "../context/AuthContext";
 
 export default function NotificationPage() {
@@ -7,7 +7,7 @@ export default function NotificationPage() {
 
   const usuario = {
     nombre: "Gianlucca Bolocco",
-    id: 1
+    id: 1,
   };
 
   const [notificaciones, setNotificaciones] = useState([
@@ -18,9 +18,7 @@ export default function NotificationPage() {
 
   const marcarComoLeida = (id) => {
     setNotificaciones((prev) =>
-      prev.map((n) =>
-        n.id === id ? { ...n, leida: true } : n
-      )
+      prev.map((n) => (n.id === id ? { ...n, leida: true } : n))
     );
   };
 
@@ -36,7 +34,9 @@ export default function NotificationPage() {
 
         <section className="mb-8">
           <h2 className="text-xl font-semibold mb-4">No leídas</h2>
-          {noLeidas.length === 0 && <p className="text-neutral-500">No hay notificaciones nuevas.</p>}
+          {noLeidas.length === 0 && (
+            <p className="text-neutral-500">No hay notificaciones nuevas.</p>
+          )}
           <ul className="space-y-3">
             {noLeidas.map((n) => (
               <li
@@ -57,7 +57,9 @@ export default function NotificationPage() {
 
         <section>
           <h2 className="text-xl font-semibold mb-4">Leídas</h2>
-          {leidas.length === 0 && <p className="text-neutral-500">No hay notificaciones leídas.</p>}
+          {leidas.length === 0 && (
+            <p className="text-neutral-500">No hay notificaciones leídas.</p>
+          )}
           <ul className="space-y-3">
             {leidas.map((n) => (
               <li

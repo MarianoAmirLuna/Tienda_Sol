@@ -37,9 +37,7 @@ export const CartProvider = ({ children }) => {
 
   const actualizarCantidad = (id, nuevaCantidad) => {
     setCarrito((prev) =>
-      prev.map((p) =>
-        p.id === id ? { ...p, cantidad: nuevaCantidad } : p
-      )
+      prev.map((p) => (p.id === id ? { ...p, cantidad: nuevaCantidad } : p))
     );
   };
 
