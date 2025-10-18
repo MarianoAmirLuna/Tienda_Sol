@@ -2,10 +2,15 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import { ShoppingCart, Moon, Sun, User } from "lucide-react";
 import logo from "/logoTiendaSol.png";
+import { useCart } from '../context/CartContext.jsx';
+
 
 export default function Navbar({ darkMode, setDarkMode }) {
 
   const [userOpen, setUserOpen] = useState(false);
+
+  const { carrito } = useCart();
+  const cantidadTotal = carrito.reduce((acc, item) => acc + item.cantidad, 0);
 
   const user = {
     name: "Gianlucca Bolocco",
@@ -46,7 +51,7 @@ export default function Navbar({ darkMode, setDarkMode }) {
           <Link to="/cart" className="relative p-3 rounded-full hover:bg-neutral-800/70 transition">
             <ShoppingCart className="w-6 h-6 text-white" />
             <span className="absolute -top-1 -right-1 bg-neutral-400 text-neutral-900 text-xs px-2 rounded-full">
-              3
+              {cantidadTotal}
             </span>
           </Link>
 

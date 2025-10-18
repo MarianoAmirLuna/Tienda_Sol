@@ -14,21 +14,21 @@ function Home() {
       name: "Reloj Minimal Pro",
       price: 12999,
       image:
-        "https://ferreira.vtexassets.com/arquivos/ids/424314-800-auto?v=638388548002630000&width=800&height=auto&aspect=true",
+        "https://alcatraz.com.ar/1322-thickbox_default/campera-urbana-azul-francia.jpg",
     },
     {
       id: 3,
       name: "Mochila Urbana",
       price: 8999,
       image:
-        "https://ferreira.vtexassets.com/arquivos/ids/424314-800-auto?v=638388548002630000&width=800&height=auto&aspect=true",
+        "https://alcatraz.com.ar/1864-thickbox_default/camisaco-combat-azul.jpg",
     },
     {
       id: 4,
       name: "Auriculares Wireless",
       price: 4999,
       image:
-        "https://ferreira.vtexassets.com/arquivos/ids/424314-800-auto?v=638388548002630000&width=800&height=auto&aspect=true",
+        "https://alcatraz.com.ar/2825-thickbox_default/bufanda-de-abrigo-negra-lana-bifaz-lisa-viscosa-alcatraz.jpg",
     },
   ];
 
