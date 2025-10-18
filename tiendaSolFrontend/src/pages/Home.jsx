@@ -1,12 +1,13 @@
 import ProductList from "../components/ProductList";
 import { useEffect, useState } from "react";
-//gian
 
 function Home() {
   const [productos, setProductos] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/productos")
+    console.log(`${import.meta.env.VITE_API_URL_INICIAL}/productos`);
+
+    fetch(`${import.meta.env.VITE_API_URL_INICIAL}/productos`)
       .then((response) => response.json())
       .then((data) => {
         setProductos(data);

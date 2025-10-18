@@ -23,37 +23,35 @@ import swaggerSpec from "./config/swagger.js";
 
 const app = express();
 app.use(express.json());
-app.use(
-    cors({
-        origin: process.env.ALLOWED_ORIGINS
-            ? process.env.ALLOWED_ORIGINS.split(",").map((o) => o.trim())
-            : true,
-    })
-);
+app.use(cors());
 
 // Configuración de Swagger UI
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerSpec, {
     explorer: true,
     customSiteTitle: "API Docs - TiendaSol Grupo 09",
     swaggerOptions: {
-        persistAuthorization: true,
-    }
-}));
+      persistAuthorization: true,
+    },
+  })
+);
 
 // health check
 app.get("/health-check", (req, res) => {
-    res.json({
-        message: "hello world",
-        timestamp: new Date().toISOString(),
-        status: "healthy",
-        documentation: "/api-docs"
-    });
+  res.json({
+    message: "hello world",
+    timestamp: new Date().toISOString(),
+    status: "healthy",
+    documentation: "/api-docs",
+  });
 });
 
 // Ruta para obtener el JSON de Swagger
-app.get('/api-docs-json', (req, res) => {
-    res.setHeader('Content-Type', 'application/json');
-    res.send(swaggerSpec);
+app.get("/api-docs-json", (req, res) => {
+  res.setHeader("Content-Type", "application/json");
+  res.send(swaggerSpec);
 });
 
 const PORT = Number(process.env.SERVER_PORT) || 8000;
@@ -75,9 +73,9 @@ server.setController(ProductoController, productoController);
 // Pedidos
 const pedidoRepo = new PedidoRepository();
 const pedidoService = new PedidoService(
-    pedidoRepo,
-    productoService,
-    notificacionService
+  pedidoRepo,
+  productoService,
+  notificacionService
 );
 const pedidoController = new PedidoController(pedidoService);
 
@@ -85,7 +83,11 @@ server.setController(PedidoController, pedidoController);
 
 // usuario
 const usuarioRepo = new UsuarioRepository();
-const usuarioService = new UsuarioService(usuarioRepo, pedidoService, notificacionService);
+const usuarioService = new UsuarioService(
+  usuarioRepo,
+  pedidoService,
+  notificacionService
+);
 const usuarioController = new UsuarioController(usuarioService);
 
 server.setController(UsuarioController, usuarioController);
@@ -95,16 +97,18 @@ server.configureRoutes();
 server.configureErrorHandling();
 
 const startServer = async () => {
-    try {
-        await connectDB();
-        server.launch(() => {
-            console.log(`🚀 Servidor ejecutándose en puerto ${PORT}`);
-            console.log(`📚 Documentación Swagger disponible en: http://localhost:${PORT}/api-docs`);
-            console.log(`❤️  Health check en: http://localhost:${PORT}/health-check`);
-        });
-    } catch (error) {
-        console.error("Error al iniciar servidor:", error);
-    }
+  try {
+    await connectDB();
+    server.launch(() => {
+      console.log(`🚀 Servidor ejecutándose en puerto ${PORT}`);
+      console.log(
+        `📚 Documentación Swagger disponible en: http://localhost:${PORT}/api-docs`
+      );
+      console.log(`❤️  Health check en: http://localhost:${PORT}/health-check`);
+    });
+  } catch (error) {
+    console.error("Error al iniciar servidor:", error);
+  }
 };
 
 startServer();

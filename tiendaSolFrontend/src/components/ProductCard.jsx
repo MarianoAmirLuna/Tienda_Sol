@@ -1,9 +1,5 @@
 export default function ProductCard({ product }) {
   // Usar la primera foto del array de fotos
-  const imagenPrincipal =
-    product.fotos && product.fotos.length > 0
-      ? product.fotos[0]
-      : "https://via.placeholder.com/300x300?text=Sin+Imagen";
 
   return (
     <a
@@ -12,7 +8,7 @@ export default function ProductCard({ product }) {
     >
       <div className="relative w-full h-56 overflow-hidden rounded-t-2xl">
         <img
-          src={imagenPrincipal}
+          src={product.fotos[0]}
           alt={product.nombre}
           className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
         />

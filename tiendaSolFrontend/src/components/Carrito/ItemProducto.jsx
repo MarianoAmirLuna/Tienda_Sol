@@ -15,13 +15,12 @@ export default function ItemProducto({
                  bg-neutral-200 dark:bg-neutral-800 
                  transition-colors duration-300"
     >
-
       <div className="flex items-center gap-4 flex-grow min-w-[200px]">
         <div className="w-5 h-5 border-2 border-neutral-400 dark:border-neutral-500 rounded-full flex-shrink-0"></div>
 
         <div className="bg-neutral-100 dark:bg-neutral-700 p-1 rounded-lg flex-shrink-0">
           <img
-            src={producto.imagen || "https://via.placeholder.com/100"}
+            src={producto.fotos[0] || "https://via.placeholder.com/100"}
             alt={producto.nombre}
             className="w-20 h-20 object-cover rounded-md"
           />
@@ -56,7 +55,9 @@ export default function ItemProducto({
                      transition-colors duration-300 flex-shrink-0"
         >
           <button
-            onClick={() => onActualizarCantidad(producto.id, producto.cantidad - 1)}
+            onClick={() =>
+              onActualizarCantidad(producto.id, producto.cantidad - 1)
+            }
             className="p-1 rounded hover:bg-neutral-200 dark:hover:bg-neutral-600 
                        text-neutral-600 dark:text-neutral-300
                        disabled:opacity-30"
@@ -70,7 +71,9 @@ export default function ItemProducto({
           </span>
 
           <button
-            onClick={() => onActualizarCantidad(producto.id, producto.cantidad + 1)}
+            onClick={() =>
+              onActualizarCantidad(producto.id, producto.cantidad + 1)
+            }
             className="p-1 rounded hover:bg-neutral-200 dark:hover:bg-neutral-600 
                        text-neutral-600 dark:text-neutral-300"
           >
