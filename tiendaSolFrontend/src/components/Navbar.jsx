@@ -14,7 +14,7 @@ export default function Navbar({ darkMode, setDarkMode }) {
 
   const user = {
     name: "Gianlucca Bolocco",
-    notifications: 3,
+    id: 1
   };
 
   return (
@@ -71,12 +71,7 @@ export default function Navbar({ darkMode, setDarkMode }) {
                 </div>
 
                 <button className="w-full text-left px-4 py-2 flex items-center justify-between text-sm hover:bg-neutral-700/50 transition">
-                  <span className="text-neutral-100">Notificaciones</span>
-                  {user.notifications > 0 && (
-                    <span className="text-xs bg-neutral-400 text-neutral-900 rounded-full px-2 py-0.5">
-                      {user.notifications}
-                    </span>
-                  )}
+                  <a href='/notificaciones' className="text-neutral-100">Notificaciones</a>
                 </button>
 
                 <button className="w-full text-left px-4 py-2 text-sm hover:bg-neutral-700/50 transition text-red-400">

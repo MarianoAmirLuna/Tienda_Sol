@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import ProductDetail from "./pages/ProductDetail";
 import Footer from "./components/Footer";
 import Cart from "./pages/Cart";
+import NotificationPage from "./pages/NotificationPage";
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/productos/:idProducto" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/notificaciones" element={<NotificationPage />} />
       </Routes>
 
       <Footer />
