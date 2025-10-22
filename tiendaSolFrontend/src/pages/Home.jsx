@@ -1,5 +1,5 @@
 import ProductList from "../components/ProductList";
-import Filtros from "../components/filtros";
+import Filtros from "../components/Filtros";
 import { useEffect, useState } from "react";
 
 function Home() {
@@ -45,11 +45,14 @@ function Home() {
     console.log("url enviada: " + url);
 
     fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        setProductos(data);
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Error HTTP: ${response.status}`);
+        }
+        return response.json();
       })
-      .catch((error) => console.error("Error:", error));
+      .then((data) => setProductos(data))
+      .catch((error) => console.error("Error en fetch:", error));
   };
 
   // Cargar productos iniciales

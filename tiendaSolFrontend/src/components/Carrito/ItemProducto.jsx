@@ -20,7 +20,7 @@ export default function ItemProducto({
 
         <div className="bg-neutral-100 dark:bg-neutral-700 p-1 rounded-lg flex-shrink-0">
           <img
-            src={producto.fotos[0] || "https://via.placeholder.com/100"}
+            src={producto.fotos?.[0] || "https://via.placeholder.com/100"}
             alt={producto.nombre}
             className="w-20 h-20 object-cover rounded-md"
           />
