@@ -7,9 +7,9 @@ function Home() {
 
   return (
     <>
-
+      <div className="text-center text-2xl py-10">Bienvenidos a Tienda Sol</div>
       <CarruselAutomatico intervalo={5000} />
-      <ProductListPage />
+      <ProductListPage sellerId={null} />
     </>
   );
 }

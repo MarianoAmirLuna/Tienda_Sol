@@ -30,7 +30,7 @@ export default function DetalleProducto() {
     agregarAlCarrito({ ...producto, cantidad });
   };
 
-  // 👇 Obtener la imagen de forma SEGURA
+
   const imagenSegura =
     producto.fotos && producto.fotos.length > 0
       ? producto.fotos[0]
@@ -39,16 +39,14 @@ export default function DetalleProducto() {
   return (
     <div className="min-h-screen bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-white px-6 py-12 transition-colors duration-300">
       <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8 bg-white dark:bg-neutral-800 rounded-3xl shadow-xl overflow-hidden transition-colors duration-300">
-        {/* Imagen del producto - USAR imagenSegura 👇 */}
         <div className="bg-neutral-100 dark:bg-neutral-700 flex items-center justify-center p-8">
           <img
             src={imagenSegura}
             alt={producto.nombre}
-            className="w-full max-w-md object-contain transition-transform duration-500 hover:scale-105"
+            className="w-full max-w-md object-contain duration-500"
           />
         </div>
 
-        {/* El resto del código igual */}
         <div className="p-10 flex flex-col justify-between space-y-8">
           <div>
             <h1 className="text-4xl font-bold mb-4">{producto.nombre}</h1>
@@ -62,16 +60,26 @@ export default function DetalleProducto() {
             </p>
 
             <p
-              className={`mt-1 text-sm ${
-                producto.stock > 0
-                  ? "text-neutral-500 dark:text-neutral-400"
-                  : "text-red-500 dark:text-red-400"
-              }`}
-            >
-              {producto.stock > 0
-                ? `Stock disponible: ${producto.stock}`
-                : "Sin stock disponible"}
+              className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
+              Stock disponible: {producto.stock}
             </p>
+
+            <p>
+              Vendido por <a className="text-blue-500 hover:underline" href={`/${producto.vendedor._id}/productos`}>{producto.vendedor.nombre}</a>
+            </p>
+
+            {
+              producto.categorias && producto.categorias.length > 0 && (
+                <div className="mt-4">
+                  <h2 className="font-semibold">Categorías:</h2>
+                  <ul className="list-disc list-inside">
+                    {producto.categorias.map((categoria, index) => (
+                      <li key={index}>{categoria}</li>
+                    ))}
+                  </ul>
+                </div>
+              )
+            }
           </div>
 
           <div className="flex flex-col md:flex-row items-center md:items-start md:space-x-4 space-y-4 md:space-y-0">
@@ -106,6 +114,7 @@ export default function DetalleProducto() {
               <span>Agregar al carrito</span>
             </button>
           </div>
+          
         </div>
       </div>
     </div>

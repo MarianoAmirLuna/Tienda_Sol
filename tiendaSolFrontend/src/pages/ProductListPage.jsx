@@ -11,49 +11,54 @@ const FILTROS_INICIALES = {
   orden: "",
 };
 
-const construirQueryParams = (filtros) => {
-  const params = new URLSearchParams();
+const construirQueryParams = (filtros, sellerId) => {
+    const params = new URLSearchParams();
 
-  if (filtros.terminoBusqueda) {
-    params.append("keyWord", filtros.terminoBusqueda);
-  }
-  if (filtros.categoria) {
-    params.append("category", filtros.categoria);
-  }
-  if (filtros.precioMin && !isNaN(Number(filtros.precioMin))) {
-    params.append("minPrice", filtros.precioMin);
-  }
-  if (filtros.precioMax && !isNaN(Number(filtros.precioMax))) {
-    params.append("maxPrice", filtros.precioMax);
-  }
-  if (filtros.orden) {
-    params.append("sortOrder", filtros.orden);
-  }
+    if (sellerId) {
+        params.append("sellerId", sellerId);
+    }
+    if (filtros.terminoBusqueda) {
+        params.append("keyWord", filtros.terminoBusqueda);
+    }
+    if (filtros.categoria) {
+        params.append("category", filtros.categoria);
+    }
+    if (filtros.precioMin && !isNaN(Number(filtros.precioMin))) {
+        params.append("minPrice", filtros.precioMin);
+    }
+    if (filtros.precioMax && !isNaN(Number(filtros.precioMax))) {
+        params.append("maxPrice", filtros.precioMax);
+    }
+    if (filtros.orden) {
+        params.append("sortOrder", filtros.orden);
+    }
 
-  return params.toString();
+    return params.toString();
 };
 
-function ProductListPage() {
-  const [productos, setProductos] = useState([]);
-  const [filtros, setFiltros] = useState(FILTROS_INICIALES);
+function ProductListPage({sellerId}) {
+    const [productos, setProductos] = useState([]);
+    const [filtros, setFiltros] = useState(FILTROS_INICIALES);
 
-  const buscarProductos = (filtrosAplicados = filtros) => {
-    const queryParams = construirQueryParams(filtrosAplicados);
-    const url = queryParams
-      ? `${import.meta.env.VITE_API_URL_INICIAL}/productos?${queryParams}`
-      : `${import.meta.env.VITE_API_URL_INICIAL}/productos`;
+    const buscarProductos = (filtrosAplicados = filtros) => {
+        const queryParams = construirQueryParams(filtrosAplicados, sellerId);
 
-    console.log("url enviada: " + url);
+        
+        const url = queryParams
+        ? `${import.meta.env.VITE_API_URL_INICIAL}/productos?${queryParams}`
+        : `${import.meta.env.VITE_API_URL_INICIAL}/productos`;
 
-    fetch(url)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Error HTTP: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => setProductos(data))
-      .catch((error) => console.error("Error en fetch:", error));
+        console.log("url enviada: " + url);
+
+        fetch(url)
+        .then((response) => {
+            if (!response.ok) {
+            throw new Error(`Error HTTP: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then((data) => setProductos(data))
+        .catch((error) => console.error("Error en fetch:", error));
   };
 
   useEffect(() => {
@@ -70,7 +75,7 @@ function ProductListPage() {
 
   return (
     <>
-      <div className="text-center text-2xl py-10">Bienvenido a Tienda Sol</div>
+      <div className="text-left text-2xl py-10 pl-10">Productos:</div>
 
       <Filtros
         filtros={filtros}

@@ -8,6 +8,7 @@ import Cart from "./pages/Cart";
 import NotificationPage from "./pages/NotificationPage";
 import CreateProductPage from "./pages/CreateProductPage";
 import Login from "./pages/Login";
+import SellerPage from "./pages/SellerPage";
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -24,6 +25,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/productos/:idProducto" element={<ProductDetail />} />
+        <Route path="/:sellerId/productos" element={<SellerPage />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/notificaciones" element={<NotificationPage />} />
         <Route path="/nuevo-producto" element={<CreateProductPage />} />
