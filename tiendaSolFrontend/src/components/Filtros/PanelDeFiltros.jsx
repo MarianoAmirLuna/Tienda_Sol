@@ -30,7 +30,6 @@ export default function PanelDeFiltros({ filtros, manejarCambio, manejarBuscar }
       </h3>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 mb-6">
-        {/* Búsqueda por término */}
         <div className="lg:col-span-2">
           <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
             Buscar producto
@@ -49,7 +48,6 @@ export default function PanelDeFiltros({ filtros, manejarCambio, manejarBuscar }
           </div>
         </div>
 
-        {/* Filtro por categoría */}
         <div>
           <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
             Categoría
@@ -67,7 +65,6 @@ export default function PanelDeFiltros({ filtros, manejarCambio, manejarBuscar }
           </select>
         </div>
 
-        {/* Filtro por precio mínimo */}
         <div>
           <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
             Precio mínimo
@@ -87,7 +84,6 @@ export default function PanelDeFiltros({ filtros, manejarCambio, manejarBuscar }
           </div>
         </div>
 
-        {/* Filtro por precio máximo */}
         <div>
           <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
             Precio máximo
@@ -107,7 +103,7 @@ export default function PanelDeFiltros({ filtros, manejarCambio, manejarBuscar }
           </div>
         </div>
 
-        {/* Sort Order */}
+
         <div>
           <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
             Ordenar por
@@ -128,7 +124,6 @@ export default function PanelDeFiltros({ filtros, manejarCambio, manejarBuscar }
           </div>
         </div>
 
-        {/* Botón Buscar */}
         <div className="flex items-end">
           <button
             onClick={manejarBuscar}

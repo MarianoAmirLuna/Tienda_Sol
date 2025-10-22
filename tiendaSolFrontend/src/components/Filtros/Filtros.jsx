@@ -2,6 +2,7 @@ import { useState } from "react";
 import BotonToggleFiltros from "./BotonToggleFiltros";
 import PanelDeFiltros from "./PanelDeFiltros";
 
+
 export default function Filtros({ filtros, onCambioFiltros, onBuscar }) {
   const [mostrarFiltros, setMostrarFiltros] = useState(false);
 
