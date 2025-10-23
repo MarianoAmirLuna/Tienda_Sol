@@ -36,6 +36,13 @@ export default function UserMenu() {
           </Link>
 
           <Link
+            to={`/${usuario?._id}/productos`}
+            className="w-full text-left px-4 py-2 flex items-center justify-between text-sm hover:bg-neutral-700/50 transition text-neutral-100"
+          >
+            Mi tienda
+          </Link>
+
+          <Link
             onClick={handleLogout}
             className="w-full text-left px-4 py-2 flex items-center justify-between text-sm hover:bg-neutral-700/50 transition text-red-400"
           >
