@@ -7,13 +7,13 @@ export function FotosInput({ fotos = [], setFotos }) {
   const handleAdd = () => {
     const nuevaFoto = fotoInput.trim();
     if (nuevaFoto !== "") {
-      setFotos([...fotos, nuevaFoto]); // 👈 directo, sin función
+      setFotos([...fotos, nuevaFoto]); 
       setFotoInput("");
     }
   };
 
   const handleRemove = (url) => {
-    setFotos(fotos.filter((f) => f !== url)); // 👈 directo también
+    setFotos(fotos.filter((f) => f !== url));
   };
 
   const inputClass =
