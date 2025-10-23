@@ -6,7 +6,7 @@ import ProductDetail from "./pages/ProductDetail";
 import Footer from "./components/Footer";
 import Cart from "./pages/Cart";
 import NotificationPage from "./pages/NotificationPage";
-import CreateProduct from "./components/SellerPanel/CreateProduct";
+import CreateProduct from "./components/SellerPanel/CreateProductForm/CreateProduct";
 import Login from "./pages/Login";
 import SellerProductPage from "./pages/SellerProductPage";
 import SellerPanelPage from "./pages/SellerPanelPage";

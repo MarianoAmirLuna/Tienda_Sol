@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SalesTable from "../components/SellerPanel/SalesTable";
-import CreateProduct from "../components/SellerPanel/CreateProduct";
+import CreateProduct from "../components/SellerPanel/CreateProductForm/CreateProduct";
 import { useUser } from "../context/UserContext";
 
 export default function SellerPanelPage() {
