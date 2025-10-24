@@ -9,7 +9,7 @@ export default function Footer() {
 
           <div className="col-span-2 md:col-span-1">
             <div className="mb-4">
-              <h3 className="text-xl font-bold tracking-wider text-blue-600 dark:text-blue-400">
+              <h3 className="text-xl font-bold tracking-wider text-indigo-600 dark:text-indigo-400">
                 Tienda Sol
               </h3>
               <p className="text-sm text-neutral-600 dark:text-neutral-300 mt-1">
@@ -25,20 +25,20 @@ export default function Footer() {
 
                 <div
                   aria-label="Facebook"
-                  className="cursor-default text-neutral-500 dark:text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                  className="cursor-default text-neutral-500 dark:text-neutral-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
                 >
                   <Facebook className="w-6 h-6" /> 
                 </div>
                 <div
                   aria-label="Instagram"
-                  className="cursor-default text-neutral-500 dark:text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                  className="cursor-default text-neutral-500 dark:text-neutral-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
                 >
                   <Instagram className="w-6 h-6" />
                 </div>
 
                 <div
                   aria-label="X (Twitter)"
-                  className="cursor-default text-neutral-500 dark:text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                  className="cursor-default text-neutral-500 dark:text-neutral-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
                 >
                   <X className="w-6 h-6" /> 
                 </div>
@@ -95,17 +95,17 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
               <li className="flex items-center">
 
-                <MapPin className="w-4 h-4 mr-3 text-blue-500 dark:text-blue-400 flex-shrink-0" />
+                <MapPin className="w-4 h-4 mr-3 text-indigo-500 dark:text-indigo-400 flex-shrink-0" />
                 Av. Principal 123, CABA
               </li>
               <li className="flex items-center">
 
-                <Mail className="w-4 h-4 mr-3 text-blue-500 dark:text-blue-400 flex-shrink-0" />
+                <Mail className="w-4 h-4 mr-3 text-indigo-500 dark:text-indigo-400 flex-shrink-0" />
                 contacto@tiendasol.com
               </li>
               <li className="flex items-center">
 
-                <Phone className="w-4 h-4 mr-3 text-blue-500 dark:text-blue-400 flex-shrink-0" />
+                <Phone className="w-4 h-4 mr-3 text-indigo-500 dark:text-indigo-400 flex-shrink-0" />
                 +54 11 5555-5555
               </li>
             </ul>

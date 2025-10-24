@@ -18,7 +18,7 @@ export default function ProductDetailInfo({producto}) {
                 Vendido por{" "}
                 <Link 
                 to={`/${producto.vendedor._id}/productos`} 
-                className="text-blue-500 hover:underline"
+                className="text-indigo-500 hover:underline"
                 >
                 {producto.vendedor.nombre}
                 </Link>

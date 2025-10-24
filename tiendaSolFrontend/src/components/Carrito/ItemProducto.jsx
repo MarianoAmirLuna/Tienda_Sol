@@ -1,12 +1,11 @@
 import React from "react";
 import { Plus, Minus, X } from "lucide-react";
+import { useCart } from "../../context/CartContext"
 
-export default function ItemProducto({
-  producto,
-  onEliminar,
-  onActualizarCantidad,
-}) {
+export default function ItemProducto({producto}) {
+
   const subtotalItem = producto.precio * producto.cantidad;
+  const { eliminarDelCarrito, actualizarCantidad } = useCart(); 
   const stockDisponible = producto.stock || 0;
 
   return (
@@ -31,10 +30,10 @@ export default function ItemProducto({
             {producto.nombre}
           </p>
           <p className="text-xs text-neutral-500 dark:text-neutral-400">
-            ${producto.precio} / unidad
+            ${producto.precio} / u.
           </p>
           <button
-            onClick={() => onEliminar(producto.id)}
+            onClick={() => eliminarDelCarrito(producto.id)}
             className="text-red-600 hover:text-red-500 text-sm font-medium mt-1 transition flex items-center"
           >
             Remover
@@ -52,7 +51,7 @@ export default function ItemProducto({
                      text-neutral-900 dark:text-white flex-shrink-0"
         >
           <button
-            onClick={() => onActualizarCantidad(producto.id, producto.cantidad - 1)}
+            onClick={() => actualizarCantidad(producto.id, producto.cantidad - 1)}
             className="p-2 rounded-l-xl hover:bg-neutral-200 dark:hover:bg-neutral-600 
                        text-indigo-600 dark:text-indigo-400 disabled:opacity-30 disabled:cursor-not-allowed"
             disabled={producto.cantidad <= 1}
@@ -64,7 +63,7 @@ export default function ItemProducto({
           </span>
 
           <button
-            onClick={() => onActualizarCantidad(producto.id, producto.cantidad + 1)}
+            onClick={() => actualizarCantidad(producto.id, producto.cantidad + 1)}
             className="p-2 rounded-r-xl hover:bg-neutral-200 dark:hover:bg-neutral-600 
                        text-indigo-600 dark:text-indigo-400 disabled:opacity-30 disabled:cursor-not-allowed"
             disabled={producto.cantidad >= stockDisponible} 

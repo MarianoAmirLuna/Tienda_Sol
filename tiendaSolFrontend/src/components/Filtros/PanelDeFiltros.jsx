@@ -42,7 +42,7 @@ export default function PanelDeFiltros({ filtros, manejarCambio, manejarBuscar }
               onChange={(e) =>
                 manejarCambio("terminoBusqueda", e.target.value)
               }
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors"
             />
           </div>
         </div>
@@ -54,7 +54,7 @@ export default function PanelDeFiltros({ filtros, manejarCambio, manejarBuscar }
           <select
             value={filtros.categoria || ""}
             onChange={(e) => manejarCambio("categoria", e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+            className="w-full px-4 py-3 border border-gray-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors"
           >
             {CATEGORIAS.map(opt => (
               <option key={opt.value} value={opt.value}>
@@ -78,7 +78,7 @@ export default function PanelDeFiltros({ filtros, manejarCambio, manejarBuscar }
               value={filtros.precioMin || ""}
               onChange={(e) => manejarCambioNumerico("precioMin", e.target.value)}
               min="0"
-              className="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+              className="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors"
             />
           </div>
         </div>
@@ -97,7 +97,7 @@ export default function PanelDeFiltros({ filtros, manejarCambio, manejarBuscar }
               value={filtros.precioMax || ""}
               onChange={(e) => manejarCambioNumerico("precioMax", e.target.value)}
               min="0"
-              className="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+              className="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors"
             />
           </div>
         </div>
@@ -112,7 +112,7 @@ export default function PanelDeFiltros({ filtros, manejarCambio, manejarBuscar }
             <select
               value={filtros.orden || ""}
               onChange={(e) => manejarCambio("orden", e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors appearance-none"
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors appearance-none"
             >
               {ORDENES.map(opt => (
                 <option key={opt.value} value={opt.value}>
@@ -126,9 +126,8 @@ export default function PanelDeFiltros({ filtros, manejarCambio, manejarBuscar }
         <div className="flex items-end">
           <button
             onClick={manejarBuscar}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-lg font-medium transition-colors flex items-center justify-center space-x-2"
+            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-3 rounded-lg font-medium transition-colors flex items-center justify-center space-x-2"
           >
-            <Search className="w-4 h-4" />
             <span>Buscar</span>
           </button>
         </div>

@@ -52,9 +52,9 @@ export default function ProductDetailCarrousel({ producto }) {
             onClick={() => setImagenIndex(idx)}
             className={`flex-shrink-0 border-2 rounded-xl transition-all duration-300 ${
                 idx === imagenIndex
-                ? "border-blue-600 dark:border-green-400"
+                ? "border-indigo-600 dark:border-green-400"
                 : "border-transparent"
-            } hover:shadow-lg hover:shadow-blue-500/30 dark:hover:shadow-green-400/30`}
+            } hover:shadow-lg hover:shadow-indigo-500/30 dark:hover:shadow-green-400/30`}
             >
             <img
                 src={foto}

@@ -80,7 +80,7 @@ export default function CreateProduct({ sellerId }) {
             <InputText label={<><Package className="inline w-4 h-4 mr-1 mb-1 text-orange-500" /> Stock</>} type="number" name="stock" value={form.stock} onChange={handleChange} placeholder="0" required />
           </div>
 
-          <CheckBoxGroup label={<><Tag className="inline w-4 h-4 mr-1 mb-1 text-blue-500" /> Categorías</>} options={CATEGORIAS} selected={form.categorias} onChange={handleChange} />
+          <CheckBoxGroup label={<><Tag className="inline w-4 h-4 mr-1 mb-1 text-indigo-500" /> Categorías</>} options={CATEGORIAS} selected={form.categorias} onChange={handleChange} />
           <FotosInput fotos={form.fotos} setFotos={(nuevasFotos) => setForm((prev) => ({ ...prev, fotos: nuevasFotos }))} />
 
           <button type="submit" disabled={loading} className={`w-full py-3 text-white rounded-xl font-bold text-lg mt-6 transition ${loading ? "bg-gray-400 cursor-not-allowed" : "bg-green-600 hover:bg-green-500"}`}>

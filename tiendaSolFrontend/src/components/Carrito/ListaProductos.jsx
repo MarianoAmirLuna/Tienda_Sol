@@ -1,12 +1,9 @@
 import React from "react";
 import ItemProducto from "./ItemProducto";
-import { useCart } from "../../context/CartContext.jsx"; 
 
 export default function ListaProductos({ carrito }) {
 
-  const { eliminarDelCarrito, actualizarCantidad } = useCart(); 
-
-  const hayProductos = carrito && carrito.length > 0;
+  
 
   return (
     <div className="rounded-xl p-4 sm:p-6  transition-colors duration-300 min-h-[250px]" >
@@ -17,8 +14,6 @@ export default function ListaProductos({ carrito }) {
           {carrito.map((producto) => (
             <ItemProducto
               producto={producto}
-              onEliminar={eliminarDelCarrito}
-              onActualizarCantidad={actualizarCantidad}
             />
           ))}
         </div>

@@ -91,9 +91,49 @@ export const CartProvider = ({ children }) => {
   }, [carrito]);
 
 
-  const crearPedido = () => {
-    console.log("holaaa")
-  }
+  const crearPedido = async (direccion, compradorId, vendedorId) => {
+    try {
+    const itemsPedido = carrito
+      .filter((p) => p.vendedorId === vendedorId)
+      .map((p) => ({
+        productoID: p.id,
+        cantidad: p.cantidad,
+      }));
+
+    const pedido = {
+      compradorID: compradorId,
+      itemsPedido,
+      direccionEntrega: direccion,
+    };
+
+    console.log("🧾 Pedido a enviar:", pedido);
+
+    const response = await fetch(`${import.meta.env.VITE_API_URL_INICIAL}/pedidos`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(pedido),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error en la creación del pedido: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    console.log("✅ Pedido creado:", data);
+
+    // Eliminar los productos del carrito que corresponden al vendedor
+    setCarrito((prev) => prev.filter((p) => p.vendedorId !== vendedorId));
+
+    return data;
+    } catch (error) {
+    console.error("❌ Error al generar pedido:", error);
+    throw error;
+    }
+  };
+
+
 
   return (
     <CartContext.Provider

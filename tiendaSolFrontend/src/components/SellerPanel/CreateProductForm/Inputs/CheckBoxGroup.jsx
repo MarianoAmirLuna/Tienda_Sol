@@ -13,7 +13,7 @@ export function CheckBoxGroup({ label, options, selected, onChange }) {
               value={opt}
               checked={selected.includes(opt)}
               onChange={onChange}
-              className="w-4 h-4 accent-blue-600"
+              className="w-4 h-4 accent-indigo-600"
             />
             <span className="text-neutral-900 dark:text-neutral-100">{opt}</span>
           </label>

@@ -1,26 +1,72 @@
-import React from "react";
+import React, { useState } from "react";
 import { useCart } from "../../context/CartContext";
+import DireccionForm from "./DireccionForm";
+import { Truck, DollarSign, ChevronDown, CheckCircle } from 'lucide-react'; // Iconos
 
-export default function ResumenCompra({vendedorId, subtotal }) {
-
+export default function ResumenCompra({ compradorId, subtotal, vendedorId, direccionUsuario }) {
   const { crearPedido } = useCart();
+  const [isOpen, setIsOpen] = useState(false);
+  const [direccionSeleccionada, setDireccionSeleccionada] = useState(direccionUsuario || null);
+  const [direccionValida, setDireccionValida] = useState(!!direccionUsuario);
+
+  const handleDireccionChange = (dir, esValida) => {
+    setDireccionSeleccionada(dir);
+    setDireccionValida(esValida);
+  };
+
+  const handleGenerarPedido = () => {
+    crearPedido(direccionSeleccionada, compradorId, vendedorId);
+  };
 
   return (
-    <div className="p-6 bg-neutral-100 dark:bg-neutral-900 rounded-xl border border-neutral-300 dark:border-neutral-700 shadow-md">
-      <h3 className="text-lg font-bold text-neutral-900 dark:text-white mb-4">
-        Resumen del pedido
+    <div className="p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700">
+      <h3 className="flex items-center text-xl font-extrabold text-gray-900 dark:text-white mb-6 border-b pb-2 border-gray-200 dark:border-gray-700">
+        <DollarSign className="w-5 h-5 mr-2 text-indigo-600 dark:text-indigo-400" />
+        Resumen de la Orden
       </h3>
 
-      <div className="flex justify-between text-neutral-700 dark:text-neutral-300 mb-3">
-        <span>Subtotal:</span>
-        <span>${subtotal}</span>
+      <div className="flex justify-between items-center text-lg font-medium text-gray-700 dark:text-gray-300 mb-6">
+        <span>Subtotal de productos:</span>
+        <span className="font-bold text-gray-900 dark:text-white">${subtotal}</span>
       </div>
 
+      <hr className="mb-6 border-gray-200 dark:border-gray-700" />
+
       <button
-        onClick={() => crearPedido(vendedorId)}
-        className="w-full mt-4 py-2 px-4 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-lg transition"
+        onClick={() => setIsOpen(prev => !prev)}
+        className="w-full mb-4 flex items-center justify-center py-3 px-4 bg-indigo-50 dark:bg-gray-700 text-indigo-700 dark:text-white font-semibold rounded-xl transition hover:bg-indigo-100 dark:hover:bg-gray-600 border border-indigo-200 dark:border-gray-600"
       >
-        Pagar y generar pedido
+        <Truck className="w-5 h-5 mr-2" />
+        {direccionValida ? <CheckCircle className="w-4 h-4 mr-2 text-green-500" /> : null}
+        {isOpen ? "Ocultar Detalles de Envío" : "Seleccionar / Modificar Dirección"}
+        <ChevronDown className={`w-4 h-4 ml-2 transition-transform ${isOpen ? 'transform rotate-180' : ''}`} />
+      </button>
+
+      {isOpen && (
+        <div className="mb-6 p-4 border border-indigo-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-900 shadow-inner">
+          <DireccionForm
+            direccionInicial={direccionUsuario}
+            onChange={handleDireccionChange}
+          />
+        </div>
+      )}
+      
+      {!isOpen && direccionSeleccionada && (
+        <div className={`mb-6 p-3 rounded-lg border text-sm ${direccionValida ? 'bg-green-50 border-green-300 text-green-800 dark:bg-green-900 dark:border-green-700 dark:text-green-300' : 'bg-red-50 border-red-300 text-red-800 dark:bg-red-900 dark:border-red-700 dark:text-red-300'}`}>
+          {direccionValida ? 'Dirección de envío válida seleccionada.' : 'Dirección incompleta o inválida. Por favor, revísala.'}
+        </div>
+      )}
+
+      <button
+        onClick={handleGenerarPedido}
+        disabled={!direccionValida}
+        className={`w-full py-3 px-4 text-lg font-bold rounded-xl shadow-lg transition transform active:scale-95 ${
+          direccionValida
+            ? "bg-indigo-600 hover:bg-indigo-700 text-white shadow-indigo-500/50"
+            : "bg-gray-300 text-gray-500 cursor-not-allowed shadow-none"
+        }`}
+      >
+        Pagar y Generar Pedido
       </button>
     </div>
   );

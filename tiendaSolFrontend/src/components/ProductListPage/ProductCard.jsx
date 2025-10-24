@@ -20,7 +20,7 @@ export default function ProductCard({ product }) {
           <h3 className="text-lg font-semibold mb-2 text-neutral-900 dark:text-white">
             {product.nombre}
           </h3>
-          <p className="text-blue-600 dark:text-blue-400 font-bold text-lg">
+          <p className="text-indigo-600 dark:text-indigo-400 font-bold text-lg">
             ${product.precio?.toLocaleString("es-AR") || "0"}
           </p>
         </div>
