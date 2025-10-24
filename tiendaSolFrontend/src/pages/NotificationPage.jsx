@@ -100,7 +100,7 @@ export default function NotificationPage() {
             {noLeidas.map((n) => (
               <li
                 key={n._id}
-                className="p-4 bg-indigo-50 dark:bg-indigo-800 rounded-xl flex justify-between items-start shadow-sm hover:shadow-md transition-shadow duration-300"
+                className="p-4 bg-indigo-50 dark:bg-indigo-800 rounded-xl flex justify-between items-start -sm hover:-md transition- duration-300"
               >
                 <div>
                   <p className="text-gray-800 dark:text-gray-50">{n.mensaje}</p>
@@ -132,7 +132,7 @@ export default function NotificationPage() {
             {leidas.map((n) => (
               <li
                 key={n._id}
-                className="p-4 bg-neutral-100 dark:bg-neutral-700 rounded-xl flex justify-between items-start shadow-sm opacity-80 transition-opacity duration-300"
+                className="p-4 bg-neutral-100 dark:bg-neutral-700 rounded-xl flex justify-between items-start -sm opacity-80 transition-opacity duration-300"
               >
                 <div>
                   <p className="text-gray-700 dark:text-gray-200">{n.mensaje}</p>

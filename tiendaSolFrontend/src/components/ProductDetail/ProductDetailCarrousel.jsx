@@ -17,7 +17,7 @@ export default function ProductDetailCarrousel({ producto }) {
   };
 
   return (
-    <div className="flex flex-col items-center bg-neutral-100 dark:bg-neutral-800 p-6 rounded-3xl shadow-md transition">
+    <div className="flex flex-col items-center bg-neutral-100 dark:bg-neutral-800 p-6 rounded-3xl -md transition">
       <div className="relative w-full flex items-center justify-center">
         <img
           src={fotos[imagenIndex]}
@@ -29,14 +29,14 @@ export default function ProductDetailCarrousel({ producto }) {
           <>
             <button
               onClick={prevImagen}
-              className="absolute left-3 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-700 rounded-full p-2 shadow-md hover:bg-gray-200 dark:hover:bg-gray-600 transition"
+              className="absolute left-3 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-700 rounded-full p-2 -md hover:bg-gray-200 dark:hover:bg-gray-600 transition"
             >
               ‹
             </button>
 
             <button
               onClick={nextImagen}
-              className="absolute right-3 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-700 rounded-full p-2 shadow-md hover:bg-gray-200 dark:hover:bg-gray-600 transition"
+              className="absolute right-3 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-700 rounded-full p-2 -md hover:bg-gray-200 dark:hover:bg-gray-600 transition"
             >
               ›
             </button>
@@ -54,7 +54,7 @@ export default function ProductDetailCarrousel({ producto }) {
                 idx === imagenIndex
                 ? "border-indigo-600 dark:border-green-400"
                 : "border-transparent"
-            } hover:shadow-lg hover:shadow-indigo-500/30 dark:hover:shadow-green-400/30`}
+            } hover:-lg hover:-indigo-500/30 dark:hover:-green-400/30`}
             >
             <img
                 src={foto}

@@ -46,7 +46,7 @@ export default function CarruselAutomatico({ intervalo = 4000 }) {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8 relative">
-      <div className="overflow-hidden rounded-xl shadow-2xl relative">
+      <div className="overflow-hidden rounded-xl -2xl relative">
         <div
           className="flex transition-transform duration-700 ease-in-out"
           style={{ transform: `translateX(-${currentSlide * 100}%)` }}

@@ -19,7 +19,7 @@ function OrderCard({pedido, cancelarPedido}) {
     const estadoColor = estadoConfig[estado]?.color || estadoConfig.PENDIENTE.color;
 
   return (
-    <div key={_id} className="p-6 bg-white dark:bg-neutral-800 rounded-xl shadow-lg border border-neutral-200 dark:border-neutral-700">
+    <div key={_id} className="p-6 bg-white dark:bg-neutral-800 rounded-xl -lg border border-neutral-200 dark:border-neutral-700">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
         <div className="md:col-span-2 space-y-1">
             <p className="text-sm text-indigo-600 dark:text-indigo-400 font-semibold">
@@ -33,7 +33,7 @@ function OrderCard({pedido, cancelarPedido}) {
 
         <div className="md:col-span-1 flex flex-col items-start md:items-center space-y-1">
             <p className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1 uppercase">Estado Actual</p>
-            <span className={`inline-flex items-center px-3 py-1.5 rounded-full text-sm font-bold shadow ${estadoColor}`}>
+            <span className={`inline-flex items-center px-3 py-1.5 rounded-full text-sm font-bold  ${estadoColor}`}>
             <EstadoIcon className="w-4 h-4 mr-1" />
             {estado}
             </span>
@@ -43,7 +43,7 @@ function OrderCard({pedido, cancelarPedido}) {
             {puedeCancelar ? (
             <button
                 onClick={() => cancelarPedido(_id)}
-                className="flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm font-semibold transition-colors shadow-md"
+                className="flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm font-semibold transition-colors -md"
             >
                 <X className="w-4 h-4 mr-1" />
                 Cancelar Pedido

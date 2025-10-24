@@ -25,14 +25,14 @@ export default function ProductTable({ sellerId }) {
 
   if (productos.length === 0)
     return (
-      <div className="text-center p-8 bg-white dark:bg-neutral-800 rounded-3xl shadow-2xl border">
+      <div className="text-center p-8 bg-white dark:bg-neutral-800 rounded-3xl -2xl border">
         <h2 className="text-3xl font-bold mb-2">Gestión de Productos</h2>
         <p className="text-neutral-500">No se encontraron productos.</p>
       </div>
     );
 
   return (
-    <div className="bg-white dark:bg-neutral-800 rounded-3xl shadow-2xl border border-neutral-200 dark:border-neutral-700 overflow-hidden">
+    <div className="bg-white dark:bg-neutral-800 rounded-3xl -2xl border border-neutral-200 dark:border-neutral-700 overflow-hidden">
       <ProductTableHeader total={productos.length} />
 
       <div className="overflow-x-auto">

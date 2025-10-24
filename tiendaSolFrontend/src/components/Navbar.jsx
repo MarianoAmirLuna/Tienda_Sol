@@ -16,7 +16,7 @@ export default function Navbar({ darkMode, setDarkMode }) {
     <nav
       className="w-full z-50 
                  bg-neutral-900/80
-                 border-b border-neutral-800/60 shadow-lg 
+                 border-b border-neutral-800/60 -lg 
                  transition-all duration-300"
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -73,7 +73,7 @@ export default function Navbar({ darkMode, setDarkMode }) {
           >
             <ShoppingCart className="w-6 h-6 text-white" />
             {cantidadTotal > 0 && (
-              <span className="absolute -top-1 -right-1 bg-indigo-500 text-white text-xs px-2 py-[2px] rounded-full shadow-md">
+              <span className="absolute -top-1 -right-1 bg-indigo-500 text-white text-xs px-2 py-[2px] rounded-full -md">
                 {cantidadTotal}
               </span>
             )}

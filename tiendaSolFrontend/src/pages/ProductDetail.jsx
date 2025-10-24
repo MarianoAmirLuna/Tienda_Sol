@@ -79,7 +79,7 @@ export default function DetalleProducto() {
 
   return (
     <div className="from-neutral-50 to-neutral-100 dark:from-neutral-900 dark:to-neutral-800 px-4 sm:px-6 py-12">
-      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 bg-white dark:bg-neutral-900 rounded-3xl shadow-2xl overflow-hidden">
+      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 bg-white dark:bg-neutral-900 rounded-3xl -2xl overflow-hidden">
         <ProductDetailCarrousel producto={producto} />
 
         <div className="p-6 sm:p-8 flex flex-col justify-between space-y-8">

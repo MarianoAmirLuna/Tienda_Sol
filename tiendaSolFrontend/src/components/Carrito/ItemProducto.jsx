@@ -13,7 +13,7 @@ export default function ItemProducto({producto}) {
       className="flex flex-wrap items-center justify-between gap-x-6 gap-y-4 
                  p-4 sm:p-5 rounded-xl 
                  bg-neutral-100 dark:bg-neutral-900 
-                 transition-shadow hover:shadow-md"
+                 transition- hover:-md"
     >
       <div className="flex items-center gap-4 flex-grow min-w-[200px]">
         

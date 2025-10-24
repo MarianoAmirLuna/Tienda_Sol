@@ -28,7 +28,7 @@ export default function ResumenCompra({ compradorId, subtotal, vendedorId, direc
   };
 
   return (
-    <div className="p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700">
+    <div className="p-6 bg-white dark:bg-gray-800 rounded-2xl -xl border border-gray-100 dark:border-gray-700">
       <h3 className="flex items-center text-xl font-extrabold text-gray-900 dark:text-white mb-6 border-b pb-2 border-gray-200 dark:border-gray-700">
         <DollarSign className="w-5 h-5 mr-2 text-indigo-600 dark:text-indigo-400" />
         Resumen de la Orden
@@ -52,7 +52,7 @@ export default function ResumenCompra({ compradorId, subtotal, vendedorId, direc
       </button>
 
       {isOpen && (
-        <div className="mb-6 p-4 border border-indigo-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-900 shadow-inner">
+        <div className="mb-6 p-4 border border-indigo-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-900 -inner">
           <DireccionForm
             direccionInicial={direccionUsuario}
             onChange={handleDireccionChange}
@@ -69,10 +69,10 @@ export default function ResumenCompra({ compradorId, subtotal, vendedorId, direc
       <button
         onClick={handleGenerarPedido}
         disabled={!direccionValida}
-        className={`w-full py-3 px-4 text-lg font-bold rounded-xl shadow-lg transition transform active:scale-95 ${
+        className={`w-full py-3 px-4 text-lg font-bold rounded-xl -lg transition transform active:scale-95 ${
           direccionValida
-            ? "bg-indigo-600 hover:bg-indigo-700 text-white shadow-indigo-500/50"
-            : "bg-gray-300 text-gray-500 cursor-not-allowed shadow-none"
+            ? "bg-indigo-600 hover:bg-indigo-700 text-white -indigo-500/50"
+            : "bg-gray-300 text-gray-500 cursor-not-allowed -none"
         }`}
       >
         Pagar y Generar Pedido

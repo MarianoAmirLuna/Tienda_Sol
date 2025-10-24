@@ -85,7 +85,7 @@ export default function SalesEarningStat({ sellerId }) {
 
   if (isLoading) {
     return (
-      <div className="p-6 bg-white dark:bg-neutral-800 rounded-xl shadow-2xl border border-gray-200 dark:border-neutral-700 h-[450px] flex items-center justify-center">
+      <div className="p-6 bg-white dark:bg-neutral-800 rounded-xl -2xl border border-gray-200 dark:border-neutral-700 h-[450px] flex items-center justify-center">
         <p className="text-lg text-gray-500 dark:text-gray-400">Cargando estadísticas...</p>
       </div>
     );
@@ -93,7 +93,7 @@ export default function SalesEarningStat({ sellerId }) {
 
   if (error || pedidosCompletados.length === 0) {
     return (
-      <div className="p-6 bg-white dark:bg-neutral-800 rounded-xl shadow-2xl border border-gray-200 dark:border-neutral-700 h-[450px] flex items-center justify-center">
+      <div className="p-6 bg-white dark:bg-neutral-800 rounded-xl -2xl border border-gray-200 dark:border-neutral-700 h-[450px] flex items-center justify-center">
         <p className="text-lg text-gray-500 dark:text-gray-400">
           {error || "No hay pedidos completados para mostrar estadísticas."}
         </p>
@@ -102,7 +102,7 @@ export default function SalesEarningStat({ sellerId }) {
   }
 
   return (
-    <div className="p-6 bg-white dark:bg-neutral-800 rounded-xl shadow-2xl border border-gray-200 dark:border-neutral-700">
+    <div className="p-6 bg-white dark:bg-neutral-800 rounded-xl -2xl border border-gray-200 dark:border-neutral-700">
       <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-50 text-center">
         Estadísticas de Ventas y Ganancias
       </h2>

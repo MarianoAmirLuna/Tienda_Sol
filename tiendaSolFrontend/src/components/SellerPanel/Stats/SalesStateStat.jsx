@@ -24,7 +24,7 @@ export default function SalesStateStat({ sellerId }) {
   );
 
   return (
-    <div className="p-6 bg-white dark:bg-neutral-800 rounded-xl shadow-2xl border border-gray-200 dark:border-neutral-700">
+    <div className="p-6 bg-white dark:bg-neutral-800 rounded-xl -2xl border border-gray-200 dark:border-neutral-700">
       <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-50 text-center">
         Distribución de Pedidos
       </h2>

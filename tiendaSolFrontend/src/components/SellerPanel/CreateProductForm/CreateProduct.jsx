@@ -67,7 +67,7 @@ export default function CreateProduct({ sellerId }) {
 
   return (
     <div className="bg-neutral-50 dark:bg-neutral-900">
-      <div className="max-w-3xl mx-auto bg-white dark:bg-neutral-800 p-6 sm:p-10 rounded-3xl shadow-2xl">
+      <div className="max-w-3xl mx-auto bg-white dark:bg-neutral-800 p-6 sm:p-10 rounded-3xl border border-gray-200  -2xl">
         <h1 className="text-3xl sm:text-4xl font-extrabold mb-8 text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-700 pb-4">Crear Nuevo Producto</h1>
         <FormMessage mensaje={mensaje} />
 

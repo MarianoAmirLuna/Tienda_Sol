@@ -14,7 +14,7 @@ export default function SalesPanel({ sellerId }) {
 
   return (
     <div className="dark:bg-neutral-900">
-      <div className="mx-auto bg-white dark:bg-neutral-800 rounded-3xl shadow-2xl overflow-hidden border border-neutral-200 dark:border-neutral-700">
+      <div className="mx-auto bg-white dark:bg-neutral-800 rounded-3xl -2xl overflow-hidden border border-neutral-200 dark:border-neutral-700">
         <header className="flex items-center justify-between p-8 border-b border-neutral-200 dark:border-neutral-700">
           <h1 className="text-3xl font-extrabold text-neutral-900 dark:text-neutral-100">Panel de Ventas</h1>
           <p className="text-neutral-500 dark:text-neutral-400 text-sm">{pedidos.length} pedidos totales</p>

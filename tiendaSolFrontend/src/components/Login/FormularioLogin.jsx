@@ -13,7 +13,7 @@ export default function FormularioLogin({ onSubmit, error }) {
 
   return (
     <div
-      className="relative bg-neutral-100 dark:bg-neutral-900 p-10 pt-16 rounded-3xl shadow-2xl 
+      className="relative bg-neutral-100 dark:bg-neutral-900 p-10 pt-16 rounded-3xl -2xl 
                  transition-colors duration-300 max-w-md mx-auto"
     >
 
@@ -21,7 +21,7 @@ export default function FormularioLogin({ onSubmit, error }) {
         className="absolute -top-12 left-1/2 -translate-x-1/2 
                    bg-indigo-500 dark:bg-indigo-400 
                    p-6 rounded-full border-4 
-                   border-white dark:border-neutral-900 shadow-lg"
+                   border-white dark:border-neutral-900 -lg"
       >
         <User className="w-12 h-12 text-white dark:text-neutral-900" />
       </div>
@@ -48,7 +48,7 @@ export default function FormularioLogin({ onSubmit, error }) {
             className="mt-1 block w-full px-4 py-3 
                        bg-white dark:bg-neutral-800 
                        text-neutral-900 dark:text-white 
-                       rounded-lg shadow-sm border border-neutral-300 dark:border-neutral-700 
+                       rounded-lg -sm border border-neutral-300 dark:border-neutral-700 
                        focus:outline-none focus:ring-2 focus:ring-indigo-500 
                        transition-all duration-200"
           />
@@ -71,7 +71,7 @@ export default function FormularioLogin({ onSubmit, error }) {
             className="mt-1 block w-full px-4 py-3 
                        bg-white dark:bg-neutral-800 
                        text-neutral-900 dark:text-white 
-                       rounded-lg shadow-sm border border-neutral-300 dark:border-neutral-700 
+                       rounded-lg -sm border border-neutral-300 dark:border-neutral-700 
                        focus:outline-none focus:ring-2 focus:ring-indigo-500 
                        transition-all duration-200"
           />

@@ -14,7 +14,7 @@ export default function UserMenu() {
   };
 
   return (
-    <div className="absolute right-0 mt-3 w-64 bg-neutral-800 dark:bg-neutral-900 border border-neutral-700/50 dark:border-neutral-800/50 rounded-2xl shadow-xl overflow-hidden z-50">
+    <div className="absolute right-0 mt-3 w-64 bg-neutral-800 dark:bg-neutral-900 border border-neutral-700/50 dark:border-neutral-800/50 rounded-2xl -xl overflow-hidden z-50">
       {usuario ? (
         <>
           <div className="px-4 py-3 border-b border-neutral-700 dark:border-neutral-800">

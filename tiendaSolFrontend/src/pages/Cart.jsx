@@ -48,7 +48,7 @@ export default function Cart() {
           return (
             <div
               key={vendedorId}
-              className="w-full max-w-6xl p-6 bg-white dark:bg-neutral-800 rounded-2xl shadow-md border border-neutral-200 dark:border-neutral-700 hover:shadow-lg transition"
+              className="w-full max-w-6xl p-6 bg-white dark:bg-neutral-800 rounded-2xl -md border border-neutral-200 dark:border-neutral-700 hover:-lg transition"
             >
               <h2 className="text-2xl font-bold mb-6 border-b border-neutral-200 dark:border-neutral-700 pb-3">
                 Pedido de{" "}

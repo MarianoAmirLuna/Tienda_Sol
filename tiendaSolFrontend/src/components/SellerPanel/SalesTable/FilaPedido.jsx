@@ -77,7 +77,7 @@ export default function FilaPedido({ pedido, estado, onEstadoChange }) {
       <td className="p-5 text-center">
         <button
           onClick={() => generarFactura(pedido)}
-          className="flex items-center gap-2 mx-auto px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg shadow-md"
+          className="flex items-center gap-2 mx-auto px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg -md"
         >
           <FileText className="w-4 h-4" />
           Factura
