@@ -85,9 +85,6 @@ export default function NotificationPage() {
           <h1 className="text-4xl font-extrabold mb-2 text-neutral-900 dark:text-white">
             Notificaciones de <span className="text-indigo-600 dark:text-indigo-400">{usuario.nombre}</span>
           </h1>
-          <p className="text-neutral-500 dark:text-neutral-400 text-base">
-            Panel de control de ventas y productos
-          </p>
         </header>
 
         <section className="mb-10">

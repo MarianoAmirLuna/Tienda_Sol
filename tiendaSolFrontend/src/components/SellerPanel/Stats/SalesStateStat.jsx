@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from "recharts";
+import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recharts";
+
+const COLORS = ["#4f46e5", "#16a34a", "#f59e0b", "#ef4444", "#8b5cf6", "#10b981"];
 
 export default function SalesStateStat({ sellerId }) {
   const [pedidos, setPedidos] = useState([]);
@@ -15,8 +17,8 @@ export default function SalesStateStat({ sellerId }) {
   const data = Object.values(
     pedidos.reduce((acc, pedido) => {
       const estado = pedido.estado || "PENDIENTE";
-      acc[estado] = acc[estado] || { estado, count: 0 };
-      acc[estado].count += 1;
+      acc[estado] = acc[estado] || { name: estado, value: 0 };
+      acc[estado].value += 1;
       return acc;
     }, {})
   );
@@ -24,16 +26,29 @@ export default function SalesStateStat({ sellerId }) {
   return (
     <div className="p-6 bg-white dark:bg-neutral-800 rounded-xl shadow-2xl border border-gray-200 dark:border-neutral-700">
       <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-50 text-center">
-        Estadísticas de Ventas
+        Distribución de Pedidos
       </h2>
       <ResponsiveContainer width="100%" height={300}>
-        <BarChart data={data} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
-          <XAxis dataKey="estado"/>
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="count" fill="#4f46e5" name="Cantidad de Pedidos" />
-        </BarChart>
+        <PieChart>
+          <Pie
+            data={data}
+            dataKey="value"
+            nameKey="name"
+            cx="50%"
+            cy="50%"
+            outerRadius={100}
+            fill="#4f46e5"
+            label={({ name, percent }) =>
+              `${name}: ${(percent * 100).toFixed(0)}%`
+            }
+          >
+            {data.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            ))}
+          </Pie>
+          <Tooltip formatter={(value) => `${value} pedidos`} />
+          <Legend verticalAlign="bottom" height={36}/>
+        </PieChart>
       </ResponsiveContainer>
     </div>
   );

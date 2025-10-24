@@ -10,13 +10,18 @@ import CreateProduct from "./components/SellerPanel/CreateProductForm/CreateProd
 import Login from "./pages/Login";
 import SellerProductPage from "./pages/SellerProductPage";
 import SellerPanelPage from "./pages/SellerPanelPage";
-
+import OrderPage from "./pages/OrderPage";
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false);
+  
+  const [darkMode, setDarkMode] = useState(() => {
+    const stored = localStorage.getItem("darkMode");
+    return stored === "true" ? true : false;
+  });
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", darkMode);
+    localStorage.setItem("darkMode", darkMode);
     console.log("Dark mode:", darkMode ? "ON" : "OFF");
   }, [darkMode]);
 
@@ -33,6 +38,7 @@ function App() {
         <Route path="/nuevo-producto" element={<CreateProduct />} />
         <Route path="/login" element={<Login />} />
         <Route path="/panel-vendedor" element={<SellerPanelPage />} />
+        <Route path="/orders" element={<OrderPage />} />
       </Routes>
 
       <Footer />

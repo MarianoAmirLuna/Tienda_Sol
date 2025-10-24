@@ -2,6 +2,7 @@ import { useUser } from "../context/UserContext.jsx";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
+
 export default function UserMenu() {
   
   const { usuario, setUsuario } = useUser();
@@ -34,7 +35,12 @@ export default function UserMenu() {
           >
             Panel de Vendedor
           </Link>
-
+          <Link
+            to={`/orders`}
+            className="w-full text-left px-4 py-2 flex items-center justify-between text-sm hover:bg-neutral-700/50 transition text-neutral-100"
+          >
+            Mis pedidos
+          </Link>
           <Link
             to={`/${usuario?._id}/productos`}
             className="w-full text-left px-4 py-2 flex items-center justify-between text-sm hover:bg-neutral-700/50 transition text-neutral-100"
