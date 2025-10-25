@@ -19,7 +19,7 @@ export class ProductoController {
   }
 
   obtenerProducto(req, res, next) {
-    const idResult = productoSchema.parsearId(req);    
+    const idResult = productoSchema.parsearId(req);
     this.productoService
       .obtenerProducto(idResult)
       .then((producto) => res.status(200).json(producto))
@@ -29,28 +29,8 @@ export class ProductoController {
   }
 
   obtenerProductosSegun(req, res, next) {
-    const {
-      page = 1,
-      limit = 10,
-      sortOrder = "asc",
-      sellerId,
-      keyWord,
-      category,
-      minPrice,
-      maxPrice,
-    } = req.query;
-
     this.productoService
-      .obtenerProductosSegun(
-        page,
-        limit,
-        sortOrder,
-        sellerId,
-        keyWord,
-        category,
-        minPrice,
-        maxPrice
-      )
+      .obtenerProductosSegun(req.query)
       .then((productos) => res.status(200).json(productos))
       .catch((error) => {
         next(error);

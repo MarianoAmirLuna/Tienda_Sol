@@ -11,9 +11,9 @@ import Login from "./pages/Login";
 import SellerProductPage from "./pages/SellerProductPage";
 import SellerPanelPage from "./pages/SellerPanelPage";
 import OrderPage from "./pages/OrderPage";
+import AllProducts from "./pages/AllProducts";
 
 function App() {
-  
   const [darkMode, setDarkMode] = useState(() => {
     const stored = localStorage.getItem("darkMode");
     return stored === "true" ? true : false;
@@ -31,6 +31,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/productos" element={<AllProducts />} />
         <Route path="/productos/:idProducto" element={<ProductDetail />} />
         <Route path="/:sellerId/productos" element={<SellerProductPage />} />
         <Route path="/cart" element={<Cart />} />

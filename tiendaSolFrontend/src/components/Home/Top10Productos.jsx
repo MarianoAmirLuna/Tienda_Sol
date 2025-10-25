@@ -25,7 +25,6 @@ export default function Top10Productos() {
 
   return (
     <>
-
       <ProductList products={productos} />
     </>
   );

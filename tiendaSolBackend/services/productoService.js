@@ -15,16 +15,18 @@ export class ProductoService {
     return await this.productoRepository.findById(id);
   }
 
-  async obtenerProductosSegun(
-    page,
-    limit,
-    sortOrder,
-    sellerId,
-    keyWord,
-    category,
-    minPrice,
-    maxPrice
-  ) {
+  async obtenerProductosSegun(query) {
+    const {
+      page = 1,
+      limit = 10,
+      sortOrder = "asc",
+      sellerId,
+      keyWord,
+      category,
+      minPrice,
+      maxPrice,
+    } = query;
+
     return await this.productoRepository.obtenerProductosSegun(
       page,
       limit,
