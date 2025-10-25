@@ -11,6 +11,17 @@ export class UsuarioService {
     return await this.usuarioRepo.create(usuarioData);
   }
 
+  /*
+  async register(req) {
+    //const { email, password, nombre, apellido } = req.body;
+
+    await this.usuarioRepo.create(req.body);
+
+    console.log("✅ Usuario creado exitosamente:", user._id);
+
+    const token = generateToken(user._id);
+  }*/
+
   async obtenerUsuario(id) {
     const user = await this.usuarioRepo.findById(id);
     return user;
@@ -23,7 +34,12 @@ export class UsuarioService {
   // Notificaciones
 
   async obtenerNotificaciones(id, leidas, page, limit) {
-    return await this.notificacionService.obtenerNotificaciones(id, leidas, page, limit);
+    return await this.notificacionService.obtenerNotificaciones(
+      id,
+      leidas,
+      page,
+      limit
+    );
   }
 
   async obtenerNotificacionesNoLeidas(id) {
@@ -34,7 +50,11 @@ export class UsuarioService {
     return await this.notificacionService.obtenerNotificacionesLeidas(id);
   }
 
-  async marcarLectura( idUsuario, idNotificacion, camposActualizados) {
-    return await this.notificacionService.marcarLectura(idUsuario, idNotificacion, camposActualizados);
+  async marcarLectura(idUsuario, idNotificacion, camposActualizados) {
+    return await this.notificacionService.marcarLectura(
+      idUsuario,
+      idNotificacion,
+      camposActualizados
+    );
   }
 }

@@ -1,4 +1,5 @@
 import { usuarioSchema } from "../middleware/schemas/usuarioSchema.js";
+import { JWTGenerator } from "../utils/jwtGenerator.js"; // ← SOLO esto
 
 export class UsuarioController {
   constructor(usuarioService) {
@@ -6,13 +7,33 @@ export class UsuarioController {
   }
 
   async crearUsuario(req, res, next) {
-    const nuevoUsuario = usuarioSchema.parsearUsuario(req);
+    const nuevoUsuario = usuarioSchema.parsearUsuario(req); // ← .body importante!
+    console.log("📝 Creando usuario:", nuevoUsuario.email);
+
     await this.usuarioService
       .crearUsuario(nuevoUsuario)
       .then((usuarioCreado) => {
-        return res.status(201).json(usuarioCreado);
+        // ✅ GENERAR TOKEN de forma delegada
+        const token = JWTGenerator.generarToken(usuarioCreado._id);
+
+        console.log("✅ Usuario creado:", usuarioCreado._id);
+
+        return res.status(201).json({
+          success: true,
+          message: "Usuario registrado exitosamente",
+          token, // ← JWT para el cliente
+          user: {
+            id: usuarioCreado._id,
+            nombre: usuarioCreado.nombre,
+            apellido: usuarioCreado.apellido,
+            email: usuarioCreado.email,
+            telefono: usuarioCreado.telefono,
+            fechaCreacion: usuarioCreado.fechaCreacion,
+          },
+        });
       })
       .catch((error) => {
+        console.error("❌ Error creando usuario:", error);
         next(error);
       });
   }
@@ -85,9 +106,11 @@ export class UsuarioController {
 
   async marcarLectura(req, res, next) {
     const idUsuarioResult = usuarioSchema.parsearIdString(req.params.id);
-    const idNotificacionResult = usuarioSchema.parsearIdString(req.params.idNotificacion);
+    const idNotificacionResult = usuarioSchema.parsearIdString(
+      req.params.idNotificacion
+    );
 
-    const camposActualizados = req.body
+    const camposActualizados = req.body;
 
     return await this.usuarioService
       .marcarLectura(idUsuarioResult, idNotificacionResult, camposActualizados)
