@@ -68,28 +68,26 @@ export default function CreateProduct({ sellerId }) {
   };
 
   return (
-    <div className="bg-neutral-50 dark:bg-neutral-900">
-      <div className="max-w-3xl mx-auto bg-white border-gray-200 dark:bg-neutral-800 p-6 sm:p-10 rounded-3xl border border-neutral-700">
-        <h1 className="text-3xl sm:text-4xl font-extrabold mb-8 text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-700 pb-4">Crear Nuevo Producto</h1>
-        <FormMessage mensaje={mensaje} />
+    <div className="max-w-3xl mx-auto bg-white dark:bg-neutral-800 p-6 sm:p-10 rounded-3xl border border-neutral-200 dark:border-neutral-700 shadow-sm">
+      <h1 className="text-3xl sm:text-4xl font-extrabold mb-8 text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-700 pb-4">Crear Nuevo Producto</h1>
+      <FormMessage mensaje={mensaje} />
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <InputText label="Nombre" name="nombre" value={form.nombre} onChange={handleChange} placeholder="Ej: Pantalón Jeans" required />
-          <TextArea label="Descripción" name="descripcion" value={form.descripcion} onChange={handleChange} placeholder="Detalles del producto..." />
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <InputText label={<><DollarSign className="inline w-4 h-4 mr-1 mb-1 text-green-500" /> Precio ($)</>} type="number" name="precio" value={form.precio} onChange={handleChange} placeholder="0" required />
-            <InputText label={<><Package className="inline w-4 h-4 mr-1 mb-1 text-orange-500" /> Stock</>} type="number" name="stock" value={form.stock} onChange={handleChange} placeholder="0" required />
-          </div>
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <InputText label="Nombre" name="nombre" value={form.nombre} onChange={handleChange} placeholder="Ej: Pantalón Jeans" required />
+        <TextArea label="Descripción" name="descripcion" value={form.descripcion} onChange={handleChange} placeholder="Detalles del producto..." />
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <InputText label={<><DollarSign className="inline w-4 h-4 mr-1 mb-1 text-green-500" /> Precio ($)</>} type="number" name="precio" value={form.precio} onChange={handleChange} placeholder="0" required />
+          <InputText label={<><Package className="inline w-4 h-4 mr-1 mb-1 text-orange-500" /> Stock</>} type="number" name="stock" value={form.stock} onChange={handleChange} placeholder="0" required />
+        </div>
 
-          <CheckBoxGroup label={<><Tag className="inline w-4 h-4 mr-1 mb-1 text-indigo-500" /> Categorías</>} options={CATEGORIAS} selected={form.categorias} onChange={handleChange} />
-          <FotosInput fotos={form.fotos} setFotos={(nuevasFotos) => setForm((prev) => ({ ...prev, fotos: nuevasFotos }))} />
+        <CheckBoxGroup label={<><Tag className="inline w-4 h-4 mr-1 mb-1 text-indigo-500" /> Categorías</>} options={CATEGORIAS} selected={form.categorias} onChange={handleChange} />
+        <FotosInput fotos={form.fotos} setFotos={(nuevasFotos) => setForm((prev) => ({ ...prev, fotos: nuevasFotos }))} />
 
-          <button type="submit" disabled={loading} className={`w-full py-3 text-white rounded-xl font-bold text-lg mt-6 transition ${loading ? "bg-gray-400 cursor-not-allowed" : "bg-green-600 hover:bg-green-500"}`}>
-            {loading ? "Creando..." : "Crear Producto"}
-          </button>
-        </form>
-      </div>
+        <button type="submit" disabled={loading} className={`w-full py-3 text-white rounded-xl font-bold text-lg mt-6 transition ${loading ? "bg-gray-400 cursor-not-allowed" : "bg-green-600 hover:bg-green-500"}`}>
+          {loading ? "Creando..." : "Crear Producto"}
+        </button>
+      </form>
     </div>
   );
 }

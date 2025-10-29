@@ -46,18 +46,6 @@ export class ProductoRepository {
   ) {
     const skip = (page - 1) * limit;
 
-    console.log("=== PARÁMETROS DE BÚSQUEDA ===");
-    console.log("📄 Page:", page, `(Tipo: ${typeof page})`);
-    console.log("📏 Limit:", limit, `(Tipo: ${typeof limit})`);
-    console.log("🔀 Sort Order:", sortOrder, `(Tipo: ${typeof sortOrder})`);
-    console.log("👤 Seller ID:", sellerId, `(Tipo: ${typeof sellerId})`);
-    console.log("🔍 Keyword:", keyWord, `(Tipo: ${typeof keyWord})`);
-    console.log("📂 Category:", category, `(Tipo: ${typeof category})`);
-    console.log("💰 Min Price:", minPrice, `(Tipo: ${typeof minPrice})`);
-    console.log("💰 Max Price:", maxPrice, `(Tipo: ${typeof maxPrice})`);
-    console.log("===============================");
-
-    //
     const filtros = {};
 
     if (sellerId) filtros.vendedor = sellerId;

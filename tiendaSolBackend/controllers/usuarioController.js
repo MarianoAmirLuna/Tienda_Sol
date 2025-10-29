@@ -1,5 +1,5 @@
 import { usuarioSchema } from "../middleware/schemas/usuarioSchema.js";
-import { JWTGenerator } from "../utils/jwtGenerator.js"; // ← SOLO esto
+import { JWTGenerator } from "../utils/jwtGenerator.js"; 
 
 export class UsuarioController {
   constructor(usuarioService) {
@@ -7,21 +7,16 @@ export class UsuarioController {
   }
 
   async crearUsuario(req, res, next) {
-    const nuevoUsuario = usuarioSchema.parsearUsuario(req); // ← .body importante!
-    console.log("📝 Creando usuario:", nuevoUsuario.email);
-
+    const nuevoUsuario = usuarioSchema.parsearUsuario(req);
     await this.usuarioService
       .crearUsuario(nuevoUsuario)
       .then((usuarioCreado) => {
-        // ✅ GENERAR TOKEN de forma delegada
         const token = JWTGenerator.generarToken(usuarioCreado._id);
-
-        console.log("✅ Usuario creado:", usuarioCreado._id);
 
         return res.status(201).json({
           success: true,
           message: "Usuario registrado exitosamente",
-          token, // ← JWT para el cliente
+          token, 
           user: {
             id: usuarioCreado._id,
             nombre: usuarioCreado.nombre,
@@ -33,16 +28,13 @@ export class UsuarioController {
         });
       })
       .catch((error) => {
-        console.error("❌ Error creando usuario:", error);
         next(error);
       });
   }
 
   async logearUsuario(req, res, next) {
     const { email, password } = req.body;
-    console.log("🔐 Intentando login para:", email);
 
-    // Validar que vengan email y password
     if (!email || !password) {
       return res.status(400).json({
         success: false,
@@ -60,7 +52,6 @@ export class UsuarioController {
           });
         }
 
-        // Verificar password
         const esPasswordValido = await usuario.comparePassword(password);
         if (!esPasswordValido) {
           return res.status(400).json({
@@ -69,12 +60,8 @@ export class UsuarioController {
           });
         }
 
-        console.log("✅ Login exitoso para:", usuario.email);
-
-        // Generar JWT
         const token = JWTGenerator.generarToken(usuario._id);
 
-        // Responder con token
         return res.json({
           success: true,
           message: "Login exitoso",
@@ -90,7 +77,6 @@ export class UsuarioController {
         });
       })
       .catch((error) => {
-        console.error("❌ Error en login:", error);
         next(error);
       });
   }
@@ -120,8 +106,6 @@ export class UsuarioController {
         next(error);
       });
   }
-
-  // Notificaciones
 
   async obtenerNotificaciones(req, res, next) {
     const idResult = usuarioSchema.parsearId(req);
