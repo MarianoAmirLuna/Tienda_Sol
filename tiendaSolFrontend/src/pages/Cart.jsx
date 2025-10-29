@@ -33,7 +33,7 @@ export default function Cart() {
 
     try {
       const promesasDePedidos = vendedoresIds.map(vendedorId => {
-        return crearPedido(direccionMaestra, usuario._id, vendedorId);
+        return crearPedido(direccionMaestra, usuario.id, vendedorId);
       });
       await Promise.all(promesasDePedidos);
 
@@ -100,7 +100,6 @@ export default function Cart() {
 
           <hr className="my-6 border-gray-200 dark:border-gray-700" />
 
-          {/* ¡Formulario General! */}
           <button
             onClick={() => setIsMaestroOpen(prev => !prev)}
             className="w-full mb-4 flex items-center justify-center py-3 px-4 bg-indigo-50 dark:bg-gray-700 text-indigo-700 dark:text-white font-semibold rounded-xl ..."
@@ -130,7 +129,6 @@ export default function Cart() {
           >
             Pagar y Generar TODOS los Pedidos
           </button>
-          {/* --- FIN --- */}
         </div>
       </div>
 
@@ -156,7 +154,7 @@ export default function Cart() {
                 </div>
                 <div className="w-full lg:w-1/3">
                   <ResumenCompra
-                    compradorId={usuario._id}
+                    compradorId={usuario.id}
                     subtotal={grupoVendedor.subtotal}
                     vendedorId={vendedorId}
                     direccionUsuario={usuario.direccion}

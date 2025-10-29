@@ -7,12 +7,12 @@ export default function NotificationPage() {
   const [notificaciones, setNotificaciones] = useState([]);
 
   useEffect(() => {
-    if (!usuario?._id) return;
+    if (!usuario?.id) return;
 
     const obtenerNotificaciones = async () => {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL_INICIAL}/usuarios/${usuario._id}/notificaciones`
+          `${import.meta.env.VITE_API_URL_INICIAL}/usuarios/${usuario.id}/notificaciones`
         );
         const data = await response.json();
         setNotificaciones(data);
@@ -22,14 +22,14 @@ export default function NotificationPage() {
     };
 
     obtenerNotificaciones();
-  }, [usuario?._id]);
+  }, [usuario?.id]);
 
   const marcarComoLeida = async (idNotificacion) => {
-    if (!usuario?._id) return;
+    if (!usuario?.id) return;
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL_INICIAL}/usuarios/${usuario._id}/notificaciones/${idNotificacion}`,
+        `${import.meta.env.VITE_API_URL_INICIAL}/usuarios/${usuario.id}/notificaciones/${idNotificacion}`,
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },

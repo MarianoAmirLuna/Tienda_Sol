@@ -20,7 +20,7 @@ export default function SellerPanelPage() {
     );
   }
 
-  const sellerId = usuario._id;
+  const sellerId = usuario.id;
 
   return (
     <div className="bg-neutral-50 dark:bg-neutral-900 min-h-screen p-4 sm:p-8 lg:p-10 space-y-10">

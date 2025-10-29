@@ -11,12 +11,12 @@ export default function OrderPage() {
   const [pedidos, setPedidos] = useState([]);
 
   useEffect(() => {
-    if (!usuario?._id) return;
-    fetch(`${import.meta.env.VITE_API_URL_INICIAL}/usuarios/${usuario._id}/historialPedidos`)
+    if (!usuario?.id) return;
+    fetch(`${import.meta.env.VITE_API_URL_INICIAL}/usuarios/${usuario.id}/historialPedidos`)
       .then(res => res.ok ? res.json() : Promise.reject("Error al obtener pedidos"))
       .then(setPedidos)
       .catch(console.error);
-  }, [usuario?._id]);
+  }, [usuario?.id]);
 
   const cancelarPedido = async (pedidoId) => {
 

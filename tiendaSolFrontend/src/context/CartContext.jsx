@@ -125,7 +125,6 @@ export const CartProvider = ({ children }) => {
     const data = await response.json();
     console.log("✅ Pedido creado:", data);
 
-    // Eliminar los productos del carrito que corresponden al vendedor
     setCarrito((prev) => prev.filter((p) => p.vendedorId !== vendedorId));
 
     return data;
