@@ -39,15 +39,11 @@ export default function Login() {
       console.log("Respuesta del servidor:", data);
 
       if (data.token) {
-        // Guardar el token en localStorage
         localStorage.setItem("token", data.token);
 
-        // Guardar información del usuario en el contexto
         if (data.user) {
           setUsuario(data.user);
         } else {
-          // Si el backend no devuelve el usuario, puedes hacer otra request
-          // o guardar solo el token y obtener el usuario después
           setUsuario({ email: email });
         }
 
@@ -65,7 +61,7 @@ export default function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-[calc(70vh-150px)] px-6 py-12">
+    <div className="flex items-center justify-center px-6 py-12">
       <FormularioLogin onSubmit={handleLogin} error={error} loading={loading} />
     </div>
   );

@@ -86,7 +86,7 @@ export default function Cart() {
       </header>
 
       <div className="w-full max-w-6xl mx-auto mb-10">
-        <div className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6 shadow-md">
+        <div className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6">
           <h2 className="text-2xl font-bold mb-5 border-b border-neutral-200 dark:border-neutral-700 pb-3">
             Resumen Total y Envío Unificado
           </h2>
@@ -112,7 +112,7 @@ export default function Cart() {
           </button>
 
           {isMaestroOpen && (
-            <div className="mb-6 p-4 border border-indigo-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-900 shadow-inner">
+            <div className="mb-6 p-4 border border-indigo-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-900">
               <DireccionForm
                 direccionInicial={usuario.direccion}
                 onChange={handleDireccionMaestraChange}
@@ -123,7 +123,7 @@ export default function Cart() {
           <button
             onClick={handleGenerarTodosLosPedidos}
             disabled={!direccionMaestraValida}
-            className={`w-full py-3 px-4 text-lg font-bold rounded-xl shadow-lg transition ... ${direccionMaestraValida
+            className={`w-full py-3 px-4 text-lg font-bold rounded-xl transition ... ${direccionMaestraValida
                 ? "bg-indigo-600 hover:bg-indigo-700 text-white ..."
                 : "bg-gray-300 text-gray-500 cursor-not-allowed ..."
               }`}
@@ -141,7 +141,7 @@ export default function Cart() {
           return (
             <div
               key={vendedorId}
-              className="w-full max-w-6xl p-6 bg-white dark:bg-neutral-800 rounded-2xl shadow-md border border-neutral-200 dark:border-neutral-700"
+              className="w-full max-w-6xl p-6 bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700"
             >
               <h2 className="text-2xl font-bold mb-6 ...">
                 Pedido de{" "}
