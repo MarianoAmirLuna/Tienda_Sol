@@ -61,7 +61,7 @@ export default function OrderPage() {
     );
 
   return (
-    <div className="max-w-screen bg-neutral-50 dark:bg-neutral-900">
+    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-900">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-12 space-y-6 ">
 
             <header className="text-center">
