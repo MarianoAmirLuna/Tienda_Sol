@@ -4,7 +4,6 @@ import { productSchema } from "./productoSchema.js";
 import { Producto } from "../../models/entities/producto/producto.js";
 import { Pedido } from "../../models/entities/pedido/pedido.js";
 
-
 export const estadoSchema = z.enum([
   "PENDIENTE",
   "CONFIRMADO",

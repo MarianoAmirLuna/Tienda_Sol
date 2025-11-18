@@ -1,4 +1,3 @@
-// server.js
 import express from "express";
 import {errorHandler} from "./middleware/errorHandler.js";
 

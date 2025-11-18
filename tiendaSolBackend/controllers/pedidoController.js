@@ -8,14 +8,14 @@ export class PedidoController {
     this.pedidoService = pedidoService;
   }
 
-obtenerPedidosSegun(req, res, next) {
+  obtenerPedidosSegun(req, res, next) {
     return this.pedidoService
-      .obtenerPedidosSegun(req.query) 
+      .obtenerPedidosSegun(req.query)
       .then((pedidos) => {
-        res.status(200).json(pedidos); 
+        res.status(200).json(pedidos);
       })
       .catch((error) => next(error));
-}
+  }
 
   crearPedido(req, res, next) {
     const result = pedidoSchema.parsearPedido(req);

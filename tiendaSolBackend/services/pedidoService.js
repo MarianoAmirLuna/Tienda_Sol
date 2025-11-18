@@ -17,11 +17,11 @@ export class PedidoService {
     this.pedidoSchema = PedidoModel;
   }
 
-// En tu PedidoService.js
+  // En tu PedidoService.js
 
-async obtenerPedidosSegun(query) {
+  async obtenerPedidosSegun(query) {
     return await this.pedidoRepository.obtenerPedidosSegun(query);
-}
+  }
 
 
   async getPrecioUnitario(productoID) {
@@ -44,7 +44,7 @@ async obtenerPedidosSegun(query) {
 
   async actualizarStockProductosPorCancelacion(pedido) {
     await Promise.all(
-      pedido.getItemsPedido().map((item) => 
+      pedido.getItemsPedido().map((item) =>
         this.productoService.actualizarStock(
           item.productoID,
           item.cantidad,
@@ -109,7 +109,7 @@ async obtenerPedidosSegun(query) {
     pedido.cambiarEstado(nuevoEstado);
 
     this.notificacionService.crearNotificacion(
-        new Notificacion(pedido.compradorID, `El estado de su pedido con ID: ${id} ha cambiado de ${estadoAnterior} a ${nuevoEstado}`)
+      new Notificacion(pedido.compradorID, `El estado de su pedido con ID: ${id} ha cambiado de ${estadoAnterior} a ${nuevoEstado}`)
     );
 
     if (nuevoEstado === EstadoPedido.CANCELADO) {
