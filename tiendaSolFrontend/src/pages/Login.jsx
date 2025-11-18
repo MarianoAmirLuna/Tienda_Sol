@@ -8,7 +8,7 @@ export default function Login() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { setUsuario } = useContext(UserContext);
+  const { login } = useContext(UserContext); // Cambia setUsuario por login
 
   const handleLogin = async (email, password) => {
     setError(null);
@@ -35,20 +35,14 @@ export default function Login() {
         throw new Error(data.message || "Error en el login");
       }
 
-
-      if (data.token) {
-        localStorage.setItem("token", data.token);
-
-        if (data.user) {
-          setUsuario(data.user);
-        } else {
-          setUsuario({ email: email });
-        }
+      if (data.token && data.user) {
+        // ✅ Usa la función login del contexto que guarda TODO
+        login(data.user, data.token);
 
         toast.success("¡Bienvenido de nuevo!");
         navigate("/");
       } else {
-        setError("No se recibió token de autenticación.");
+        setError("Datos de autenticación incompletos.");
       }
     } catch (err) {
       console.error(err);
