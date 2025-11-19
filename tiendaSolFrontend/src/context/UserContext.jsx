@@ -7,7 +7,6 @@ export function UserProvider({ children }) {
   const [usuario, setUsuario] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Cargar usuario y token al iniciar
   useEffect(() => {
     const storedUser = localStorage.getItem("usuario");
     const token = localStorage.getItem("token");
@@ -38,9 +37,9 @@ export function UserProvider({ children }) {
 
   const value = {
     usuario,
-    setUsuario, // Mantén esto por compatibilidad
-    login, // Nueva función
-    logout, // Nueva función
+    setUsuario,
+    login, 
+    logout, 
     loading,
   };
 

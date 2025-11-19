@@ -8,7 +8,7 @@ export default function Login() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { login } = useContext(UserContext); // Cambia setUsuario por login
+  const { login } = useContext(UserContext);
 
   const handleLogin = async (email, password) => {
     setError(null);
@@ -36,7 +36,6 @@ export default function Login() {
       }
 
       if (data.token && data.user) {
-        // ✅ Usa la función login del contexto que guarda TODO
         login(data.user, data.token);
 
         toast.success("¡Bienvenido de nuevo!");
