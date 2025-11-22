@@ -1,0 +1,13 @@
+Dependencias
+
+node_modules
+
+Output de la compilación
+
+dist
+build
+
+Archivos de entorno y temporales
+
+.env*
+.DS_Store
